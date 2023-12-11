@@ -1,8 +1,0 @@
-.contact {
-  flex-direction: column;
-  scroll-margin: 8em;
-}
-.contact > div {
-  display: flex;
-  gap: 1rem;
-}
