@@ -3,19 +3,35 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { about } from "../../portfolio";
 import "./About.css";
 // import {useTypewriter , Curcor} from "react-simple-typewriter"
-import { useTypewriter, Cursor } from "react-simple-typewriter";
 import TypeWriterEffect from 'react-typewriter-effect';
 
 const About = () => {
   const { photo, name, role, description, resume, social } = about;
 
-  const {text}  = useTypewriter({
-    words : ['Developer' , 'Designer','Photographer'],
-    loop: {},
-  });
+  const downloadFile = async (fileUrl, redirectUrl) => {
+    try {
+      // Initiate the download
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Vishvendra-Tomar-Resume.pdf";
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      // Open the new URL in a new tab
+      window.open(redirectUrl, "_blank");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+ 
   return (
     <div id="about" className="about center">
-      {photo && <img height="200px" alt="Avatar placeholder" src={photo} />}
+      {photo && <img className="aboutimage" style={{ borderRadius: '5%', height: '200px',marginBottom:"15px" }} alt="Avatar placeholder" src={photo} />}
+
       {name && (
         <h1>
           Hi, I am <span className="about__name">{name}.</span> I am
@@ -48,8 +64,15 @@ const About = () => {
       <div className="about__contact center">
         {resume && (
           <a download href={"Vishvendra-Tomar-resume.pdf"}>
-            <span type="button" className="btn btn--outline">
-              View Resume
+           <span  className="btn btn--outline"
+              onClick={() =>
+                downloadFile("Vishvendra-Tomar-Resume.pdf", resume)
+              }
+              
+              type="button"
+              
+            >
+              Resume
             </span>
           </a>
         )}

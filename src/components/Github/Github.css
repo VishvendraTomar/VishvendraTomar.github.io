@@ -10,12 +10,12 @@
   display: flex;
   gap: 1rem;
 }
-@media (max-width: 900px) {
+@media (max-width: 950px) {
   .github > div > img {
     width: 15em;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .github > div > img {
     width: 80vw;
   }

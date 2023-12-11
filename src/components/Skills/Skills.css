@@ -23,7 +23,7 @@
   height: 50px;
   object-fit: fill;
 }
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .skills__list-item {
     width: 80px;
   }

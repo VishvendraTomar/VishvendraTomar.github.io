@@ -147,7 +147,7 @@ main {
   transform: translateY(-5px);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .section {
     margin-top: 4em;
   }
