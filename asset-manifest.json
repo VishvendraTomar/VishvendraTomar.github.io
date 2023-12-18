@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.5151a733.css",
-    "main.js": "/static/js/main.47d8272a.js",
+    "main.js": "/static/js/main.f50bb003.js",
     "static/media/travel_tourism.png": "/static/media/travel_tourism.2b81ea55cba8ce965992.png",
     "static/media/profilepic.jpg": "/static/media/profilepic.d347e24ac06388c8b9fa.jpg",
     "static/media/medie.png": "/static/media/medie.e07ab8410b19773afeff.png",
     "static/media/trendio.png": "/static/media/trendio.1dbb375c1500a4258339.png",
     "index.html": "/index.html",
     "main.5151a733.css.map": "/static/css/main.5151a733.css.map",
-    "main.47d8272a.js.map": "/static/js/main.47d8272a.js.map"
+    "main.f50bb003.js.map": "/static/js/main.f50bb003.js.map"
   },
   "entrypoints": [
     "static/css/main.5151a733.css",
-    "static/js/main.47d8272a.js"
+    "static/js/main.f50bb003.js"
   ]
 }
