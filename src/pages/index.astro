@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Vishvendra Tomar — A Technical Overview">
+  <main class="paper">
+
+    <!-- Header -->
+    <header class="paper-header">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <h1 class="paper-title">Vishvendra Tomar<br />A Technical Overview</h1>
+      <p class="paper-subtitle">An Empirical Analysis of Professional Contributions in Backend &amp; AI Engineering</p>
+      <div class="paper-meta">
+        <span>Vishvendra Tomar</span>
+        <span class="separator">&bull;</span>
+        <a href="mailto:vishvendratomar29@gmail.com">vishvendratomar29@gmail.com</a>
+        <span class="separator">&bull;</span>
+        <span>Bangalore, India</span>
+        <br />
+        <a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener">GitHub</a>
+        <span class="separator">&bull;</span>
+        <a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </header>
+
+    <hr />
+
+    <!-- Two Column Layout -->
+    <div class="two-col">
+
+      <!-- Left Column -->
+      <div>
+
+        <!-- Abstract -->
+        <section class="section">
+          <h2 class="section-title">Abstract</h2>
+          <p>
+            Backend engineer specialising in distributed systems, async task pipelines,
+            and LLM integrations. Built and debugged production systems at scale — from
+            observability pipelines and Celery task queues to AI-powered developer tools
+            with RAG, vector search, and structured LLM output. Experienced integrating
+            OpenAI and Anthropic APIs across multiple platforms, with focus on production
+            reliability, log-driven debugging, and automation agents.
+          </p>
+        </section>
+
+        <!-- 1. Introduction -->
+        <section class="section">
+          <h2 class="section-title">1. Introduction</h2>
+          <p>
+            As backend systems grow in complexity — distributed architectures, async
+            pipelines, and LLM integrations becoming table stakes — the need for engineers
+            who can build, debug, and ship these systems at production scale has intensified.
+            This paper presents Vishvendra Pratap Singh Tomar, a Backend Engineer with a
+            track record of delivering production-grade systems across AI tooling, distributed
+            infrastructure, and enterprise platforms.
+          </p>
+          <p class="research-interests">
+            <em>Research Interests:</em> Distributed Systems, LLM Integrations, RAG Systems,
+            Production Debugging, AI Tooling, Async Pipelines.
+          </p>
+          <p class="research-interests">
+            <em>Current Position:</em> Software Engineer 2 at GeekyAnts, focusing on backend
+            architecture, LLM integrations, and distributed systems.
+          </p>
+        </section>
+
+        <!-- 2. Technical Stack -->
+        <section class="section">
+          <h2 class="section-title">2. Methodology &amp; Technical Stack</h2>
+          <p class="no-indent">Our approach leverages a diverse technical stack across multiple domains:</p>
+
+          <div class="stack-category">
+            <span class="stack-label">Backend</span>
+            <span class="stack-items">FastAPI, NestJS, Node.js, Celery, Redis, BullMQ, Temporal, REST APIs, GraphQL, WebSockets</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">Languages</span>
+            <span class="stack-items">Python, TypeScript, JavaScript, SQL</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">Databases</span>
+            <span class="stack-items">PostgreSQL, MySQL, Firestore, Prisma ORM, Supabase, psycopg v3</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">AI / ML</span>
+            <span class="stack-items">OpenAI GPT-4o, Anthropic Claude API, RAG Systems, ChromaDB, Vector Embeddings, Semantic Search, Prompt Engineering</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">Infrastructure</span>
+            <span class="stack-items">Docker, Kubernetes (k3s), Railway, Kafka, RabbitMQ, GitLab CI/CD, AWS S3</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">Observability</span>
+            <span class="stack-items">Prometheus, Grafana, Loki, Jaeger, distributed tracing, log analysis</span>
+          </div>
+          <div class="stack-category">
+            <span class="stack-label">Architecture</span>
+            <span class="stack-items">DDD, Event-Driven, Hexagonal, CQRS, ACID Transactions</span>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column -->
+      <div>
+
+        <!-- 3. Projects -->
+        <section class="section">
+          <h2 class="section-title">3. Experimental Implementations</h2>
+          <p class="no-indent">We present 4 notable implementations demonstrating practical applications of backend and AI engineering:</p>
+
+          <!-- 3.1 -->
+          <h3 class="subsection-title">3.1. myJobDrop — Workforce Management Platform [1]</h3>
+          <p class="no-indent">
+            Production platform scaling to 300K+ users. Led full migration from 50+ Firebase
+            Cloud Functions to modular FastAPI backend (13 modules, 46-table PostgreSQL schema
+            with RLS). Built ACID-compliant Celery pipelines with exponential backoff, dead-letter
+            queues, and Prometheus+Loki-driven debugging that eliminated 13 atomicity violations.
+            Built stateless domain engines: wage calculator, 15-rule shift validator, automated
+            invoicing. Integrated GPT-4o with structured output parsing for 93-category job classification.
+          </p>
+          <p class="technologies">Technologies: <span>Python, FastAPI, Celery, PostgreSQL, Redis, Docker, Railway, OpenAI API, Pydantic, Prometheus</span></p>
+
+          <!-- 3.2 -->
+          <h3 class="subsection-title">3.2. AntAgents — Enterprise Workflow Automation [2]</h3>
+          <p class="no-indent">
+            Enterprise platform with visual drag-and-drop process builder (React Flow). LLM-powered
+            AI agent orchestration as pluggable workflow nodes. Real-time process execution engine
+            with state management, pause/resume, trace ID-based debugging. Event-driven via
+            Kafka + RabbitMQ. Full observability: Prometheus, Grafana, Loki across 11 containerized services.
+          </p>
+          <p class="technologies">Technologies: <span>NestJS, Next.js, React Flow, MySQL, Prisma, Kafka, RabbitMQ, Redis, BullMQ, Docker</span></p>
+
+          <!-- 3.3 -->
+          <h3 class="subsection-title">3.3. workspace.build — AI-Powered Dev Platform [3]</h3>
+          <p class="no-indent">
+            AI developer platform with 106+ REST APIs across 22 modules. Claude + GPT-4
+            integration with WebSocket streaming and structured LLM output parsing for 3-phase
+            AI brainstorming. Temporal workflows for 5-stage project creation. Kubernetes-based
+            isolated dev workspaces per user (VS Code Server + Terminal).
+          </p>
+          <p class="technologies">Technologies: <span>NestJS, Next.js, PostgreSQL, Temporal, Redis, Kubernetes, Stripe, GitLab API, Anthropic Claude, OpenAI</span></p>
+
+          <!-- 3.4 -->
+          <h3 class="subsection-title">3.4. Code Analyzer — AI Code Analysis Tool [4]</h3>
+          <p class="no-indent">
+            Claude AI-powered code review with risk assessment and performance scoring. Semantic
+            code search via ChromaDB + Sentence-Transformers (RAG pipeline). GitHub integration
+            for commit history, contributor metrics, productivity visualizations, cycle time
+            breakdown, activity heatmaps.
+          </p>
+          <p class="technologies">Technologies: <span>NestJS, Python Flask, PostgreSQL, ChromaDB, Anthropic Claude API, Sentence-Transformers, GitHub API</span></p>
+        </section>
+
+        <!-- 4. Results -->
+        <section class="section">
+          <h2 class="section-title">4. Results &amp; Impact</h2>
+          <p class="no-indent">Key achievements from recent work:</p>
+          <ul class="bullet-list">
+            <li>Promoted twice in under 2 years (Intern → SE → SE2)</li>
+            <li>Migrated production platform to serve 300K+ users with zero downtime</li>
+            <li>Eliminated 13 atomicity violations through log-driven production debugging</li>
+            <li>Built RAG pipelines and LLM integrations across 3 production platforms</li>
+            <li>Full observability stack (Prometheus, Grafana, Loki, Jaeger) across all systems</li>
+          </ul>
+        </section>
+
+        <!-- 5. Conclusion -->
+        <section class="section">
+          <h2 class="section-title">5. Conclusion &amp; Future Work</h2>
+          <p>
+            This work demonstrates comprehensive expertise in backend engineering, with
+            proven ability to deliver production-grade distributed systems and AI integrations.
+            Currently pursuing advanced applications in LLM tooling, RAG architectures, and
+            scalable backend infrastructure. Open to collaboration on challenging backend +
+            AI engineering projects.
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Appendices (full width) -->
+    <hr />
+
+    <section class="appendix">
+      <h2 class="appendix-title">Appendix A: Professional Experience</h2>
+      <div class="experience-entry">
+        <strong>[E1]</strong> Software Engineer 2, <em>GeekyAnts.</em> May 2025 – Present.
+      </div>
+      <div class="experience-entry">
+        <strong>[E2]</strong> Software Engineer, <em>GeekyAnts.</em> September 2024 – May 2025.
+      </div>
+      <div class="experience-entry">
+        <strong>[E3]</strong> Intern, <em>GeekyAnts.</em> May 2024 – September 2024.
+      </div>
+    </section>
+
+    <section class="appendix">
+      <h2 class="appendix-title">Appendix B: Contact Information</h2>
+      <div class="contact-box">
+        <p>For collaboration inquiries, consulting opportunities, or further information:</p>
+        <div class="contact-item"><strong>Email:</strong> <a href="mailto:vishvendratomar29@gmail.com">vishvendratomar29@gmail.com</a></div>
+        <div class="contact-item"><strong>Phone:</strong> +91 63975 21084</div>
+        <div class="contact-item"><strong>Location:</strong> Bangalore, India</div>
+        <div class="contact-item"><strong>GitHub:</strong> <a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener">github.com/VishvendraTomar</a></div>
+        <div class="contact-item"><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener">linkedin.com/in/vishvendra-tomar</a></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      &copy; 2026 Vishvendra Pratap Singh Tomar. All rights reserved.
+    </footer>
+
+  </main>
+</Layout>
