@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const studies = {
+  system: {
+    number:'01',category:'BACKEND SYSTEMS',title:'Workforce infrastructure',
+    intro:'Modernising the systems that coordinate shifts, pay, and operational workflows.',
+    context:'Workforce platforms combine time-sensitive events, complex business rules and integrations that cannot simply fail silently.',
+    role:'Backend service development, relational data modelling, and integration workflows.',
+    challenges:[
+      {name:'Model the domain',detail:'Designed a PostgreSQL model for operational entities, their relationships, and rules that must remain consistent.'},
+      {name:'Separate the boundaries',detail:'Worked on modular FastAPI service paths rather than keeping all application behaviour inside serverless functions.'},
+      {name:'Make slow work asynchronous',detail:'Used queues and background processing patterns for work that needs retry, visibility and predictable failure handling.'}
+    ],
+    lessons:'The hard part of a migration is not replacing endpoints. It is preserving the business meaning and correctness of existing workflows.',
+    stack:['Python','FastAPI','PostgreSQL','Redis','Celery']
+  },
+  flow:{
+    number:'02',category:'AI WORKFLOWS',title:'AntAgents',
+    intro:'A workflow platform where automation is built from connected steps, including AI capabilities.',
+    context:'An automation system needs more than a sequence of API calls: it needs visibility into execution, failures and the state between steps.',
+    role:'Workflow and backend engineering, with an emphasis on agent-oriented orchestration.',
+    challenges:[
+      {name:'Represent a workflow',detail:'Think in nodes, edges, inputs and outputs so workflows can be visualised and executed predictably.'},
+      {name:'Keep execution state',detail:'Track progress between stages, distinguish pending from completed steps and make interruption easier to reason about.'},
+      {name:'Observe the whole run',detail:'Connect events, background execution and traceable outcomes instead of treating each step as an isolated operation.'}
+    ],
+    lessons:'Agent features become useful when the surrounding workflow is dependable: explicit state, clear responsibilities and understandable results.',
+    stack:['TypeScript','NestJS','Redis','Docker']
+  },
+  code:{
+    number:'03',category:'APPLIED AI',title:'Developer tooling',
+    intro:'Making model-powered development workflows useful, testable and easier to trust.',
+    context:'Language models can help analyse code and structure developer tasks, but model output must be handled like an external dependency.',
+    role:'Exploring and implementing practical LLM integrations and developer tools.',
+    challenges:[
+      {name:'Ground the response',detail:'Retrieve the relevant context before asking a model to explain or analyse it.'},
+      {name:'Structure the output',detail:'Use schemas and validation instead of relying on loosely formatted natural-language responses.'},
+      {name:'Handle uncertainty',detail:'Surface limitations and keep the workflow resilient when the model has insufficient context or returns an invalid result.'}
+    ],
+    lessons:'The most useful AI feature often has very little magic in the interface and a lot of careful engineering behind the scenes.',
+    stack:['Python','TypeScript','LLM APIs','Retrieval']
+  }
+};
+export function getStaticPaths(){
+  return Object.entries(studies).map(([slug,study])=>({params:{slug},props:{study}}));
+}
+const {study}=Astro.props;
+---
+<Layout title={study.title+' — Vishvendra Tomar'} description={study.intro}>
+<main class="case">
+  <header class="top wrap"><a href="/" class="back">← BACK TO PORTFOLIO</a><span>VT / CASE STUDY {study.number}</span></header>
+  <section class="intro wrap"><div class="kicker"><span class="square"></span>{study.category} / {study.number}</div><h1>{study.title}<span>.</span></h1><p>{study.intro}</p><a href="#breakdown" class="skiplink">EXPLORE THE BREAKDOWN ↓</a></section>
+  <div class="blue-stripe"></div>
+  <section class="paper" id="breakdown"><div class="wrap">
+    <div class="two-col"><div class="section-heading"><span class="index">01 /</span><h2>The context.</h2></div><div><p>{study.context}</p><div class="role"><span>MY FOCUS</span><p>{study.role}</p></div></div></div>
+    <div class="section-heading engineering"><span class="index">02 /</span><h2>Engineering decisions.</h2></div>
+    <div class="decisions">{study.challenges.map((item,i)=><article class="decision"><span class="step">0{i+1}</span><h3>{item.name}</h3><p>{item.detail}</p></article>)}</div>
+    <div class="two-col lesson"><div class="section-heading"><span class="index">03 /</span><h2>What matters.</h2></div><div><p>{study.lessons}</p><div class="stack">{study.stack.map(t=><span>{t}</span>)}</div></div></div>
+  </div></section>
+  <section class="closing wrap"><div><span class="kicker">NEXT STEP</span><h2>Keep exploring<span>.</span></h2></div><a href="/#work">ALL SELECTED WORK ↗</a></section>
+  <footer class="footer wrap"><span>© {new Date().getFullYear()} VISHVENDRA TOMAR</span><a href="/">BACK TO HOME ↗</a></footer>
+</main>
+</Layout>
+<style>
+:global(:root){--charcoal:#1e1e1c;--paper:#d8cbb3;--blue:#2f6bff}
+.case{background:var(--charcoal);color:var(--paper);overflow:hidden}
+.wrap{width:min(1120px,calc(100% - 80px));margin:auto}
+.top{height:94px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #625d54;font:10px 'DM Mono',monospace;letter-spacing:1px}
+.top span{color:#aea28f}.back{transition:color .2s}.back:hover{color:#89aaff}
+.intro{padding:105px 0 110px}.kicker{display:flex;align-items:center;gap:13px;font:11px 'DM Mono',monospace;letter-spacing:1px;color:#b2a791}.square{display:inline-block;width:10px;height:10px;background:var(--blue)}
+.intro h1{max-width:950px;font:500 clamp(62px,9vw,120px)/1 'Space Grotesk',sans-serif;letter-spacing:-.078em;margin:31px 0 37px}.intro h1 span,.closing h2 span{color:var(--blue)}
+.intro p{max-width:660px;font:20px/1.7 'DM Sans',sans-serif;color:#b9ad9d;margin:0}.skiplink{display:inline-block;margin-top:55px;border-bottom:1px solid #b0a695;padding-bottom:10px;font:11px 'DM Mono',monospace;letter-spacing:1px}
+.blue-stripe{height:7px;background:var(--blue)}.paper{background:var(--paper);color:var(--charcoal);padding:110px 0 125px}.two-col{display:grid;grid-template-columns:42% 1fr;gap:60px;align-items:start}
+.section-heading .index{font:11px 'DM Mono',monospace;color:var(--blue)}h2{font:500 clamp(38px,5vw,68px)/1.08 'Space Grotesk',sans-serif;letter-spacing:-.06em;margin:22px 0 0}.two-col>div>p{font:19px/1.8 'DM Sans',sans-serif;margin:0;color:#514d46}.role{border-top:1px solid #b0a694;padding-top:20px;margin-top:42px}.role span{font:10px 'DM Mono',monospace;color:#666052}.role p{font:15px/1.75 'DM Sans',sans-serif;margin:12px 0}
+.engineering{margin-top:120px;margin-bottom:40px}.decisions{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.decision{border-top:1px solid #a99e8d;padding:20px 12px 20px 0;min-height:220px}.step{font:11px 'DM Mono',monospace;color:var(--blue)}.decision h3{font:500 27px/1.2 'Space Grotesk',sans-serif;letter-spacing:-1px;margin:30px 0 12px}.decision p{font:14px/1.8 'DM Sans',sans-serif;color:#625c52}
+.lesson{border-top:1px solid #aaa08d;padding-top:55px;margin-top:90px}.stack{display:flex;gap:9px;flex-wrap:wrap;margin-top:28px}.stack span{border:1px solid #a99e8d;padding:9px 11px;font:10px 'DM Mono',monospace}
+.closing{padding-top:95px;padding-bottom:95px;display:flex;align-items:end;justify-content:space-between;gap:30px}.closing h2{margin-top:21px}.closing>a{font:12px 'DM Mono',monospace;padding-bottom:10px;border-bottom:1px solid var(--paper);white-space:nowrap}.footer{padding:27px 0;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #625d54;font:10px 'DM Mono',monospace;color:#a99d8b}
+@media(max-width:680px){.wrap{width:calc(100% - 38px)}.top{height:75px;font-size:9px}.intro{padding:78px 0 85px}.intro h1{font-size:clamp(50px,11vw,75px)}.intro p{font-size:16px}.skiplink{margin-top:40px}.paper{padding:70px 0 85px}.two-col{grid-template-columns:1fr;gap:25px}.two-col>div>p{font-size:17px}.engineering{margin-top:75px}.decisions{grid-template-columns:1fr;gap:3px}.decision{min-height:0;padding:23px 0}.decision h3{margin:15px 0}.lesson{margin-top:65px}.closing{padding-top:70px;padding-bottom:70px;display:block}.closing>a{display:inline-block;margin-top:25px}.footer{font-size:9px}}
+</style>
