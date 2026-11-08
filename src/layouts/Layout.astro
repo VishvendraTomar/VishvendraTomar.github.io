@@ -1,35 +1,33 @@
 ---
-const { title = 'Vishvendra Tomar — Backend & AI Engineer', description = 'Backend-focused software engineer building reliable APIs, production workflows, and AI-powered applications.' } = Astro.props;
+const { title = 'Vishvendra Tomar — Backend Engineer', description = 'Vishvendra Tomar is a software engineer working on backend platforms, reliable systems, and applied AI.' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1018" />
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vishvendratomar.github.io/" />
-    <link rel="canonical" href="https://vishvendratomar.github.io/" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <slot />
-  </body>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#1e1e1c" />
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vishvendratomar.github.io/" />
+<link rel="canonical" href="https://vishvendratomar.github.io/" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<title>{title}</title>
+</head>
+<body><slot /></body>
 </html>
 <style is:global>
-  :root{color-scheme:dark;font-family:'DM Sans',sans-serif;background:#0b1018;color:#e9edf3;scroll-behavior:smooth}
-  *,*::before,*::after{box-sizing:border-box}
-  body{margin:0;min-width:320px}
-  a{color:inherit;text-decoration:none}
-  button{font:inherit}
-  ::selection{background:#a9e8cf;color:#0b1018}
-  :focus-visible{outline:2px solid #a9e8cf;outline-offset:4px}
-  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+:root{font-family:'DM Sans',Arial,sans-serif;background:#1e1e1c;color:#d8cbb3;scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;min-width:320px}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#2f6bff;color:#fff}
+:focus-visible{outline:2px solid #2f6bff;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
