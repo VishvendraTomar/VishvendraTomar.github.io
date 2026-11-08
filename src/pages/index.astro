@@ -52,9 +52,14 @@ const capabilities=[
                   <div class="flow-stack"><span>TRIGGER <i>DONE</i></span><div class="flow-connector"></div><span class="flow-active">AGENT STEP <i>↗</i></span><div class="flow-connector"></div><span>RESULT <i>○</i></span></div>
                 </div>}
                 {p.kind==='code' && <div class="artboard code-art">
-                  <div class="art-label"><span>AI PIPELINE</span><span>03 / 03</span></div>
-                  <div class="code-lines"><span><i>01</i> context = retrieve(query)</span><span><i>02</i> result = model.generate(</span><span><i>03</i> &nbsp;context, schema, rules</span><span><i>04</i> )</span><span><i>05</i> return validate(result)</span></div>
-                  <div class="code-indicator">✦</div>
+                  <div class="art-label code-head"><span>AI PIPELINE</span><span class="code-brand"><span class="code-spark" aria-hidden="true">✦</span>03 / 03</span></div>
+                  <div class="code-lines">
+                    <span class="code-row"><i>01</i><code>context = retrieve(query)</code></span>
+                    <span class="code-row"><i>02</i><code>result = model.generate(</code></span>
+                    <span class="code-row"><i>03</i><code>  context, schema, rules</code></span>
+                    <span class="code-row"><i>04</i><code>)</code></span>
+                    <span class="code-row"><i>05</i><code>return validate(result)</code></span>
+                  </div>
                 </div>}
                 <span class="visual-caption">VISHVENDRA / SELECTED WORK</span>
               </div>
@@ -236,6 +241,33 @@ const capabilities=[
   .brand-text{display:none}
   .hero-overline{gap:9px}
   .hero h1{font-size:36px}
+}
+
+/* AI pipeline: icon stays in the header, never over the code or line numbers. */
+.code-head{align-items:center;gap:12px;min-width:0}
+.code-brand{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0}
+.code-spark{font:500 24px/1 'Space Grotesk',Arial,sans-serif;color:var(--blue)}
+.code-art .code-lines{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:34px 0 20px;max-width:100%;white-space:normal;font:11px/1.6 'DM Mono',monospace}
+.code-art .code-row{display:grid;grid-template-columns:24px minmax(0,1fr);gap:14px;min-width:0;align-items:start}
+.code-art .code-row i{font:inherit;color:#827e75;margin:0;padding:0}
+.code-art .code-row code{display:block;min-width:0;font:inherit;color:var(--paper);white-space:pre-wrap;overflow-wrap:anywhere}
+.code-art .code-row:nth-child(2) code,.code-art .code-row:nth-child(5) code{color:#92b1ff}
+@media(max-width:680px){
+ .code-art .code-lines{font-size:10px;gap:11px;margin:28px 0 15px}
+ .code-art .code-row{grid-template-columns:22px minmax(0,1fr);gap:10px}
+ .code-spark{font-size:20px}
+}
+@media(max-width:480px){
+ .project-art .artboard.code-art{padding:19px}
+ .code-art .code-lines{font-size:10px;line-height:1.6;gap:9px;margin:24px 0 14px}
+ .code-art .code-row{grid-template-columns:20px minmax(0,1fr);gap:9px}
+ .code-brand{gap:7px}
+ .code-spark{font-size:18px}
+ .code-head{font-size:9px}
+}
+@media(max-width:360px){
+ .code-art .code-lines{font-size:9px}
+ .code-spark{font-size:16px}
 }
 </style>
 
