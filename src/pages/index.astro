@@ -1,219 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const projects = [
+  { index:'01', name:'Workforce infrastructure', type:'PRODUCTION SYSTEM · BACKEND', description:'Backend modernization for a workforce platform: designing a PostgreSQL domain model, building FastAPI services, and working through the real-world complexity of shifts, payroll rules, and government integrations.', tags:['Python','FastAPI','PostgreSQL','Celery','Redis'], focus:'Schema design · async integrations · reliability', visual:'workforce' },
+  { index:'02', name:'AntAgents', type:'AI WORKFLOWS · AUTOMATION', description:'An AI-enabled workflow platform exploring visual process design, orchestration, execution state, and the infrastructure needed to run long-lived automation reliably.', tags:['TypeScript','NestJS','Redis','Kafka','Docker'], focus:'Workflow orchestration · execution lifecycle', visual:'agents' },
+  { index:'03', name:'AI developer tooling', type:'LLM INTEGRATION · DEVELOPER EXPERIENCE', description:'Experiments and implementations around AI-assisted development, structured model outputs, code analysis, and building useful workflows on top of language models.', tags:['Python','TypeScript','LLM APIs','RAG'], focus:'Practical AI integration · tooling', visual:'ai' }
+];
+const skills=[
+ {name:'Backend & APIs',list:'Python · FastAPI · REST APIs · Node.js · TypeScript'},
+ {name:'Data & asynchronous work',list:'PostgreSQL · Firestore · Redis · Celery · queues'},
+ {name:'Applied AI',list:'LLM APIs · structured outputs · retrieval workflows'},
+ {name:'Shipping & debugging',list:'Docker · observability · CI/CD · Flutter'}
+];
 ---
-<Layout title="Vishvendra Tomar — A Technical Overview">
-  <main class="paper">
-
-    <!-- Header -->
-    <header class="paper-header">
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <h1 class="paper-title">Vishvendra Tomar<br />A Technical Overview</h1>
-      <p class="paper-subtitle">An Empirical Analysis of Professional Contributions in Backend &amp; AI Engineering</p>
-      <div class="paper-meta">
-        <span>Vishvendra Tomar</span>
-        <span class="separator">&bull;</span>
-        <a href="mailto:vishvendratomar29@gmail.com">vishvendratomar29@gmail.com</a>
-        <span class="separator">&bull;</span>
-        <span>Bangalore, India</span>
-        <br />
-        <a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener">GitHub</a>
-        <span class="separator">&bull;</span>
-        <a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+<Layout>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="wordmark" href="#top" aria-label="Vishvendra Tomar, back to top"><span class="mark">VT<span class="mark-dot">.</span></span><span class="wordmark-label">VISHVENDRA TOMAR<br/><span>SOFTWARE ENGINEER</span></span></a>
+      <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#experience">Experience</a><a class="nav-contact" href="mailto:vishvendratomar29@gmail.com">Get in touch <span aria-hidden="true">↗</span></a></nav>
     </header>
 
-    <hr />
+    <main>
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="eyebrow"><span class="pulse"></span> BACKEND ENGINEERING <span class="eyebrow-divider">/</span> APPLIED AI <span class="eyebrow-divider">/</span> SYSTEMS</div>
+        <h1 id="hero-title">Building software<br/>that <span class="hero-italic">holds up</span><span class="accent-dot">.</span></h1>
+        <div class="hero-bottom">
+          <p>I'm Vishvendra — a backend-focused software engineer working across APIs, data-heavy systems, and practical AI integrations. I care about the details that make software reliable, not just the demo.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#work">Explore selected work <span>↘</span></a><a class="button button-secondary" href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+        </div>
+        <div class="hero-grid" aria-hidden="true"><div class="hero-grid-corner"></div><span>ENGINEERING / 2026</span><span>SCROLL TO EXPLORE ↓</span></div>
+      </section>
 
-    <!-- Two Column Layout -->
-    <div class="two-col">
+      <section class="work-section section-wrap" id="work" aria-labelledby="work-title">
+        <div class="container"><div class="section-top"><div><div class="section-label"><span class="section-number">01 /</span> SELECTED WORK</div><h2 id="work-title">Systems, not<br/><span class="muted-heading">just screens.</span></h2></div><p class="section-aside">A few projects and engineering areas that represent the kind of problems I enjoy solving.</p></div>
+        <div class="project-list">
+          {projects.map(p=>(
+            <article class="project-card">
+              <div class={'project-visual '+p.visual} aria-hidden="true">
+                {p.visual==='workforce' ? <div class="diagram wf-diagram"><div class="diagram-top"><span>EVENT STREAM</span><span>● ● ●</span></div><div class="nodes"><span>SHIFT<br/>EVENT</span><b>→</b><span>API<br/>SERVICE</span><b>→</b><span>QUEUE<br/>WORKER</span></div><div class="diagram-bottom"><span>POSTGRESQL</span><span>REDIS / CELERY</span><span>OBSERVABILITY</span></div></div> : p.visual==='agents' ? <div class="diagram ag-diagram"><div class="tiny-caption">WORKFLOW / EXECUTION</div><div class="agent-flow"><span>TRIGGER</span><i></i><span class="active-node">AI AGENT ✳</span><i></i><span>ACTION ↗</span></div><div class="agent-bottom"><span>STATE: RUNNING</span><span>03 NODES</span></div></div> : <div class="diagram ai-diagram"><div class="ai-code"><div><em>01</em><span class="code-purple">const</span> context = <span class="code-green">retrieve</span>(query)</div><div><em>02</em><span class="code-purple">const</span> result = <span class="code-green">await</span> model.generate(&#123;</div><div><em>03</em>&nbsp;&nbsp;context, schema, guardrails</div><div><em>04</em>&#125;)</div><div><em>05</em><span class="code-purple">return</span> validate(result)</div></div><div class="ai-symbol">✳</div></div>}
+                <span class="visual-index">PROJECT / {p.index}</span>
+              </div>
+              <div class="project-copy"><div class="project-meta"><span>{p.index} / {p.type}</span><span class="project-symbol">↗</span></div><h3>{p.name}</h3><p>{p.description}</p><p class="project-focus">{p.focus}</p><div class="tags">{p.tags.map(tag=><span>{tag}</span>)}</div></div>
+            </article>
+          ))}
+        </div>
+        <p class="work-note">Commercial work is described at a high level. Private source code and confidential details are not shared.</p>
+        </div>
+      </section>
 
-      <!-- Left Column -->
-      <div>
+      <section class="about-section section-wrap" id="about"><div class="container about-grid"><div><div class="section-label"><span class="section-number">02 /</span> HOW I WORK</div><h2>Curious about the<br/><span class="muted-heading">whole system.</span></h2></div><div class="about-content"><p class="about-lead">The interesting problems usually live between components.</p><p>I like tracing how a request moves from the interface to the API, through the database and background jobs, and back to the person who depends on it. From designing clean service boundaries to finding subtle problems in production, I enjoy making complicated things easier to reason about.</p><p>My experience spans backend development, full-stack delivery, and newer AI-assisted workflows. Today, I’m especially interested in Python, reliable distributed work, and AI features that solve actual user problems.</p><div class="stack-grid">{skills.map(s=><div class="stack-item"><h3>{s.name}</h3><p>{s.list}</p></div>)}</div></div></div></section>
 
-        <!-- Abstract -->
-        <section class="section">
-          <h2 class="section-title">Abstract</h2>
-          <p>
-            Backend engineer specialising in distributed systems, async task pipelines,
-            and LLM integrations. Built and debugged production systems at scale — from
-            observability pipelines and Celery task queues to AI-powered developer tools
-            with RAG, vector search, and structured LLM output. Experienced integrating
-            OpenAI and Anthropic APIs across multiple platforms, with focus on production
-            reliability, log-driven debugging, and automation agents.
-          </p>
-        </section>
+      <section class="experience-section section-wrap" id="experience"><div class="container"><div class="section-label"><span class="section-number">03 /</span> EXPERIENCE</div><div class="experience-heading"><h2>Where I've<br/><span class="muted-heading">put it to work.</span></h2><p>Progressing from shipping features to owning more complex engineering problems.</p></div><div class="experience-list"><div class="experience-row"><span class="experience-years">2026</span><div><h3>Software Engineer</h3><p>International HR technology product · via Deel EOR</p></div><span class="experience-kind">BACKEND / PRODUCT</span></div><div class="experience-row"><span class="experience-years">2024 — 2026</span><div><h3>Software Engineer III <span class="experience-small">(progressed from intern)</span></h3><p>GeekyAnts · Software engineering & product development</p></div><span class="experience-kind">FULL STACK / BACKEND</span></div></div></div></section>
 
-        <!-- 1. Introduction -->
-        <section class="section">
-          <h2 class="section-title">1. Introduction</h2>
-          <p>
-            As backend systems grow in complexity — distributed architectures, async
-            pipelines, and LLM integrations becoming table stakes — the need for engineers
-            who can build, debug, and ship these systems at production scale has intensified.
-            This paper presents Vishvendra Tomar, a Backend Engineer with a
-            track record of delivering production-grade systems across AI tooling, distributed
-            infrastructure, and enterprise platforms.
-          </p>
-          <p class="research-interests">
-            <em>Research Interests:</em> Distributed Systems, LLM Integrations, RAG Systems,
-            Production Debugging, AI Tooling, Async Pipelines.
-          </p>
-          <p class="research-interests">
-            <em>Current Position:</em> Software Engineer 2 at GeekyAnts, focusing on backend
-            architecture, LLM integrations, and distributed systems.
-          </p>
-        </section>
-
-        <!-- 2. Technical Stack -->
-        <section class="section">
-          <h2 class="section-title">2. Methodology &amp; Technical Stack</h2>
-          <p class="no-indent">Our approach leverages a diverse technical stack across multiple domains:</p>
-
-          <div class="stack-category">
-            <span class="stack-label">Backend</span>
-            <span class="stack-items">FastAPI, NestJS, Node.js, Celery, Redis, BullMQ, Temporal, REST APIs, GraphQL, WebSockets</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">Languages</span>
-            <span class="stack-items">Python, TypeScript, JavaScript, SQL</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">Databases</span>
-            <span class="stack-items">PostgreSQL, MySQL, Firestore, Prisma ORM, Supabase, psycopg v3</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">AI / ML</span>
-            <span class="stack-items">OpenAI GPT-4o, Anthropic Claude API, RAG Systems, ChromaDB, Vector Embeddings, Semantic Search, Prompt Engineering</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">Infrastructure</span>
-            <span class="stack-items">Docker, Kubernetes (k3s), Railway, Kafka, RabbitMQ, GitLab CI/CD, AWS S3</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">Observability</span>
-            <span class="stack-items">Prometheus, Grafana, Loki, Jaeger, distributed tracing, log analysis</span>
-          </div>
-          <div class="stack-category">
-            <span class="stack-label">Architecture</span>
-            <span class="stack-items">DDD, Event-Driven, Hexagonal, CQRS, ACID Transactions</span>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- Right Column -->
-      <div>
-
-        <!-- 3. Projects -->
-        <section class="section">
-          <h2 class="section-title">3. Experimental Implementations</h2>
-          <p class="no-indent">We present 4 notable implementations demonstrating practical applications of backend and AI engineering:</p>
-
-          <!-- 3.1 -->
-          <h3 class="subsection-title">3.1. myJobDrop — Workforce Management Platform [1]</h3>
-          <p class="no-indent">
-            Production platform scaling to 300K+ users. Led full migration from 50+ Firebase
-            Cloud Functions to modular FastAPI backend (13 modules, 46-table PostgreSQL schema
-            with RLS). Built ACID-compliant Celery pipelines with exponential backoff, dead-letter
-            queues, and Prometheus+Loki-driven debugging that eliminated 13 atomicity violations.
-            Built stateless domain engines: wage calculator, 15-rule shift validator, automated
-            invoicing. Integrated GPT-4o with structured output parsing for 93-category job classification.
-          </p>
-          <p class="technologies">Technologies: <span>Python, FastAPI, Celery, PostgreSQL, Redis, Docker, Railway, OpenAI API, Pydantic, Prometheus</span></p>
-
-          <!-- 3.2 -->
-          <h3 class="subsection-title">3.2. AntAgents — Enterprise Workflow Automation [2]</h3>
-          <p class="no-indent">
-            Enterprise platform with visual drag-and-drop process builder (React Flow). LLM-powered
-            AI agent orchestration as pluggable workflow nodes. Real-time process execution engine
-            with state management, pause/resume, trace ID-based debugging. Event-driven via
-            Kafka + RabbitMQ. Full observability: Prometheus, Grafana, Loki across 11 containerized services.
-          </p>
-          <p class="technologies">Technologies: <span>NestJS, Next.js, React Flow, MySQL, Prisma, Kafka, RabbitMQ, Redis, BullMQ, Docker</span></p>
-
-          <!-- 3.3 -->
-          <h3 class="subsection-title">3.3. workspace.build — AI-Powered Dev Platform [3]</h3>
-          <p class="no-indent">
-            AI developer platform with 106+ REST APIs across 22 modules. Claude + GPT-4
-            integration with WebSocket streaming and structured LLM output parsing for 3-phase
-            AI brainstorming. Temporal workflows for 5-stage project creation. Kubernetes-based
-            isolated dev workspaces per user (VS Code Server + Terminal).
-          </p>
-          <p class="technologies">Technologies: <span>NestJS, Next.js, PostgreSQL, Temporal, Redis, Kubernetes, Stripe, GitLab API, Anthropic Claude, OpenAI</span></p>
-
-          <!-- 3.4 -->
-          <h3 class="subsection-title">3.4. Code Analyzer — AI Code Analysis Tool [4]</h3>
-          <p class="no-indent">
-            Claude AI-powered code review with risk assessment and performance scoring. Semantic
-            code search via ChromaDB + Sentence-Transformers (RAG pipeline). GitHub integration
-            for commit history, contributor metrics, productivity visualizations, cycle time
-            breakdown, activity heatmaps.
-          </p>
-          <p class="technologies">Technologies: <span>NestJS, Python Flask, PostgreSQL, ChromaDB, Anthropic Claude API, Sentence-Transformers, GitHub API</span></p>
-        </section>
-
-        <!-- 4. Results -->
-        <section class="section">
-          <h2 class="section-title">4. Results &amp; Impact</h2>
-          <p class="no-indent">Key achievements from recent work:</p>
-          <ul class="bullet-list">
-            <li>Promoted twice in under 2 years (Intern → SE → SE2)</li>
-            <li>Migrated production platform to serve 300K+ users with zero downtime</li>
-            <li>Eliminated 13 atomicity violations through log-driven production debugging</li>
-            <li>Built RAG pipelines and LLM integrations across 3 production platforms</li>
-            <li>Full observability stack (Prometheus, Grafana, Loki, Jaeger) across all systems</li>
-          </ul>
-        </section>
-
-        <!-- 5. Conclusion -->
-        <section class="section">
-          <h2 class="section-title">5. Conclusion &amp; Future Work</h2>
-          <p>
-            This work demonstrates comprehensive expertise in backend engineering, with
-            proven ability to deliver production-grade distributed systems and AI integrations.
-            Currently pursuing advanced applications in LLM tooling, RAG architectures, and
-            scalable backend infrastructure. Open to collaboration on challenging backend +
-            AI engineering projects.
-          </p>
-        </section>
-
-      </div>
-    </div>
-
-    <!-- Appendices (full width) -->
-    <hr />
-
-    <section class="appendix">
-      <h2 class="appendix-title">Appendix A: Professional Experience</h2>
-      <div class="experience-entry">
-        <strong>[E1]</strong> Software Engineer 2, <em>GeekyAnts.</em> May 2025 – Present.
-      </div>
-      <div class="experience-entry">
-        <strong>[E2]</strong> Software Engineer, <em>GeekyAnts.</em> September 2024 – May 2025.
-      </div>
-      <div class="experience-entry">
-        <strong>[E3]</strong> Intern, <em>GeekyAnts.</em> May 2024 – September 2024.
-      </div>
-    </section>
-
-    <section class="appendix">
-      <h2 class="appendix-title">Appendix B: Contact Information</h2>
-      <div class="contact-box">
-        <p>For collaboration inquiries, consulting opportunities, or further information:</p>
-        <div class="contact-item"><strong>Email:</strong> <a href="mailto:vishvendratomar29@gmail.com">vishvendratomar29@gmail.com</a></div>
-        <div class="contact-item"><strong>Phone:</strong> +91 63975 21084</div>
-        <div class="contact-item"><strong>Location:</strong> Bangalore, India</div>
-        <div class="contact-item"><strong>GitHub:</strong> <a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener">github.com/VishvendraTomar</a></div>
-        <div class="contact-item"><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener">linkedin.com/in/vishvendra-tomar</a></div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      &copy; 2026 Vishvendra Tomar. All rights reserved.
-    </footer>
-
-  </main>
+      <section class="contact-section section-wrap" id="contact"><div class="container"><div class="section-label"><span class="section-number">04 /</span> LET'S CONNECT</div><div class="contact-grid"><div><h2>Have something<br/><span>worth building?</span></h2><p>I'm open to interesting software engineering opportunities and conversations about backend systems, applied AI, and product engineering.</p><a class="email-link" href="mailto:vishvendratomar29@gmail.com">Let's talk <span aria-hidden="true">↗</span></a></div><div class="contact-links"><a href="mailto:vishvendratomar29@gmail.com"><span>Email</span><span>↗</span></a><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span>↗</span></a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span>↗</span></a></div></div></div></section>
+    </main>
+    <footer class="site-footer container"><span>© {new Date().getFullYear()} VISHVENDRA TOMAR</span><span>BUILT WITH INTENTION · ASTRO + GITHUB PAGES</span><a href="#top">BACK TO TOP ↑</a></footer>
+  </div>
 </Layout>
+<style>
+.site-shell{overflow:hidden}.container{width:min(1180px,calc(100% - 80px));margin:auto}.site-header{height:100px;width:min(1320px,calc(100% - 80px));margin:auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #27303b}.wordmark{display:flex;align-items:center;gap:14px}.mark{display:grid;place-items:center;width:46px;height:46px;border:1px solid #6e7b83;font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-2px}.mark-dot,.accent-dot{color:#a9e8cf}.wordmark-label{font-family:'DM Mono';font-size:10px;line-height:1.7;letter-spacing:1.5px}.wordmark-label span{color:#8996a5}.site-header nav{display:flex;align-items:center;gap:35px;font-size:13px;color:#aab4bf}.site-header nav a:hover{color:#a9e8cf}.site-header nav .nav-contact{color:#0b1018;background:#a9e8cf;padding:13px 18px;font-weight:700}.nav-contact span{margin-left:12px}
+.hero{padding-top:119px;position:relative}.eyebrow,.section-label,.tiny-caption{font-family:'DM Mono';font-size:11px;letter-spacing:1.5px;color:#a9e8cf}.eyebrow{display:flex;align-items:center;gap:15px}.pulse{width:7px;height:7px;border-radius:50%;background:#a9e8cf;box-shadow:0 0 0 5px #a9e8cf1c}.eyebrow-divider{color:#485362}.hero h1{font-family:'Space Grotesk';font-size:clamp(70px,9vw,136px);letter-spacing:-.087em;line-height:1.01;font-weight:600;margin:36px 0 52px}.hero-italic{font-family:Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.085em;color:#a9e8cf}.hero-bottom{display:flex;align-items:end;justify-content:space-between;gap:44px}.hero-bottom>p{max-width:620px;font-size:19px;line-height:1.75;color:#9caab8;margin:0}.hero-actions{display:flex;gap:12px;flex-shrink:0}.button{display:inline-flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 20px;font-size:12px;font-weight:700;transition:transform .2s ease}.button:hover{transform:translateY(-3px)}.button-primary{background:#a9e8cf;color:#0b1018}.button-secondary{border:1px solid #384553;color:#e9edf3}.hero-grid{height:140px;border-bottom:1px solid #33404a;position:relative;display:flex;align-items:end;justify-content:space-between;padding-bottom:20px;font-family:'DM Mono';font-size:10px;letter-spacing:1px;color:#687785;margin-top:67px}.hero-grid:before{content:'';position:absolute;inset:0;background-image:linear-gradient(to right,#34424d33 1px,transparent 1px);background-size:12.5% 100%;mask-image:linear-gradient(to bottom,transparent,#000)}.hero-grid>span{position:relative}
+.section-wrap{padding:126px 0}.section-top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:60px}.section-number{color:#667687;margin-right:10px}.section-wrap h2{font-family:'Space Grotesk';font-size:clamp(48px,6.4vw,85px);line-height:1.08;font-weight:500;letter-spacing:-.069em;margin:27px 0 0}.muted-heading{color:#758392}.section-aside{max-width:305px;color:#92a0ae;line-height:1.75;font-size:14px}.work-section{background:#101721}.project-list{display:grid;gap:21px}.project-card{display:grid;grid-template-columns:1.06fr .94fr;min-height:365px;border:1px solid #303b47;background:#141d28;overflow:hidden}.project-visual{position:relative;padding:45px;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden}.project-visual:after{content:'';position:absolute;inset:0;background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:30px 30px;pointer-events:none}.project-visual.workforce{background:radial-gradient(circle at 45% 50%,#254e51,#15292d 70%)}.project-visual.agents{background:radial-gradient(circle at center,#403b62,#29263e 75%)}.project-visual.ai{background:radial-gradient(circle at center,#2c394f,#172333 75%)}.visual-index{position:absolute;bottom:20px;left:24px;font-family:'DM Mono';font-size:10px;color:#c3d5d3;letter-spacing:1px;z-index:2}.diagram{position:relative;z-index:1;width:100%;max-width:420px;border:1px solid #8ddac45c;background:#091c23a8;box-shadow:0 25px 65px #0004;padding:25px;transform:rotate(-2deg)}.diagram-top,.diagram-bottom,.agent-bottom{font:10px 'DM Mono';letter-spacing:.5px;color:#a4bbbd;display:flex;justify-content:space-between}.nodes,.agent-flow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:35px 0;color:#a9e8cf}.nodes span{border:1px solid #a9e8cf80;padding:15px 12px;text-align:center;line-height:1.6;font:11px 'DM Mono'}.nodes b{font-weight:400}.diagram-bottom{border-top:1px solid #a9e8cf40;padding-top:15px;font-size:8px}.ag-diagram{border-color:#aaa6ff75;background:#17182bdc;transform:rotate(2deg)}.agent-flow{gap:8px}.agent-flow span{font:10px 'DM Mono';border:1px solid #9693d4;padding:12px 10px;color:#dedaff;white-space:nowrap}.agent-flow .active-node{background:#a5a0e5;color:#151525}.agent-flow i{height:1px;min-width:14px;flex:1;background:#a5a0e5}.ai-diagram{border-color:#718db0;background:#101b2bdc;min-height:208px;display:flex;align-items:center}.ai-code{font:clamp(8px,.85vw,11px)/2 'DM Mono';color:#c3cedd;white-space:nowrap}.ai-code em{color:#566982;margin-right:18px;font-style:normal}.code-purple{color:#b9abf3}.code-green{color:#a9e8cf}.ai-symbol{font-size:65px;color:#a9e8cf;position:absolute;right:14px;top:-28px}.project-copy{padding:39px 39px 37px;display:flex;flex-direction:column}.project-meta{display:flex;justify-content:space-between;align-items:center;font:10px 'DM Mono';letter-spacing:1px;color:#9aabb9}.project-symbol{color:#a9e8cf;font-size:24px}.project-copy h3{font-family:'Space Grotesk';font-size:clamp(29px,3vw,40px);font-weight:500;letter-spacing:-1.4px;margin:24px 0 10px}.project-copy>p{font-size:14px;line-height:1.8;color:#acb7c2;margin:0}.project-copy .project-focus{font:11px 'DM Mono';color:#a9e8cf;margin:21px 0}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:17px}.tags span{border:1px solid #3b4653;padding:7px 9px;font:10px 'DM Mono';color:#b2bfcb}.work-note{margin:28px 0 0;color:#778898;font-size:12px}
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px}.about-content{padding-top:65px}.about-content>p{color:#9eacb9;line-height:1.9;font-size:15px}.about-content .about-lead{font-family:'Space Grotesk';font-size:27px;line-height:1.4;color:#e9edf3;letter-spacing:-.5px}.stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px 35px;margin-top:39px}.stack-item{border-top:1px solid #33404c;padding-top:18px}.stack-item h3{font-size:13px;margin:0 0 8px}.stack-item p{font-size:12px;color:#93a0ae;line-height:1.8;margin:0}.experience-section{background:#101721}.experience-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:58px}.experience-heading p{max-width:280px;font-size:14px;line-height:1.8;color:#96a3b0}.experience-list{border-top:1px solid #34414d}.experience-row{display:grid;grid-template-columns:170px 1fr 190px;gap:25px;padding:35px 0;border-bottom:1px solid #34414d;align-items:center}.experience-years,.experience-kind{font:11px 'DM Mono';letter-spacing:.5px;color:#9babba}.experience-row h3{font-size:20px;font-weight:600;margin:0 0 8px}.experience-row p{font-size:13px;margin:0;color:#9eacb9}.experience-small{font-size:12px;color:#91a1b0;font-weight:400}.experience-kind{text-align:right;font-size:10px}
+.contact-section{background:#a9e8cf;color:#0b1018;padding:110px 0}.contact-section .section-label,.contact-section .section-number{color:#385a4b}.contact-grid{display:grid;grid-template-columns:1fr 280px;gap:70px}.contact-grid h2{font-size:clamp(48px,6vw,80px);margin:30px 0}.contact-grid h2 span{color:#517b69}.contact-grid p{max-width:520px;font-size:15px;line-height:1.8;color:#426151}.email-link{display:inline-flex;gap:55px;align-items:center;font-family:'Space Grotesk';font-size:21px;border-bottom:1px solid #0b1018;padding-bottom:10px;margin-top:18px}.contact-links{display:flex;flex-direction:column;justify-content:end}.contact-links a{display:flex;justify-content:space-between;padding:19px 0;border-bottom:1px solid #5c9984;font-size:14px;font-weight:700}.contact-links a:hover{opacity:.6}.site-footer{display:flex;justify-content:space-between;gap:20px;align-items:center;padding-top:34px;padding-bottom:34px;font:10px 'DM Mono';letter-spacing:.5px;color:#8392a1}.site-footer a{color:#a9e8cf}
+@media(max-width:950px){.hero-bottom{align-items:start;flex-direction:column}.about-grid{gap:35px}.project-visual{padding:25px}.project-copy{padding:30px}.site-header nav{gap:18px}.hero{padding-top:88px}}
+@media(max-width:700px){.container,.site-header{width:calc(100% - 38px)}.site-header{height:78px}.wordmark-label{display:none}.site-header nav{gap:15px;font-size:11px}.site-header nav a[href="#experience"]{display:none}.site-header nav .nav-contact{padding:10px}.hero{padding-top:80px}.hero h1{font-size:clamp(50px,11vw,80px);letter-spacing:-.075em;margin:32px 0}.hero-bottom>p{font-size:16px}.hero-actions{flex-wrap:wrap}.hero-grid{height:100px;margin-top:40px}.section-wrap{padding:75px 0}.section-top,.experience-heading{display:block}.section-aside,.experience-heading p{margin-top:25px}.project-card{display:block}.project-visual{min-height:260px}.project-copy{min-height:290px}.project-copy h3{font-size:32px}.about-grid,.contact-grid{grid-template-columns:1fr;gap:20px}.about-content{padding-top:0}.stack-grid{gap:20px}.experience-row{grid-template-columns:95px 1fr;gap:15px;padding:30px 0}.experience-kind{display:none}.experience-row h3{font-size:17px}.experience-small{display:block;margin-top:5px}.contact-section{padding:80px 0}.site-footer{flex-wrap:wrap;line-height:1.8}.site-footer span:nth-child(2){display:none}}
+@media(max-width:390px){.site-header nav a[href="#about"]{display:none}.button{font-size:11px}.diagram{padding:14px}.nodes span{padding:12px 7px;font-size:9px}.agent-flow span{padding:9px 6px;font-size:8px}.ai-code{font-size:7px}}
+</style>
