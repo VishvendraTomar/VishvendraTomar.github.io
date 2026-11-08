@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 export function getStaticPaths(){
 const studies = {
-  system: {
+  'workforce-infrastructure': {
     number:'01',category:'BACKEND SYSTEMS',title:'Workforce infrastructure',
     intro:'Modernising the systems that coordinate shifts, pay, and operational workflows.',
     context:'Workforce platforms combine time-sensitive events, complex business rules and integrations that cannot simply fail silently.',
@@ -15,7 +15,7 @@ const studies = {
     lessons:'The hard part of a migration is not replacing endpoints. It is preserving the business meaning and correctness of existing workflows.',
     stack:['Python','FastAPI','PostgreSQL','Redis','Celery']
   },
-  flow:{
+  antagents:{
     number:'02',category:'AI WORKFLOWS',title:'AntAgents',
     intro:'A workflow platform where automation is built from connected steps, including AI capabilities.',
     context:'An automation system needs more than a sequence of API calls: it needs visibility into execution, failures and the state between steps.',
@@ -28,7 +28,7 @@ const studies = {
     lessons:'Agent features become useful when the surrounding workflow is dependable: explicit state, clear responsibilities and understandable results.',
     stack:['TypeScript','NestJS','Redis','Docker']
   },
-  code:{
+  'ai-developer-tooling':{
     number:'03',category:'APPLIED AI',title:'Developer tooling',
     intro:'Making model-powered development workflows useful, testable and easier to trust.',
     context:'Language models can help analyse code and structure developer tasks, but model output must be handled like an external dependency.',
@@ -76,4 +76,18 @@ const {study}=Astro.props;
 .lesson{border-top:1px solid #aaa08d;padding-top:55px;margin-top:90px}.stack{display:flex;gap:9px;flex-wrap:wrap;margin-top:28px}.stack span{border:1px solid #a99e8d;padding:9px 11px;font:10px 'DM Mono',monospace}
 .closing{padding-top:95px;padding-bottom:95px;display:flex;align-items:end;justify-content:space-between;gap:30px}.closing h2{margin-top:21px}.closing>a{font:12px 'DM Mono',monospace;padding-bottom:10px;border-bottom:1px solid var(--paper);white-space:nowrap}.footer{padding:27px 0;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #625d54;font:10px 'DM Mono',monospace;color:#a99d8b}
 @media(max-width:680px){.wrap{width:calc(100% - 38px)}.top{height:75px;font-size:9px}.intro{padding:78px 0 85px}.intro h1{font-size:clamp(50px,11vw,75px)}.intro p{font-size:16px}.skiplink{margin-top:40px}.paper{padding:70px 0 85px}.two-col{grid-template-columns:1fr;gap:25px}.two-col>div>p{font-size:17px}.engineering{margin-top:75px}.decisions{grid-template-columns:1fr;gap:3px}.decision{min-height:0;padding:23px 0}.decision h3{margin:15px 0}.lesson{margin-top:65px}.closing{padding-top:70px;padding-bottom:70px;display:block}.closing>a{display:inline-block;margin-top:25px}.footer{font-size:9px}}
+
+/* Long project names and header links should never collide on a small phone. */
+.intro h1,.section-heading h2,.decision h3,.closing h2{overflow-wrap:break-word}
+@media(max-width:480px){
+  .intro h1{font-size:clamp(39px,10.2vw,53px);letter-spacing:-.065em;line-height:1.06}
+  .top{gap:12px;flex-wrap:wrap;min-height:75px;height:auto;padding-top:16px;padding-bottom:16px;row-gap:8px}
+  .top span{font-size:8px}
+  .intro{padding:68px 0 74px}
+  .kicker{font-size:9px;letter-spacing:.5px}
+  .section-heading h2{font-size:clamp(36px,10vw,50px)}
+  .two-col>div>p{font-size:16px}
+  .closing h2{font-size:clamp(40px,11vw,58px)}
+  .footer{flex-wrap:wrap;row-gap:9px}
+}
 </style>

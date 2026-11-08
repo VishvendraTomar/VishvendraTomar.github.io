@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const projects = [
-  {num:'01',eyebrow:'BACKEND SYSTEMS',name:'Workforce infrastructure',short:'Modernising the backend of a workforce platform.',detail:'FastAPI services, a PostgreSQL data model, background tasks and the business rules behind shifts and payments.',stack:['Python','FastAPI','PostgreSQL','Celery'],kind:'system'},
-  {num:'02',eyebrow:'WORKFLOW AUTOMATION',name:'AntAgents',short:'Connecting processes, people and AI.',detail:'Visual workflows, agent steps, execution state and asynchronous processing in a modular automation platform.',stack:['TypeScript','NestJS','Redis','Docker'],kind:'flow'},
-  {num:'03',eyebrow:'APPLIED AI',name:'Developer tooling',short:'Making language models useful in real workflows.',detail:'Structured outputs, retrieval, code analysis and the engineering around predictable model integrations.',stack:['Python','LLM APIs','RAG'],kind:'code'}
+  {num:'01',eyebrow:'BACKEND SYSTEMS',name:'Workforce infrastructure',short:'Modernising the backend of a workforce platform.',detail:'FastAPI services, a PostgreSQL data model, background tasks and the business rules behind shifts and payments.',stack:['Python','FastAPI','PostgreSQL','Celery'],kind:'system',slug:'workforce-infrastructure'},
+  {num:'02',eyebrow:'WORKFLOW AUTOMATION',name:'AntAgents',short:'Connecting processes, people and AI.',detail:'Visual workflows, agent steps, execution state and asynchronous processing in a modular automation platform.',stack:['TypeScript','NestJS','Redis','Docker'],kind:'flow',slug:'antagents'},
+  {num:'03',eyebrow:'APPLIED AI',name:'Developer tooling',short:'Making language models useful in real workflows.',detail:'Structured outputs, retrieval, code analysis and the engineering around predictable model integrations.',stack:['Python','LLM APIs','RAG'],kind:'code',slug:'ai-developer-tooling'}
 ];
 const capabilities=[
   {num:'01',name:'Backend',items:'Python, FastAPI, Node.js, TypeScript'},
@@ -15,16 +15,16 @@ const capabilities=[
 <Layout>
 <div class="shell" id="top">
   <header class="header wrap">
-    <a href="#top" class="brand" aria-label="Vishvendra Tomar — home"><span class="brand-icon">V<span>✳</span>T</span><span class="brand-text">VISHVENDRA<br/>TOMAR</span></a>
+    <a href="#top" class="brand" aria-label="Vishvendra Tomar — home"><span class="brand-icon">V<span>✦</span>T</span><span class="brand-text">VISHVENDRA<br/>TOMAR</span></a>
     <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#inside">Explore</a><a href="#about">About</a><a href="#experience">Experience</a></nav>
     <a class="header-contact" href="mailto:vishvendratomar29@gmail.com">Let's talk <span aria-hidden="true">↗</span></a>
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-overline"><span class="small-rule"></span><span>INDEPENDENT THINKING. PRODUCTION ENGINEERING.</span><span class="hero-no">01 — 04</span></div>
+      <div class="hero-overline"><span class="small-rule"></span><span>VISHVENDRA TOMAR / BACKEND ENGINEERING</span><span class="hero-no">01 — 04</span></div>
       <h1 id="hero-title"><span class="hero-line">I build the</span><br/><span class="hero-line serif">systems behind</span><br/><span class="hero-line">the product<span class="blue-stop">.</span></span></h1>
       <div class="hero-bottom">
-        <p>I'm Vishvendra, a software engineer focused on backend systems and applied AI. I turn complex workflows into software people can rely on.</p>
+        <p>I'm Vishvendra Tomar, a software engineer focused on backend systems and applied AI. I turn complex workflows into software people can rely on.</p>
         <a href="#work" class="round-link" aria-label="Explore selected work"><span aria-hidden="true">↘</span></a>
       </div>
       <div class="hero-end"><span>PYTHON / FASTAPI / PRODUCT ENGINEERING</span><span>SCROLL TO EXPLORE ↓</span></div>
@@ -39,7 +39,7 @@ const capabilities=[
               <div class="project-info">
                 <div class="project-top"><span>{p.num} / {p.eyebrow}</span><span aria-hidden="true">↗</span></div>
                 <div class="project-main"><h3>{p.name}</h3><p class="project-short">{p.short}</p><p class="project-detail">{p.detail}</p></div>
-                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div><a class="case-link" href={`/work/${p.kind}/`} aria-label={`Read ${p.name} case study`}>Read the case study <span aria-hidden="true">↗</span></a>
+                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div><a class="case-link" href={`/work/${p.slug}/`} aria-label={`Read ${p.name} case study`}>Read the case study <span aria-hidden="true">↗</span></a>
               </div>
               <div class={'project-art '+p.kind} aria-hidden="true">
                 {p.kind==='system' && <div class="artboard">
@@ -49,12 +49,12 @@ const capabilities=[
                 </div>}
                 {p.kind==='flow' && <div class="artboard">
                   <div class="art-label"><span>AGENT ORCHESTRATION</span><span>02 / 03</span></div>
-                  <div class="flow-stack"><span>TRIGGER <i>✓</i></span><div class="flow-connector"></div><span class="flow-active">AGENT STEP <i>↗</i></span><div class="flow-connector"></div><span>RESULT <i>○</i></span></div>
+                  <div class="flow-stack"><span>TRIGGER <i>DONE</i></span><div class="flow-connector"></div><span class="flow-active">AGENT STEP <i>↗</i></span><div class="flow-connector"></div><span>RESULT <i>○</i></span></div>
                 </div>}
                 {p.kind==='code' && <div class="artboard code-art">
                   <div class="art-label"><span>AI PIPELINE</span><span>03 / 03</span></div>
                   <div class="code-lines"><span><i>01</i> context = retrieve(query)</span><span><i>02</i> result = model.generate(</span><span><i>03</i> &nbsp;context, schema, rules</span><span><i>04</i> )</span><span><i>05</i> return validate(result)</span></div>
-                  <div class="code-indicator">✳</div>
+                  <div class="code-indicator">✦</div>
                 </div>}
                 <span class="visual-caption">VISHVENDRA / SELECTED WORK</span>
               </div>
@@ -87,7 +87,7 @@ const capabilities=[
               </div>
             </div>
             <div class="demo-detail" aria-live="polite" aria-atomic="true">
-              <div class="detail-overline"><span id="detail-number">COMPONENT 01 / 05</span><span class="detail-spark" aria-hidden="true">✳</span></div>
+              <div class="detail-overline"><span id="detail-number">COMPONENT 01 / 05</span><span class="detail-spark" aria-hidden="true">✦</span></div>
               <div class="detail-body"><span class="detail-type" id="detail-type">INPUT LAYER</span><h3 id="detail-title">Start with a real question.</h3><p id="detail-description">A support request enters the system. Before generating an answer, the application has to establish who is asking and what information may be used.</p></div>
               <div class="detail-footer"><span id="detail-principle">DESIGN PRINCIPLE / IDENTITY FIRST</span><div class="detail-controls"><button type="button" id="step-prev" aria-label="Previous architecture component">←</button><button type="button" id="step-next" aria-label="Next architecture component">→</button></div></div>
             </div>
@@ -107,7 +107,7 @@ const capabilities=[
       <div class="section-intro"><span class="overline"><span class="section-index">03</span> EXPERIENCE</span><div><h2 id="experience-title">Built through<br/><em>experience.</em></h2></div></div>
       <div class="timeline"><div class="timeline-row"><span class="dates">2026</span><div><h3>Software Engineer</h3><p>Deel</p><p class="role-detail">Worked on AI customer-support infrastructure: FastAPI orchestration connecting policy knowledge (RAG), live user context, authorized actions, and response guardrails.</p></div><span class="timeline-type">BACKEND / PRODUCT</span></div><div class="timeline-row"><span class="dates">2024 — 2026</span><div><h3>Software Engineer III</h3><p>GeekyAnts · Joined as an intern, grew into SE III</p></div><span class="timeline-type">SOFTWARE ENGINEERING</span></div></div>
     </div></section>
-    <section class="contact dark-section" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-head"><span class="overline"><span class="section-index">04</span> CONTACT</span><span class="contact-spark" aria-hidden="true">✳</span></div><h2 id="contact-title">Let's make<br/><em>something work.</em></h2><div class="contact-bottom"><p>Open to backend and software engineering opportunities.</p><a href="mailto:vishvendratomar29@gmail.com" class="contact-email">Get in touch <span>↗</span></a></div><div class="social-links"><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a><a href="mailto:vishvendratomar29@gmail.com">EMAIL ↗</a></div></div></section>
+    <section class="contact dark-section" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-head"><span class="overline"><span class="section-index">04</span> CONTACT</span><span class="contact-spark" aria-hidden="true">✦</span></div><h2 id="contact-title">Let's make<br/><em>something work.</em></h2><div class="contact-bottom"><p>Open to backend and software engineering opportunities.</p><a href="mailto:vishvendratomar29@gmail.com" class="contact-email">Get in touch <span>↗</span></a></div><div class="social-links"><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a><a href="mailto:vishvendratomar29@gmail.com">EMAIL ↗</a></div></div></section>
   </main>
   <footer class="footer wrap"><span>© {new Date().getFullYear()} VISHVENDRA TOMAR</span><span>DESIGNED WITH INTENTION</span><a href="#top">BACK TO TOP ↑</a></footer>
 </div>
@@ -177,6 +177,66 @@ const capabilities=[
 @media(max-width:680px){.header nav a[href='#experience'],.header nav a[href='#about']{display:none}.inside-section{padding:75px 0}.inside-head{margin-bottom:35px}.demo-top{padding:15px}.demo-id{display:none}.demo-layout{grid-template-columns:1fr}.demo-map{padding:26px 19px;border-right:0;border-bottom:1px solid #57534b}.map-label{font-size:9px}.map-steps{max-width:440px}.map-node{padding:15px}.map-sources{grid-template-columns:1fr 1fr}.map-sources .map-node-copy strong{font-size:12px}.map-node.is-selected{transform:none}.demo-detail{min-height:340px;padding:25px}.detail-body{padding:28px 0}.detail-body h3{font-size:37px}.inside-bottom{font-size:8px}}
 @media(max-width:375px){.header nav a[href='#inside']{display:none}.map-sources{grid-template-columns:1fr}.detail-body h3{font-size:32px}.map-node-copy strong{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.hero-line{animation:none}.map-node,.detail-controls button{transition:none}}
+
+/* Mobile polish: prevent text, controls and decorative symbols from colliding. */
+.brand-icon span,.code-indicator,.detail-spark,.contact-spark{font-family:'Space Grotesk',Arial,sans-serif;font-variant-emoji:text;color:var(--blue)}
+.hero,.hero h1,.hero-bottom,.project,.project-info,.project-art,.artboard,.demo-layout,.map-node,.demo-detail{min-width:0}
+.hero h1,.project-main h3,.detail-body h3{overflow-wrap:normal}
+.map-node .map-arrow{flex:none}
+@media(max-width:680px){
+  .header{gap:12px}
+  .brand{margin-right:auto;gap:8px;flex-shrink:0}
+  .header nav{gap:14px;flex-shrink:0}
+  .header nav a[href='#about'],.header nav a[href='#experience']{display:none}
+  .header-contact{flex-shrink:0;white-space:nowrap}
+  .hero h1{font-size:clamp(39px,9.7vw,66px);line-height:1.08;letter-spacing:-.07em}
+  .hero .serif{letter-spacing:-.065em}
+  .hero-bottom{gap:18px;align-items:center}
+  .hero-bottom p{min-width:0}
+  .round-link{flex:none}
+  .hero-end{flex-wrap:wrap;row-gap:9px}
+  .map-sources .map-node-copy strong{overflow-wrap:break-word}
+  .map-arrow{align-self:center}
+  .art-label,.art-status{gap:8px;flex-wrap:wrap}
+  .code-lines{white-space:normal;overflow-wrap:anywhere;line-height:1.6}
+  .contact-spark,.detail-spark{line-height:1;flex-shrink:0}
+  .social-links{flex-wrap:wrap;row-gap:12px}
+}
+@media(max-width:480px){
+  .header nav a[href='#inside']{display:none}
+  .hero-overline{flex-wrap:wrap;font-size:8px;letter-spacing:.45px}
+  .hero h1{font-size:clamp(37px,9.8vw,46px);line-height:1.1}
+  .hero .serif{letter-spacing:-.07em}
+  .hero-line{max-width:100%}
+  .hero-bottom p{font-size:14px;line-height:1.7}
+  .round-link{width:48px;height:48px;font-size:20px}
+  .map-sources{grid-template-columns:minmax(0,1fr)}
+  .map-node{gap:10px}
+  .map-node-copy strong{font-size:14px}
+  .map-sources .map-node-copy strong{font-size:14px}
+  .map-sources .map-arrow{display:block}
+  .map-node .map-count{min-width:23px}
+  .demo-map{padding:22px 14px}
+  .demo-detail{padding:20px;min-height:320px}
+  .detail-body h3{font-size:clamp(29px,8.5vw,38px);overflow-wrap:break-word}
+  .detail-body p{font-size:14px}
+  .detail-spark{font-size:30px}
+  .detail-controls button{width:44px;height:44px}
+  .project-art{padding:22px;min-height:370px}
+  .project-art .artboard{max-width:300px;padding:18px}
+  .art-nodes{display:grid;grid-template-columns:1fr;justify-items:stretch;gap:9px;margin:24px 0}
+  .art-nodes span{width:100%;padding:10px;line-height:1.45}
+  .art-nodes b{transform:rotate(90deg);text-align:center}
+  .code-art{overflow:hidden}
+  .code-lines{font-size:9px;white-space:normal;overflow-wrap:anywhere}
+  .code-indicator{font-size:32px;top:-12px}
+  .contact-head{align-items:flex-start}
+}
+@media(max-width:360px){
+  .brand-text{display:none}
+  .hero-overline{gap:9px}
+  .hero h1{font-size:36px}
+}
 </style>
 
 <script>
