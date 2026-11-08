@@ -39,7 +39,7 @@ const capabilities=[
               <div class="project-info">
                 <div class="project-top"><span>{p.num} / {p.eyebrow}</span><span aria-hidden="true">↗</span></div>
                 <div class="project-main"><h3>{p.name}</h3><p class="project-short">{p.short}</p><p class="project-detail">{p.detail}</p></div>
-                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div>
+                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div><a class="case-link" href={`/work/${p.kind}/`} aria-label={`Read ${p.name} case study`}>Read the case study <span aria-hidden="true">↗</span></a>
               </div>
               <div class={'project-art '+p.kind} aria-hidden="true">
                 {p.kind==='system' && <div class="artboard">
@@ -146,6 +146,7 @@ const capabilities=[
 @media(max-width:680px){.wrap{width:calc(100% - 38px)}.header{height:77px;gap:15px}.brand-icon{height:37px;width:37px;font-size:16px}.brand-text{font-size:9px}.header nav{gap:14px;font-size:11px}.header nav a[href='#experience']{display:none}.header-contact{font-size:11px}.header-contact span{margin-left:5px}.hero{padding-top:75px}.hero-overline{font-size:9px}.hero-no{display:none}.hero h1{font-size:clamp(48px,11vw,80px);margin:42px 0 40px;letter-spacing:-.07em}.hero-bottom p{font-size:15px}.round-link{width:55px;height:55px;font-size:22px}.hero-end{margin-top:76px;font-size:8px}.blue-band{height:5px}.work,.about,.experience,.contact{padding:75px 0}.section-intro{grid-template-columns:1fr;gap:30px;margin-bottom:40px}.section-intro h2,.contact h2{font-size:clamp(50px,11vw,75px)}.project{grid-template-columns:1fr}.project-info{min-height:300px;padding:26px 0 30px}.project-main h3{font-size:36px}.project-art{min-height:290px}.artboard{max-width:350px;padding:20px}.art-nodes span{font-size:10px;padding:12px}.about-layout{grid-template-columns:1fr;gap:26px}.about-lead{font-size:30px}.capabilities{grid-template-columns:1fr 1fr;margin-top:55px}.capability:nth-child(2){border-right:0}.capability:nth-child(n+3){border-top:1px solid var(--rule-dark)}.capability:nth-child(3){padding-left:0}.timeline-row{grid-template-columns:100px 1fr;gap:15px}.timeline-row h3{font-size:21px}.timeline-type{display:none}.contact-head{margin-bottom:40px}.contact-spark{font-size:40px}.contact-bottom{align-items:start;flex-direction:column}.contact-email{width:100%}.social-links{margin-top:65px}.footer{flex-wrap:wrap;line-height:1.8}.footer span:nth-child(2){display:none}}
 @media(max-width:375px){.brand-text{display:none}.header nav a[href='#about']{display:none}.hero h1{font-size:47px}.art-nodes span{font-size:9px;padding:8px 5px}.project-art{padding:19px}.code-lines{font-size:8px}.art-status{font-size:7px}}
 
+.case-link{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;width:max-content;padding-bottom:8px;margin-top:22px;border-bottom:1px solid var(--charcoal);font:600 12px 'DM Sans',sans-serif;transition:color .2s,border-color .2s}.case-link span{color:var(--blue);font-size:16px}.case-link:hover{color:var(--blue);border-color:var(--blue)}
 /* Interactive system — isolated tokens and high-contrast panels */
 .hero-line{display:inline-block;animation:hero-enter .75s cubic-bezier(.22,1,.36,1) both}
 .hero-line:nth-of-type(2){animation-delay:.11s}.hero-line:nth-of-type(3){animation-delay:.22s}
