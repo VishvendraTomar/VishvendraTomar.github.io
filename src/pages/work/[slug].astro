@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+export function getStaticPaths(){
 const studies = {
   system: {
     number:'01',category:'BACKEND SYSTEMS',title:'Workforce infrastructure',
@@ -41,8 +42,7 @@ const studies = {
     stack:['Python','TypeScript','LLM APIs','Retrieval']
   }
 };
-export function getStaticPaths(){
-  return Object.entries(studies).map(([slug,study])=>({params:{slug},props:{study}}));
+return Object.entries(studies).map(([slug,study])=>({params:{slug},props:{study}}));
 }
 const {study}=Astro.props;
 ---
