@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const projects = [
-  {num:'01',eyebrow:'BACKEND SYSTEMS',name:'Workforce infrastructure',short:'Modernising the backend of a workforce platform.',detail:'FastAPI services, a PostgreSQL data model, background tasks and the business rules behind shifts and payments.',stack:['Python','FastAPI','PostgreSQL','Celery'],kind:'system',slug:'workforce-infrastructure'},
-  {num:'02',eyebrow:'WORKFLOW AUTOMATION',name:'AntAgents',short:'Connecting processes, people and AI.',detail:'Visual workflows, agent steps, execution state and asynchronous processing in a modular automation platform.',stack:['TypeScript','NestJS','Redis','Docker'],kind:'flow',slug:'antagents'},
-  {num:'03',eyebrow:'APPLIED AI',name:'Developer tooling',short:'Making language models useful in real workflows.',detail:'Structured outputs, retrieval, code analysis and the engineering around predictable model integrations.',stack:['Python','LLM APIs','RAG'],kind:'code',slug:'ai-developer-tooling'}
+  {num:'01',eyebrow:'PRODUCTION BACKEND',name:'Workforce infrastructure',short:'Making complex workforce operations more reliable.',detail:'Modernised Cloud Functions into FastAPI services, designed a 46-table relational model, and worked on asynchronous compliance and payroll workflows. The FastAPI backend shipped while database migration remained staged.',stack:['Python','FastAPI','PostgreSQL','Celery'],kind:'system',slug:'workforce-infrastructure'},
+  {num:'02',eyebrow:'AGENT ORCHESTRATION',name:'AntAgents',short:'A visual platform for real, stateful AI workflows.',detail:'Built agent-enabled automation with React Flow, NestJS and Temporal. Worked on multi-tenant execution, pause/resume, event processing and observability across distributed services.',stack:['NestJS','React Flow','Temporal','Redis'],kind:'flow',slug:'antagents'},
+  {num:'03',eyebrow:'HACKATHON / TEAM ACHIEVEMENT',name:'Dealroom.ai',short:'From client documents to an interactive proposal concept.',detail:'Our team placed second with a proposal-automation prototype. Document upload, parsing and live progress were implemented; an agent-driven analysis and proposal experience was designed.',stack:['FastAPI','Next.js','Python','TypeScript'],kind:'proposal',slug:'dealroom-ai',recognition:'2ND PLACE · TEAM'},
+  {num:'04',eyebrow:'AI FOR DEVELOPERS',name:'AI developer tooling',short:'Making code understanding and review less manual.',detail:'Worked on AI-assisted repository analysis, semantic retrieval, code review flows and improved rules for AI-generated code, with a focus on useful developer workflows.',stack:['Python','Embeddings','LLM APIs'],kind:'code',slug:'ai-developer-tooling'}
 ];
 const capabilities=[
   {num:'01',name:'Backend',items:'Python, FastAPI, Node.js, TypeScript'},
@@ -32,14 +33,14 @@ const capabilities=[
     <div class="blue-band" aria-hidden="true"></div>
     <section class="work light-section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <div class="section-intro"><span class="overline"><span class="section-index">01</span> SELECTED WORK</span><div><h2 id="work-title">Proof is in<br/><em>the work.</em></h2><p>Three areas that reflect what I build.</p></div></div>
+        <div class="section-intro"><span class="overline"><span class="section-index">01</span> SELECTED WORK</span><div><h2 id="work-title">Proof is in<br/><em>the work.</em></h2><p>Engineering problems I helped solve, not just lists of technologies.</p></div></div>
         <div class="project-list">
           {projects.map((p)=>(
             <article class="project">
               <div class="project-info">
                 <div class="project-top"><span>{p.num} / {p.eyebrow}</span><span aria-hidden="true">↗</span></div>
                 <div class="project-main"><h3>{p.name}</h3><p class="project-short">{p.short}</p><p class="project-detail">{p.detail}</p></div>
-                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div><a class="case-link" href={`/work/${p.slug}/`} aria-label={`Read ${p.name} case study`}>Read the case study <span aria-hidden="true">↗</span></a>
+                <div class="project-tags">{p.stack.map(t=><span>{t}</span>)}</div>{p.recognition && <span class="project-recognition">{p.recognition}</span>}<a class="case-link" href={`/work/${p.slug}/`} aria-label={`Read ${p.name} case study`}>Read the case study <span aria-hidden="true">↗</span></a>
               </div>
               <div class={'project-art '+p.kind} aria-hidden="true">
                 {p.kind==='system' && <div class="artboard">
@@ -50,6 +51,14 @@ const capabilities=[
                 {p.kind==='flow' && <div class="artboard">
                   <div class="art-label"><span>AGENT ORCHESTRATION</span><span>02 / 03</span></div>
                   <div class="flow-stack"><span>TRIGGER <i>DONE</i></span><div class="flow-connector"></div><span class="flow-active">AGENT STEP <i>↗</i></span><div class="flow-connector"></div><span>RESULT <i>○</i></span></div>
+                </div>}
+                {p.kind==='proposal' && <div class="artboard proposal-art">
+                  <div class="art-label"><span>PROPOSAL AUTOMATION</span><span class="art-light">TEAM / 02</span></div>
+                  <div class="proposal-stage"><span>01</span><b>DOCUMENT INTAKE</b><small>PDF · DOCX · XLSX</small></div>
+                  <div class="proposal-arrow">↓</div>
+                  <div class="proposal-stage"><span>02</span><b>REQUIREMENTS ANALYSIS</b><small>AGENT WORKFLOW DESIGN</small></div>
+                  <div class="proposal-arrow">↓</div>
+                  <div class="proposal-stage proposal-result"><span>03</span><b>INTERACTIVE PROPOSAL</b><small>PRODUCT CONCEPT</small></div>
                 </div>}
                 {p.kind==='code' && <div class="artboard code-art">
                   <div class="art-label code-head"><span>AI PIPELINE</span><span class="code-brand"><span class="code-spark" aria-hidden="true">✦</span>03 / 03</span></div>
@@ -110,7 +119,50 @@ const capabilities=[
     </section>
     <section class="experience light-section" id="experience" aria-labelledby="experience-title"><div class="wrap">
       <div class="section-intro"><span class="overline"><span class="section-index">03</span> EXPERIENCE</span><div><h2 id="experience-title">Built through<br/><em>experience.</em></h2></div></div>
-      <div class="timeline"><div class="timeline-row"><span class="dates">2026</span><div><h3>Software Engineer</h3><p>Deel</p><p class="role-detail">Worked on the backend infrastructure behind Deel’s customer-facing AI experiences, connecting trusted knowledge, account-specific context, support workflows, and human escalation for reliable assistance.</p></div><span class="timeline-type">BACKEND / AI SYSTEMS</span></div><div class="timeline-row"><span class="dates">2024 — 2026</span><div><h3>Software Engineer III</h3><p>GeekyAnts · Joined as an intern, grew into SE III</p></div><span class="timeline-type">SOFTWARE ENGINEERING</span></div></div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <span class="dates">OCT 2026</span>
+          <div>
+            <h3>Software Engineer · Deel</h3>
+            <p>BACKEND / APPLIED AI</p>
+            <p class="role-detail">Worked on infrastructure behind customer-facing AI assistance, connecting trusted knowledge, account-aware context, support workflows and human escalation. Focused on how AI can assist people reliably, without replacing human judgment when needed.</p>
+          </div>
+          <span class="timeline-type">AI SUPPORT SYSTEMS</span>
+        </div>
+        <div class="career-block">
+          <div class="career-overview">
+            <div><span class="dates">MAY 2024 — OCT 2026</span><h3>GeekyAnts</h3><p>Started as an intern. Progressed through four engineering roles to Software Engineer III.</p></div>
+            <span class="career-rise">INTERN <span aria-hidden="true">↗</span> SE III</span>
+          </div>
+          <ol class="career-roles">
+            <li class="career-role">
+              <div class="role-dates">MAY — OCT 2026</div>
+              <div><h4>Software Engineer III</h4><p>Owned backend modernization and complex business workflows: modular FastAPI services, background execution, compliance integrations, and relational data modelling.</p></div>
+            </li>
+            <li class="career-role">
+              <div class="role-dates">MAY 2025 — APR 2026</div>
+              <div><h4>Software Engineer II</h4><p>Expanded into backend architecture, distributed workflows and AI integrations. Worked across production systems and agent-based automation, taking on increasingly independent delivery.</p></div>
+            </li>
+            <li class="career-role">
+              <div class="role-dates">SEP 2024 — MAY 2025</div>
+              <div><h4>Software Engineer</h4><p>Built backend APIs and AI-assisted developer features, including code analysis and retrieval workflows. Learned how to take features from prototype to usable team tools.</p></div>
+            </li>
+            <li class="career-role">
+              <div class="role-dates">MAY — SEP 2024</div>
+              <div><h4>Software Engineering Intern</h4><p>Built a foundation in writing production code, working with teams, debugging issues and learning across unfamiliar frameworks.</p></div>
+            </li>
+          </ol>
+          <div class="career-impact">
+            <span class="impact-title">BEYOND SHIPPING CODE</span>
+            <div class="impact-items">
+              <p><strong>GeekWiz Rising Star</strong><span>Recognition for project contributions and growth.</span></p>
+              <p><strong>Hackathon · 2nd place</strong><span>Team achievement building Dealroom.ai.</span></p>
+              <p><strong>3 technical articles + a talk</strong><span>Published engineering articles and presented a CrewAI tech talk.</span></p>
+              <p><strong>Hiring &amp; knowledge sharing</strong><span>Participated in technical interviews and team engineering discussions.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div></section>
     <section class="contact dark-section" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-head"><span class="overline"><span class="section-index">04</span> CONTACT</span><span class="contact-spark" aria-hidden="true">✦</span></div><h2 id="contact-title">Let's make<br/><em>something work.</em></h2><div class="contact-bottom"><p>Open to backend and software engineering opportunities.</p><a href="mailto:vishvendratomar29@gmail.com" class="contact-email">Get in touch <span>↗</span></a></div><div class="social-links"><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a><a href="mailto:vishvendratomar29@gmail.com">EMAIL ↗</a></div></div></section>
   </main>
@@ -268,6 +320,49 @@ const capabilities=[
 @media(max-width:360px){
  .code-art .code-lines{font-size:9px}
  .code-spark{font-size:16px}
+}
+
+/* Case-study additions: visible achievement and document-to-proposal concept. */
+.project-recognition{display:inline-block;align-self:start;margin-top:13px;border:1px solid #2f6bff;color:#2356cf;padding:7px 10px;font:10px 'DM Mono',monospace;letter-spacing:.4px}
+.proposal-art{transform:rotate(-1deg)}
+.proposal-stage{display:grid;grid-template-columns:23px minmax(0,1fr);gap:3px 10px;padding:11px 8px;border:1px solid #706c62;align-items:center}
+.proposal-stage span{font:10px 'DM Mono',monospace;color:#8eacff;grid-row:span 2}
+.proposal-stage b{font:10px 'DM Mono',monospace;letter-spacing:.2px;white-space:normal}
+.proposal-stage small{color:#a9a18f;font:9px 'DM Mono',monospace;grid-column:2}
+.proposal-stage.proposal-result{border-color:#5887ff;background:#2f6bff15}
+.proposal-arrow{text-align:center;color:#8caaff;font-size:14px;line-height:20px}
+.proposal-art .art-label{margin-bottom:22px}
+.career-block{border-bottom:1px solid var(--rule-light);padding:45px 0 58px}
+.career-overview{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:35px}
+.career-overview h3{font:500 clamp(37px,4.2vw,55px) 'Space Grotesk',sans-serif;letter-spacing:-2px;margin:14px 0 7px}
+.career-overview p{max-width:540px;color:#565149;font-size:14px;line-height:1.7;margin:0}
+.career-rise{white-space:nowrap;font:12px 'DM Mono',monospace;letter-spacing:.4px;color:#565149}
+.career-rise span{color:var(--blue);font-size:26px}
+.career-roles{list-style:none;padding:0 0 0 24px;margin:0 0 38px 0;border-left:1px solid #a99f8d}
+.career-role{position:relative;display:grid;grid-template-columns:195px minmax(0,1fr);gap:30px;padding:5px 0 25px}
+.career-role:last-child{padding-bottom:0}
+.career-role:before{content:'';position:absolute;top:11px;left:-29px;width:9px;height:9px;border-radius:50%;background:var(--blue);border:2px solid var(--paper)}
+.role-dates{font:10px 'DM Mono',monospace;color:#656056;letter-spacing:.2px;line-height:1.8}
+.career-role h4{font:500 23px 'Space Grotesk',sans-serif;letter-spacing:-.5px;margin:0 0 8px}
+.career-role p{font:13px/1.8 'DM Sans',sans-serif;color:#5c574e;max-width:610px;margin:0}
+.career-impact{margin-top:26px;padding:26px 29px;background:#cbbda4;border:1px solid #afa48e}
+.impact-title{font:10px 'DM Mono',monospace;letter-spacing:1px;color:#544c3e}
+.impact-items{display:grid;grid-template-columns:1fr 1fr;gap:22px 35px;margin-top:24px}
+.impact-items p{display:flex;flex-direction:column;gap:7px;margin:0}
+.impact-items strong{font:600 18px 'Space Grotesk',sans-serif;letter-spacing:-.5px}
+.impact-items span{font:12px/1.6 'DM Sans',sans-serif;color:#5f574d}
+@media(max-width:680px){
+ .career-block{padding:37px 0 45px}
+ .career-overview{align-items:flex-start;flex-direction:column;gap:12px}
+ .career-overview h3{font-size:41px}
+ .career-rise{font-size:11px}
+ .career-roles{padding-left:19px}
+ .career-role{grid-template-columns:1fr;gap:5px;padding-bottom:25px}
+ .career-role:before{left:-24px}
+ .career-role h4{font-size:21px}
+ .career-impact{padding:21px}
+ .impact-items{grid-template-columns:1fr;gap:19px}
+ .proposal-art .proposal-stage b{font-size:9px}
 }
 </style>
 
