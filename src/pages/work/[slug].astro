@@ -3,43 +3,62 @@ import Layout from '../../layouts/Layout.astro';
 export function getStaticPaths(){
 const studies = {
   'workforce-infrastructure': {
-    number:'01',category:'BACKEND SYSTEMS',title:'Workforce infrastructure',
-    intro:'Modernising the systems that coordinate shifts, pay, and operational workflows.',
-    context:'Workforce platforms combine time-sensitive events, complex business rules and integrations that cannot simply fail silently.',
-    role:'Backend service development, relational data modelling, and integration workflows.',
+    number:'01',category:'PRODUCTION BACKEND',title:'Workforce infrastructure',
+    intro:'Modernising the backend behind workforce scheduling, compliance and payments.',
+    context:'A workforce platform needs to coordinate worker assignments, declarations, wages and invoices while preserving business rules across time-sensitive changes. Legacy serverless workflows made separation of responsibilities, retries and consistency harder to reason about.',
+    role:'Worked as the sole backend engineer on a major modernization effort, designing modular FastAPI services, an expanded PostgreSQL domain schema and asynchronous business workflows.',
+    outcome:'Migrated more than 50 Cloud Functions to FastAPI; designed a 46-table PostgreSQL schema. The FastAPI service layer went into production with the existing Firestore database; the proposed PostgreSQL data migration was not completed during this phase.',
     challenges:[
-      {name:'Model the domain',detail:'Designed a PostgreSQL model for operational entities, their relationships, and rules that must remain consistent.'},
-      {name:'Separate the boundaries',detail:'Worked on modular FastAPI service paths rather than keeping all application behaviour inside serverless functions.'},
-      {name:'Make slow work asynchronous',detail:'Used queues and background processing patterns for work that needs retry, visibility and predictable failure handling.'}
+      {name:'Separate business rules',detail:'Reworked function-based paths into service-oriented FastAPI routes, making validations, dependencies and execution boundaries clearer.'},
+      {name:'Design the data model',detail:'Modelled shifts, assignments, payments and linked entities in a 46-table PostgreSQL schema with transaction and access-control considerations. This was design work, not a claim of a fully completed production data migration.'},
+      {name:'Build for failure',detail:'Worked on background processing for external compliance requests, retries, queue separation and reconciliation so slow or failed integrations could be tracked.'}
     ],
-    lessons:'The hard part of a migration is not replacing endpoints. It is preserving the business meaning and correctness of existing workflows.',
-    stack:['Python','FastAPI','PostgreSQL','Redis','Celery']
+    lessons:'A migration is successful only when the new architecture preserves the real business rules. Shipping a useful backend layer and deferring an unsafe database cutover can be the right engineering decision.',
+    stack:['Python','FastAPI','PostgreSQL','Firestore','Redis','Celery']
   },
   antagents:{
-    number:'02',category:'AI WORKFLOWS',title:'AntAgents',
-    intro:'A workflow platform where automation is built from connected steps, including AI capabilities.',
-    context:'An automation system needs more than a sequence of API calls: it needs visibility into execution, failures and the state between steps.',
-    role:'Workflow and backend engineering, with an emphasis on agent-oriented orchestration.',
+    number:'02',category:'AI WORKFLOW ENGINEERING',title:'AntAgents',
+    intro:'An automation platform that makes AI steps part of reliable business workflows.',
+    context:'A useful agent platform cannot stop at calling a language model. It needs a workflow definition, tenant boundaries, execution state and failure visibility so users can understand and trust the result.',
+    role:'Contributed across NestJS APIs, a React Flow visual builder, AI integrations and workflow orchestration alongside engineering teammates.',
+    outcome:'Worked on agent-enabled workflow delivery recognised in the GeekyAnts appraisal, including execution flow, pause/resume and observability concerns. The wider system spanned multiple distributed services.',
     challenges:[
-      {name:'Represent a workflow',detail:'Think in nodes, edges, inputs and outputs so workflows can be visualised and executed predictably.'},
-      {name:'Keep execution state',detail:'Track progress between stages, distinguish pending from completed steps and make interruption easier to reason about.'},
-      {name:'Observe the whole run',detail:'Connect events, background execution and traceable outcomes instead of treating each step as an isolated operation.'}
+      {name:'Make workflows visible',detail:'Used React Flow concepts to represent automation as connected steps rather than hiding execution inside one API call.'},
+      {name:'Coordinate long-running work',detail:'Worked with Temporal workflow patterns and asynchronous processing to represent state, retries and resumable execution.'},
+      {name:'Observe failures',detail:'Integrated distributed-system tooling and execution tracing patterns so teams could inspect runs, errors and service behaviour.'}
     ],
-    lessons:'Agent features become useful when the surrounding workflow is dependable: explicit state, clear responsibilities and understandable results.',
-    stack:['TypeScript','NestJS','Redis','Docker']
+    lessons:'Agent orchestration is largely about predictable software engineering: explicit state, well-defined inputs, retries and enough observability to understand a failed run.',
+    stack:['TypeScript','NestJS','React Flow','Temporal','Redis','Docker']
+  },
+  'dealroom-ai':{
+    number:'03',category:'HACKATHON / TEAM SECOND PLACE',title:'Dealroom.ai',
+    intro:'A collaborative hackathon project exploring AI-powered proposal creation.',
+    context:'Preparing a technical proposal from a client request involves reading large documents, extracting needs, identifying ambiguity, suggesting an architecture and turning that information into something the client can explore.',
+    role:'Team hackathon contribution. The repo documents the architecture and early prototype; the precise division of work across team members has not yet been documented publicly.',
+    outcome:'Our team placed second. The repository checklist records a working document-upload and parsing flow with streamed progress; the multi-agent war room, strategies and interactive proposal remained planned at the point recorded.',
+    challenges:[
+      {name:'Read real inputs',detail:'Built a FastAPI intake path for PDF, DOCX and spreadsheet files, with a Next.js upload interface and parsing feedback streamed to the browser.'},
+      {name:'Plan the agent pipeline',detail:'Designed an analyst–architect–estimator workflow with explicit state, interactive feedback and structured decisions rather than one unbounded prompt.'},
+      {name:'Scope an ambitious idea',detail:'Separated working demo capabilities from the longer-term proposal and analytics vision, making it clear what was actually implemented.'}
+    ],
+    lessons:'Hackathons are not just about finishing every planned feature. A good team can define an ambitious product vision, deliver a convincing core and explain what should be built next.',
+    stack:['Next.js','TypeScript','FastAPI','Python','SSE','SQLite'],
+    repository:'https://github.com/VishvendraTomar/dealroom.ai',
+    repositoryNote:'Repository is currently private; the link may require access.'
   },
   'ai-developer-tooling':{
-    number:'03',category:'APPLIED AI',title:'Developer tooling',
-    intro:'Making model-powered development workflows useful, testable and easier to trust.',
-    context:'Language models can help analyse code and structure developer tasks, but model output must be handled like an external dependency.',
-    role:'Exploring and implementing practical LLM integrations and developer tools.',
+    number:'04',category:'APPLIED AI',title:'AI developer tooling',
+    intro:'Using language models and retrieval to make repository understanding and code review more useful.',
+    context:'Engineering teams work with large codebases, scattered context and repetitive review tasks. Model outputs can help, but they need relevant source context, structure and validation to be useful.',
+    role:'Worked on AI-assisted code analysis and development tooling, including semantic search and LLM-assisted review workflows.',
+    outcome:'Contributed repository analysis and engineering tooling, and independently researched techniques for improving AI-generated coding rules adopted in team practices.',
     challenges:[
-      {name:'Ground the response',detail:'Retrieve the relevant context before asking a model to explain or analyse it.'},
-      {name:'Structure the output',detail:'Use schemas and validation instead of relying on loosely formatted natural-language responses.'},
-      {name:'Handle uncertainty',detail:'Surface limitations and keep the workflow resilient when the model has insufficient context or returns an invalid result.'}
+      {name:'Find the right context',detail:'Used embeddings and retrieval concepts to identify relevant project information before generating explanations.'},
+      {name:'Work with model output',detail:'Explored structured responses and practical handling of unreliable or incomplete model-generated suggestions.'},
+      {name:'Improve team practices',detail:'Researched AI-assisted IDE techniques and translated those findings into better coding guidelines and rules for the team.'}
     ],
-    lessons:'The most useful AI feature often has very little magic in the interface and a lot of careful engineering behind the scenes.',
-    stack:['Python','TypeScript','LLM APIs','Retrieval']
+    lessons:'AI tooling becomes valuable when it fits existing development workflows and gives engineers useful, reviewable results rather than unverified answers.',
+    stack:['Python','LLM APIs','Embeddings','Retrieval','Backend APIs']
   }
 };
 return Object.entries(studies).map(([slug,study])=>({params:{slug},props:{study}}));
@@ -52,7 +71,7 @@ const {study}=Astro.props;
   <section class="intro wrap"><div class="kicker"><span class="square"></span>{study.category} / {study.number}</div><h1>{study.title}<span>.</span></h1><p>{study.intro}</p><a href="#breakdown" class="skiplink">EXPLORE THE BREAKDOWN ↓</a></section>
   <div class="blue-stripe"></div>
   <section class="paper" id="breakdown"><div class="wrap">
-    <div class="two-col"><div class="section-heading"><span class="index">01 /</span><h2>The context.</h2></div><div><p>{study.context}</p><div class="role"><span>MY FOCUS</span><p>{study.role}</p></div></div></div>
+    <div class="two-col"><div class="section-heading"><span class="index">01 /</span><h2>The context.</h2></div><div><p>{study.context}</p><div class="role"><span>MY FOCUS</span><p>{study.role}</p></div><div class="role outcome"><span>WHAT WAS DELIVERED</span><p>{study.outcome}</p></div>{study.repository && <div class="repo-link"><a href={study.repository} target="_blank" rel="noopener noreferrer">VIEW GITHUB REPOSITORY ↗</a><small>{study.repositoryNote}</small></div>}</div></div>
     <div class="section-heading engineering"><span class="index">02 /</span><h2>Engineering decisions.</h2></div>
     <div class="decisions">{study.challenges.map((item,i)=><article class="decision"><span class="step">0{i+1}</span><h3>{item.name}</h3><p>{item.detail}</p></article>)}</div>
     <div class="two-col lesson"><div class="section-heading"><span class="index">03 /</span><h2>What matters.</h2></div><div><p>{study.lessons}</p><div class="stack">{study.stack.map(t=><span>{t}</span>)}</div></div></div>
@@ -90,4 +109,4 @@ const {study}=Astro.props;
   .closing h2{font-size:clamp(40px,11vw,58px)}
   .footer{flex-wrap:wrap;row-gap:9px}
 }
-</style>
+.outcome{margin-top:25px}.outcome p{font-weight:500;color:#38342e}.repo-link{margin-top:27px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}.repo-link a{display:inline-block;padding-bottom:8px;border-bottom:1px solid #3c3932;font:11px 'DM Mono',monospace}.repo-link a:hover{color:#2f6bff;border-color:#2f6bff}.repo-link small{color:#5d574e;font:11px/1.6 'DM Sans',sans-serif}</style>
