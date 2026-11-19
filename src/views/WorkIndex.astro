@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Figure from '../components/Figure.astro';
+import { casesFor } from '../lib/content';
+import { ui } from '../i18n/ui';
+import { localize, type Lang } from '../i18n/config';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const t = ui[lang].workIndex;
+---
+<Layout lang={lang} title={t.title}><div class="page-intro"><h1>{t.title}</h1></div><div class="cards">{casesFor(lang).map(({frontmatter:f})=><article class="card"><Figure id={f.figure} lang={lang} compact/><h2><a href={localize('/work/'+f.slug+'/', lang)}>{f.title}</a></h2><p>{f.summary}</p></article>)}</div></Layout>

@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ui } from '../i18n/ui';
+import { localize, type Lang } from '../i18n/config';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const t = ui[lang].about;
+---
+<Layout lang={lang} title={t.title}><article class="entry"><div class="page-intro"><h1>{t.heading}</h1><p class="lede">{t.lede}</p></div><h2>{t.bordersH}</h2><p>{t.borders}</p><h2>{t.geekyH}</h2><p>{t.geeky}</p><p>{t.also}</p><h2>{t.toolsH}</h2><p>Python, FastAPI, TypeScript, Node.js, NestJS, Next.js, PostgreSQL, Firestore, Redis, Docker, AWS, Azure DevOps.</p><a href={localize('/work/', lang)}>{t.explore}</a></article></Layout>

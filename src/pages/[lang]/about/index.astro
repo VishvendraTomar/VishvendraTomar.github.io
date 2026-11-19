@@ -1,0 +1,6 @@
+---
+import About from '../../../views/About.astro';
+import { otherLangs, type Lang } from '../../../i18n/config';
+export function getStaticPaths(){return otherLangs.map(lang=>({params:{lang}}))}
+---
+<About lang={Astro.params.lang as Lang}/>

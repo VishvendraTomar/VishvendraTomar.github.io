@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/config';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const t = ui[lang].contact;
+const mail = 'vishvendratomar29@gmail.com';
+---
+<Layout lang={lang} title={t.title}><article class="entry"><div class="page-intro"><h1>{t.heading}</h1><p class="lede">{t.lede}</p></div><p>{t.body}</p><div class="actions"><a class="primary" href={'mailto:' + mail}>{t.email}</a><a href="https://www.linkedin.com/in/vishvendra-tomar/">LinkedIn</a><a href={'mailto:' + mail + '?subject=' + encodeURIComponent(t.callSubject)}>{t.call}</a></div></article></Layout>

@@ -1,0 +1,45 @@
+---
+import { otherLangs, localize, splitPath, isTranslated } from '../i18n/config';
+import { ui } from '../i18n/ui';
+const { lang, path } = splitPath(Astro.url.pathname);
+// Only English pages that exist in other languages suggest a translation. Nothing ever redirects.
+const show = lang === 'en' && isTranslated(path);
+const offers = Object.fromEntries(otherLangs.map(l => [l, { href: localize(path, l), ...ui[l].suggest }]));
+---
+{show && <div class="lang-suggest" hidden data-offers={JSON.stringify(offers)} role="region" aria-label="Language">
+  <p><span class="lsg-text"></span> <a class="lsg-go"></a></p>
+  <button type="button" class="lsg-close" aria-label="Dismiss">×</button>
+</div>}
+<style>
+.lang-suggest { position: fixed; left: 50%; bottom: 18px; z-index: 50; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 18px; background: #f1e9da; color: #1e1e1c; border-left: 4px solid #2f6bff; box-shadow: 0 14px 40px #0007; font: 14px/1.45 'DM Sans', system-ui, sans-serif; }
+.lang-suggest[hidden] { display: none; }
+.lang-suggest p { margin: 0; flex: 1; }
+.lsg-go { font-weight: 700; color: #173f9b; text-decoration: underline; text-underline-offset: .2em; white-space: nowrap; }
+.lsg-close { flex: none; width: 34px; height: 34px; border: 1px solid #b4aa98; background: transparent; color: #1e1e1c; font-size: 20px; line-height: 1; cursor: pointer; }
+.lsg-close:hover { background: #e5dac6; }
+</style>
+<script>
+  const bar = document.querySelector<HTMLElement>('.lang-suggest');
+  if (bar) {
+    const KEY = 'lang-suggest-dismissed';
+    let dismissed = false;
+    try { dismissed = localStorage.getItem(KEY) === '1'; } catch {}
+    const offers = JSON.parse(bar.dataset.offers || '{}');
+    const preferred = (navigator.languages?.length ? navigator.languages : [navigator.language])
+      .map(l => (l || '').toLowerCase().slice(0, 2));
+    // Walk the visitor's languages in order of preference. Reaching English first means no bar.
+    let match = '';
+    for (const l of preferred) { if (l === 'en') break; if (offers[l]) { match = l; break; } }
+    if (match && !dismissed) {
+      const o = offers[match];
+      bar.querySelector('.lsg-text')!.textContent = o.text;
+      const go = bar.querySelector<HTMLAnchorElement>('.lsg-go')!;
+      go.textContent = o.action + ' →'; go.href = o.href; go.hreflang = match; go.lang = match;
+      const close = bar.querySelector<HTMLButtonElement>('.lsg-close')!;
+      close.setAttribute('aria-label', o.dismiss);
+      bar.setAttribute('lang', match);
+      bar.hidden = false;
+      close.addEventListener('click', () => { bar.hidden = true; try { localStorage.setItem(KEY, '1'); } catch {} });
+    }
+  }
+</script>

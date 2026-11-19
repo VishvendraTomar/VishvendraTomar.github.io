@@ -4,12 +4,53 @@ title: A Belgian staffing platform
 summary: "Picture 05:45. A worker calls in sick. The shift starts at 06:00. A colleague can cover, but the registration on file names the worker who just called. The manager has fifteen minutes to get the replacement declared before work starts."
 figure: registration
 order: 1
+before:
+  - "The founder’s first version ran on Cloud Functions and Firestore."
+  - "Failed Dimona filings were rerun by hand."
+  - "About 10,000 shifts, and the system was already struggling to scale."
+after:
+  - "No lost filings, no duplicates, no manual reruns."
+  - "Every filing ends accepted, retried or with a person."
+  - "125,000+ shifts and 1,000+ companies on the new backend."
+eyebrow: Government filings / Payroll
+tagline: "A government API that fails. Filings that can’t."
+highlights:
+  - title: Three exits
+    text: Every filing ends accepted, retried or with a person. Nothing is silently dropped.
+  - title: Safe to repeat
+    text: At-least-once delivery plus idempotency. A second attempt is recognised, never filed twice.
+  - title: Ask before you send
+    text: After a crash, check the filing’s status with the government before sending it again.
+  - title: Pay that recalculates
+    text: Rules stored as data with effective dates. An old payslip always comes out to the same amount.
 ---
 ## My role
 
 One of the two engineers on the platform. The founder led product direction; I built most of the backend.
 
 I spent about a year and a half on the project at GeekyAnts. I worked remotely from Bengaluru and spent about 20 days in Belgium for final delivery. My part included Dimona registration, attendance verification and the rules that turned hours into wages, invoices and filings.
+
+## Three exits, nothing silently dropped
+
+Every filing ends in exactly one of three places. It is accepted, it is retried, or it lands in a dead-letter queue where a person picks it up. No other outcome exists, so no filing can disappear quietly.
+
+<div class="exits" role="img" aria-label="A filing goes to Dimona and ends in one of three places: accepted, retried later, or the dead-letter queue for a person.">
+  <span class="exits-source">Filing → Dimona</span>
+  <div class="exits-list">
+    <span class="exit-ok"><b>Accepted</b> Registration confirmed and recorded.</span>
+    <span class="exit-retry"><b>Retried</b> Temporary failure. Back in the queue after a delay.</span>
+    <span class="exit-dlq"><b>Dead-letter queue</b> Permanent error or retries exhausted. A person is alerted.</span>
+  </div>
+</div>
+
+## Making a filing safe to repeat
+
+The first version relied on someone noticing a failed filing and running it again. The rebuild made repeating a filing safe, so the system could do it on its own.
+
+- **At-least-once delivery, plus idempotency.** The queue may hand the same job over twice. That is the price of never losing one. Each filing carries an identity, so a second attempt is recognised instead of creating a duplicate registration.
+- **Transient and permanent errors are different problems.** A timeout or an unavailable service is worth retrying. A filing rejected for its content will be rejected again, so it goes straight to a person instead of burning retries.
+- **After a crash, ask before you send.** A submitter can die after sending a filing and before saving the answer. The next attempt checks the filing’s status with the government first. It sends again only if nothing was accepted.
+- **Backoff with jitter.** When the government service comes back, a burst of queued filings should not knock it over again. Retries wait longer each time, with randomness so they spread out.
 
 ## Three decisions when a shift changes
 
@@ -45,11 +86,21 @@ I built the check around a secure NFC tap, venue Wi-Fi and location. The tap pro
 
 The cost shows up at a real venue too. A genuine worker can have a weak location reading or an unavailable network signal. That is why the three observations have distinct roles in the check.
 
-## After the shift
+## Wages that recalculate the same way twice
 
-Recorded hours feed the wage and compliance engine. The worker’s pay and the client invoice use the same attendance record but answer different questions. For operations exposed through MCP, I kept business checks in the domain layer so an agent request still had to satisfy the staffing rules.
+Recorded hours feed the wage and compliance engine. The worker’s pay and the client invoice use the same attendance record but answer different questions.
 
-The platform grew from about **10,000 to 125,000+ shifts** and served **1,000+ companies**. Those figures describe platform use over time. My contribution was the backend work described above.
+Pay rules change: rates, bonuses, legal thresholds. I stored the rules as data with effective dates instead of writing them into code. A payslip is calculated with the rules that applied on the day the work was done. Recalculating a payslip from last year gives the same amount it gave then, even after the rules have moved on.
+
+Money is never stored as a floating-point number. Amounts are kept as exact decimals, because floating-point rounding lets a few cents drift between a payslip and an invoice.
+
+For operations exposed through MCP, I kept business checks in the domain layer, so a request from an agent still had to satisfy the staffing rules.
+
+## Scale, honestly
+
+The platform started at about **10,000 shifts**, and the old system was already struggling. On the new backend it grew to **125,000+ shifts** and **1,000+ companies**.
+
+The traffic was modest. The hard part was correctness: a duplicated filing, a lost registration or a wrong payslip is a problem at any volume.
 
 ## The same problem in other countries
 

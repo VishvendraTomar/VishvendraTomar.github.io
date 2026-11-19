@@ -1,7 +1,11 @@
 ---
+import Alternates from '../components/Alternates.astro';
+import LangSuggest from '../components/LangSuggest.astro';
+import { languages, type Lang } from '../i18n/config';
 const {
-  title = 'Vishvendra Tomar | Backend Software Engineer & Applied AI',
-  description = 'Explore Vishvendra Tomar’s portfolio: backend engineering with Python and FastAPI, reliable production systems, and practical AI integrations.'
+  lang = 'en' as Lang,
+  title = 'Vishvendra Tomar | Making unreliable systems dependable',
+  description = 'Vishvendra Tomar makes unreliable systems dependable: government filings that can’t be lost, durable AI agents, and payroll that recalculates to the cent.'
 } = Astro.props;
 const site = 'https://vishvendratomar.github.io';
 const canonical = new URL(Astro.url.pathname, site).toString();
@@ -13,9 +17,9 @@ const person = {
   name: 'Vishvendra Tomar',
   url: site + '/',
   jobTitle: 'Software Engineer',
-  description: 'Backend-focused software engineer specialising in Python, FastAPI, production systems and applied AI.',
+  description: 'Backend engineer who makes unreliable systems dependable: government filings, durable AI agent infrastructure and payroll.',
   sameAs: ['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/'],
-  knowsAbout: ['Python','FastAPI','Backend engineering','PostgreSQL','Distributed systems','Applied AI']
+  knowsAbout: ['Python','FastAPI','Backend engineering','PostgreSQL','Distributed systems','Durable execution','AI agent infrastructure']
 };
 const page = {
   '@context': 'https://schema.org',
@@ -24,12 +28,12 @@ const page = {
   url: canonical,
   name: title,
   description,
-  inLanguage: 'en',
+  inLanguage: languages[lang].htmlLang,
   about: {'@id': personId}
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang={languages[lang].htmlLang}>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,6 +45,7 @@ const page = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
+<meta property="og:locale" content={languages[lang].og} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={new URL("/social-card.png",site).href} />
 <meta name="twitter:card" content="summary_large_image" />
@@ -48,6 +53,7 @@ const page = {
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <link rel="canonical" href={canonical} />
+<Alternates />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="shortcut icon" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,7 +63,7 @@ const page = {
 <script type="application/ld+json" set:html={JSON.stringify(page)} />
 <title>{title}</title>
 </head>
-<body><slot /></body>
+<body><slot /><LangSuggest /></body>
 </html>
 <style is:global>
 :root{font-family:'DM Sans',Arial,sans-serif;background:#1e1e1c;color:#d8cbb3;scroll-behavior:smooth}

@@ -1,0 +1,8 @@
+---
+import { languages, langs, localize, splitPath, isTranslated } from '../i18n/config';
+const { path } = splitPath(Astro.url.pathname);
+const site = Astro.site ?? new URL('https://vishvendratomar.github.io');
+const links = isTranslated(path) ? langs.map(l => [languages[l].htmlLang, new URL(localize(path, l), site).href]) : [];
+---
+{links.map(([hreflang, href]) => <link rel="alternate" hreflang={hreflang} href={href} />)}
+{links.length > 0 && <link rel="alternate" hreflang="x-default" href={new URL(path, site).href} />}

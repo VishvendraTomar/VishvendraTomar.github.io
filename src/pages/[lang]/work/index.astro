@@ -1,0 +1,6 @@
+---
+import WorkIndex from '../../../views/WorkIndex.astro';
+import { otherLangs, type Lang } from '../../../i18n/config';
+export function getStaticPaths(){return otherLangs.map(lang=>({params:{lang}}))}
+---
+<WorkIndex lang={Astro.params.lang as Lang}/>
