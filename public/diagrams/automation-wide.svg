@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="220" viewBox="0 0 1080 220">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a9c1ff"/></marker></defs>
+<rect width="1080" height="220" fill="#1e1e1c"/>
+<path d="M201 109H241" fill="none" stroke="#a9c1ff" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M452 109H497" fill="none" stroke="#a9c1ff" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720 109H752" fill="none" stroke="#a9c1ff" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M829 87V55H930" fill="none" stroke="#a9c1ff" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M829 131V161H930" fill="none" stroke="#a9c1ff" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="23.0" y="87" width="178" height="44" fill="#302f29" stroke="#b6aa95"/><text x="112" y="109" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">Business analyst</text>
+<rect x="242.0" y="87" width="210" height="44" fill="#302f29" stroke="#b6aa95"/><text x="347" y="109" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">Workflow definition</text>
+<rect x="498.0" y="87" width="222" height="44" fill="#302f29" stroke="#b6aa95"/><text x="609" y="109" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">Orchestrator on AWS</text>
+<rect x="753.0" y="87" width="152" height="44" fill="#302f29" stroke="#b6aa95"/><text x="829" y="109" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">Agent step</text>
+<rect x="931.5" y="33" width="127" height="44" fill="#302f29" stroke="#b6aa95"/><text x="995" y="55" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">MCP tools</text>
+<rect x="931.5" y="139" width="127" height="44" fill="#302f29" stroke="#b6aa95"/><text x="995" y="161" dy=".34em" font-family="Arial,sans-serif" text-anchor="middle" font-size="19" fill="#faf4e9">Next step</text>
+</svg>

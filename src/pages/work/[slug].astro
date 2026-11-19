@@ -7,4 +7,4 @@ const {entry}=Astro.props;
 const {frontmatter:f,Content}=entry;
 const headings=entry.getHeadings();
 ---
-<Layout title={f.title} description={f.summary} article><article class="entry"><a href="/work/">All case studies</a><h1>{f.title}</h1><p class="lede">{f.summary}</p><Figure id={f.figure}/><nav aria-label="On this page">{headings.map(h=><a href={'#'+h.slug}>{h.text}</a>)}</nav><Content/><h2>Stack</h2><div class="tags">{f.stack.map(t=><span>{t}</span>)}</div><p><a href="/architecture/">Explore the diagrams</a> · <a href="/contact/">Discuss a project</a></p></article></Layout>
+<Layout title={f.title} description={f.summary} article><article class="entry case-study"><div class="page-intro"><a href="/work/">All case studies</a><h1>{f.title}</h1><p class="lede">{f.summary}</p></div><Figure id={f.figure} featured/><nav aria-label="On this page">{headings.map(h=><a href={'#'+h.slug}>{h.text}</a>)}</nav><Content/><h2>Stack</h2><div class="tags">{f.stack.map(t=><span>{t}</span>)}</div><p><a href="/architecture/">Explore the diagrams</a> · <a href="/contact/">Discuss a project</a></p></article></Layout>
