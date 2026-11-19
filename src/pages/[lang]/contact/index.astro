@@ -1,0 +1,6 @@
+---
+import Contact from '../../../views/Contact.astro';
+import { otherLangs, type Lang } from '../../../i18n/config';
+export function getStaticPaths(){return otherLangs.map(lang=>({params:{lang}}))}
+---
+<Contact lang={Astro.params.lang as Lang}/>

@@ -1,17 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Figure from '../../components/Figure.astro';
-import ShiftSimulator from '../../components/ShiftSimulator.astro';
-import {cases} from '../../lib/content';
+import CaseStudy from '../../views/CaseStudy.astro';
+import { cases } from '../../lib/content';
 export function getStaticPaths(){return cases.map(entry=>({params:{slug:entry.frontmatter.slug},props:{entry}}))}
-const {entry}=Astro.props;
-const {frontmatter:f,Content}=entry;
-const headings=entry.getHeadings();
-const isStaffing = f.slug === "workforce-infrastructure";
 ---
-<Layout title={f.title} description={f.summary} article><article class="entry case-study"><div class="page-intro"><a href="/work/">All case studies</a><h1>{f.title}</h1><p class="lede">{f.summary}</p></div>{isStaffing && <ShiftSimulator/>}<Figure id={f.figure} featured/><nav aria-label="On this page">{headings.map(h=><a href={'#'+h.slug}>{h.text}</a>)}</nav><Content/>{f.stack && <><h2>Stack</h2><div class="tags">{f.stack.map(t=><span>{t}</span>)}</div></>}<p><a href="/architecture/">Explore the diagrams</a> · <a href="/contact/">Discuss a project</a></p></article></Layout>
-<style>
-  :global(.case-study > table) { border-collapse:collapse; width:100%; font-size:1rem; }
-  :global(.case-study > table :is(td, th)) { padding:.8rem .5rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--paper-line); }
-  :global(.case-study > table th:first-child) { width:30%; }
-</style>
+<CaseStudy entry={Astro.props.entry}/>

@@ -1,29 +1,78 @@
 ---
 slug: antagents
 title: Ant Agents
-summary: Agent infrastructure for business workflows defined by analysts at GeekyAnts.
+summary: "A durable runtime for LLM agents at GeekyAnts. It replaced onboarding, compliance checks and timesheet chasing done over email, and now runs 20+ live workflows for 300+ employees."
 figure: automation
 order: 2
-stack: [AWS, MCP]
+stack: [AWS, MCP, Durable execution]
+before:
+  - "Onboarding, work-from-home compliance checks and timesheet chasing were done by hand, over email."
+  - "Processes took days."
+  - "Failures were frequent."
+after:
+  - "20+ live workflows serving 300+ employees."
+  - "Processes that took days finish within a day."
+  - "Failures went from frequent to near zero."
+eyebrow: Durable agent runtime
+tagline: "LLM agents go off track, crash and burn money. These don’t."
+highlights:
+  - title: Resume, don’t restart
+    text: A worker dies at step 4 of 7. Another resumes from the checkpoint without redoing steps 1–3.
+  - title: Deterministic replay
+    text: Recorded model and tool outputs replay a failed run exactly, so a one-off failure can be studied.
+  - title: Context, not history
+    text: A cost spike came from context bloat. A context builder now sends each step only what it needs.
+  - title: Guardrails as layers
+    text: Tool permissions, limits, schema checks, human approval and an audit log. A prompt asks; a guardrail enforces.
 ---
 ## My role
 
-At GeekyAnts, I owned the agent infrastructure and scaling work and built most of the backend. Business analysts used the platform to put processes together from existing agents. Developers could extend it with a new agent when a process needed another capability.
+I owned the agent infrastructure and the modelling alone, and built most of the backend. Business analysts used the platform to put processes together from existing agents. Developers could extend it with a new agent when a process needed another capability. The platform ran internally on AWS, and agents reached other systems through MCP tools.
 
 ## The problem
 
-An agent might finish one task while the next task still needed information from a tool or a person. The platform had to keep track of where a process was, what had already happened and which step could run next.
+Onboarding a new joiner, checking work-from-home compliance and chasing missing timesheets were all handled by people writing emails. Each process took days because every step waited on someone remembering to do the next one.
 
-## How execution worked
+Handing that work to LLM agents brings three new problems. An agent can go off track. A run can crash halfway through. And a run can cost far more than it should, without anyone noticing until the bill arrives. The runtime exists to make those three things dependable.
 
-A workflow definition described the steps. The orchestrator tracked progress and dependencies. Agents used MCP tools to work with other systems. The platform ran internally on AWS.
+## One workflow, end to end
+
+When an employee ignores a timesheet follow-up, an agent reads their GitHub commits for the week through an MCP tool. It drafts the timesheet entry from that work and sends the draft to a person for approval. Nobody has to chase anyone, and nothing is filed without a yes.
+
+## A crash at step 4 of 7
+
+A workflow can wait on people between steps, and workers restart, get redeployed and fail in the meantime. If the machine running a workflow dies at step 4 of 7, starting over is not acceptable: step 2 already emailed someone.
+
+Each completed step is checkpointed with its result. When a worker disappears, another worker claims the run, loads the last checkpoint and resumes at step 4. Steps 1–3 are not run again. The simulator above shows both versions.
 
 > **Decision.** Keep the state of a running workflow separate from the context supplied to a model call. A process can have a long history even when the next agent needs only a small part of it.
 
-## Scaling and recovery
+## Debugging a model that never answers the same way twice
 
-Agents could perform independent work in parallel. Checkpoints supported recovery after an interruption. Tracking tool calls and task state helped narrow an investigation to a particular step. I designed the execution layer for horizontal scaling. Its measured throughput was outside the scope of this case study.
+An LLM call is not deterministic. When a run fails, calling the model again rarely reproduces the failure. So the runtime records every model output and tool result as the run happens.
+
+To debug, I replay the run from that recording. The same inputs produce the same path, step by step, without calling the model or touching real systems. A failure that happened once can be studied as often as needed.
+
+## The cost spike
+
+At one point costs rose sharply. The cause was context bloat: each step was sending the model more and more of the workflow’s history, most of it irrelevant to the step at hand.
+
+The fix was a context builder. It assembles only what the next step needs from the workflow’s state, rather than passing the whole history along. That is the decision above, in practice.
+
+## Guardrails are layers, not a prompt
+
+A prompt asks; a guardrail enforces. Telling a model “don’t file anything without approval” is a request. The runtime makes it a rule:
+
+- **Tool permissions.** Each agent can call only the tools its workflow grants.
+- **Limits.** Runs are bounded, so a confused agent stops instead of looping.
+- **Schema checks.** Model output that doesn’t match the expected structure is rejected before it reaches another system.
+- **Human approval.** Consequential actions wait for a person.
+- **Audit log.** Every step, tool call and decision is recorded.
 
 ## Where people stayed involved
 
-One process prepared billing information for a person to sign off. That boundary mattered. Automating the preparation could save follow-up work while leaving the final decision with the person responsible.
+One process prepared billing information for a person to sign off. That boundary mattered. Automating the preparation saved follow-up work while leaving the final decision with the person responsible.
+
+## What I’d do differently
+
+I wrote the durable-execution layer myself: checkpoints, claiming abandoned runs and resuming them. Today I would build on an existing durable-execution engine and spend that time on the parts specific to agents: context building, guardrails and replay.

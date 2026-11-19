@@ -1,0 +1,111 @@
+---
+import { casesFor } from '../lib/content';
+import { home } from '../i18n/home';
+import { ui } from '../i18n/ui';
+import { localize, type Lang } from '../i18n/config';
+import QueueSimulator from './QueueSimulator.astro';
+import AgentSimulator from './AgentSimulator.astro';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const studies = casesFor(lang).map(({ frontmatter: f }) => f);
+const t = home[lang].cases;
+const ba = ui[lang].ba;
+---
+<div class="cs">
+    <div class="cs-tabs" role="tablist" aria-label={t.tabs}>
+      {studies.map((f, i) => <button type="button" role="tab" id={'cs-tab-' + f.slug} aria-controls={'cs-panel-' + f.slug} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}><span class="cs-num">{String(i + 1).padStart(2, '0')}</span><span class="cs-tab-name">{f.title}</span><small>{f.eyebrow}</small></button>)}
+    </div>
+    {studies.map((f, i) => (
+      <div class="cs-panel" role="tabpanel" id={'cs-panel-' + f.slug} aria-labelledby={'cs-tab-' + f.slug} data-hidden={i === 0 ? undefined : ''}>
+        <div class="cs-top">
+          <div class="cs-intro">
+            <span class="cs-eyebrow">{String(i + 1).padStart(2, '0')} / {f.eyebrow}</span>
+            <h3>{f.tagline}</h3>
+            <p>{f.summary}</p>
+            <a class="cs-link" href={localize('/work/' + f.slug + '/', lang)}>{t.readFull} <span aria-hidden="true">↗</span></a>
+          </div>
+          {f.before && f.after && <div class="cs-ba">
+            <div><span class="cs-label">{ba.before}</span><ul>{f.before.map((b: string) => <li>{b}</li>)}</ul></div>
+            <div class="cs-after"><span class="cs-label">{ba.after}</span><ul>{f.after.map((a: string) => <li>{a}</li>)}</ul></div>
+          </div>}
+        </div>
+        <ol class="cs-highlights">
+          {f.highlights?.map((h: { title: string; text: string }, j: number) => <li><span class="cs-num">{String(j + 1).padStart(2, '0')}</span><strong>{h.title}</strong><p>{h.text}</p></li>)}
+        </ol>
+        {f.slug === 'workforce-infrastructure' && <div class="cs-sim"><QueueSimulator lang={lang}/></div>}
+        {f.slug === 'antagents' && <div class="cs-sim"><AgentSimulator lang={lang}/></div>}
+      </div>
+    ))}
+</div>
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('.cs-tabs [role=tab]')];
+  const select = (tab: HTMLButtonElement, focus = false) => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute('aria-controls')!);
+      if (panel) panel.hidden = !on;
+    });
+    if (focus) tab.focus();
+  };
+  document.querySelectorAll<HTMLElement>('.cs-panel').forEach(p => { p.hidden = p.hasAttribute('data-hidden'); });
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', e => {
+      const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (step) { e.preventDefault(); select(tabs[(i + step + tabs.length) % tabs.length], true); }
+    });
+  });
+  document.querySelectorAll<HTMLAnchorElement>('a[data-case]').forEach(a => a.addEventListener('click', () => {
+    const tab = document.getElementById('cs-tab-' + a.dataset.case) as HTMLButtonElement | null;
+    if (tab) select(tab);
+  }));
+</script>
+<style>
+.cs-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #57554e; border-bottom: 1px solid #57554e; }
+.cs-tabs button { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; align-items: baseline; text-align: left; padding: 22px 20px 22px 0; background: none; border: 0; border-bottom: 3px solid transparent; color: #8e8a80; cursor: pointer; transition: color .2s, border-color .2s; }
+.cs-tabs button + button { padding-left: 20px; border-left: 1px solid #57554e; }
+.cs-tabs button:hover { color: #d8cbb3; }
+.cs-tabs button[aria-selected=true] { color: #f1e9da; border-bottom-color: #2f6bff; }
+.cs-tab-name { font: 500 clamp(18px, 2vw, 26px)/1.15 'Space Grotesk', sans-serif; letter-spacing: -.8px; }
+.cs-tabs small { grid-column: 2; font: 9px/1.6 'DM Mono', monospace; letter-spacing: .8px; text-transform: uppercase; }
+.cs-num { font: 10px 'DM Mono', monospace; color: #2f6bff; }
+.cs-panel { padding-top: 56px; }
+.cs-panel[hidden] { display: none; }
+.cs-top { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: start; }
+.cs-eyebrow, .cs-label { font: 10px 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; color: #b4aa98; }
+.cs-intro h3 { font: 500 clamp(30px, 3.6vw, 50px)/1.08 'Space Grotesk', sans-serif; letter-spacing: -.055em; color: #f1e9da; margin: 18px 0 20px; }
+.cs-intro p { font-size: 15px; line-height: 1.75; color: #b4aa98; margin: 0; max-width: 520px; }
+.cs-link { display: inline-flex; gap: 30px; margin-top: 26px; padding-bottom: 9px; border-bottom: 1px solid #d8cbb3; font: 600 13px 'DM Sans', sans-serif; color: #f1e9da; transition: color .2s, border-color .2s; }
+.cs-link span { color: #2f6bff; }
+.cs-link:hover { color: #afc6ff; border-color: #2f6bff; }
+.cs-ba { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #57554e; }
+.cs-ba > div { padding: 22px; }
+.cs-after { background: #292925; box-shadow: inset 3px 0 0 #2f6bff; }
+.cs-after .cs-label { color: #afc6ff; }
+.cs-ba ul { list-style: none; margin: 12px 0 0; padding: 0; }
+.cs-ba li { padding: 10px 0; border-top: 1px solid #45433d; font-size: 14px; line-height: 1.5; color: #d8cbb3; }
+.cs-after li { color: #f1e9da; }
+.cs-highlights { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #57554e; }
+.cs-highlights li { padding: 24px 22px 8px 0; }
+.cs-highlights li + li { padding-left: 22px; border-left: 1px solid #57554e; }
+.cs-highlights strong { display: block; margin: 16px 0 8px; font: 500 20px/1.2 'Space Grotesk', sans-serif; letter-spacing: -.6px; color: #f1e9da; }
+.cs-highlights p { margin: 0; font-size: 13px; line-height: 1.7; color: #b4aa98; }
+.cs-sim { margin-top: 48px; }
+@media (max-width: 900px) {
+  .cs-top { grid-template-columns: 1fr; gap: 36px; }
+  .cs-highlights { grid-template-columns: 1fr 1fr; }
+  .cs-highlights li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .cs-highlights li:nth-child(n+3) { border-top: 1px solid #57554e; }
+}
+@media (max-width: 680px) {
+  .cs-tabs { grid-template-columns: 1fr; }
+  .cs-tabs button, .cs-tabs button + button { padding: 16px 0; border-left: 0; }
+  .cs-tabs button + button { border-top: 1px solid #57554e; }
+  .cs-panel { padding-top: 36px; }
+  .cs-ba { grid-template-columns: 1fr; }
+  .cs-highlights { grid-template-columns: 1fr; margin-top: 36px; }
+  .cs-highlights li, .cs-highlights li + li { padding: 20px 0 6px; border-left: 0; }
+  .cs-highlights li + li { border-top: 1px solid #57554e; }
+}
+</style>

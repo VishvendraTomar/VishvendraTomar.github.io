@@ -73,3 +73,13 @@ footer span { margin-right: auto; }
   .brand-icon { width: 37px; height: 37px; font-size: 16px; }
   .brand-name { font-size: 9px; }
 }
+.entry > .exits { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0 1.2rem; margin-block: 1.5rem 2rem; padding: 1.2rem; background: var(--charcoal); color: #f1e9da; }
+.exits-source { font: .8rem/1.4 'DM Mono', ui-monospace, monospace; text-transform: uppercase; letter-spacing: .06em; padding: .8rem; border: 1px solid #a9a08f; }
+.exits-list { display: grid; gap: .55rem; border-left: 2px solid var(--brand-blue); padding-left: 1.2rem; }
+.exits-list span { display: block; padding: .55rem .8rem; border: 1px solid #57554e; font-size: .95rem; line-height: 1.45; color: #d8cbb3; }
+.exits-list b { display: block; color: #f1e9da; font-weight: 650; }
+.exit-ok { border-left: 4px solid #8fd6a8 !important; }
+.exit-retry { border-left: 4px solid #afc6ff !important; }
+.exit-dlq { border-left: 4px solid #f09a88 !important; }
+@media (max-width: 560px) { .entry > .exits { grid-template-columns: 1fr; gap: .8rem; } .exits-list { border-left: 0; padding-left: 0; } }
+.mast-right { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .8rem 1.4rem; }

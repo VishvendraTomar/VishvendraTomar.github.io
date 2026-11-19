@@ -1,0 +1,8 @@
+---
+import CaseStudy from '../../../views/CaseStudy.astro';
+import { casesFor } from '../../../lib/content';
+import { otherLangs, type Lang } from '../../../i18n/config';
+export function getStaticPaths(){return otherLangs.flatMap(lang=>casesFor(lang).map(entry=>({params:{lang,slug:entry.frontmatter.slug},props:{entry}})))}
+const lang = Astro.params.lang as Lang;
+---
+<CaseStudy entry={Astro.props.entry} lang={lang}/>

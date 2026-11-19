@@ -1,6 +1,4 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Figure from '../../components/Figure.astro';
-import {cases} from '../../lib/content';
+import WorkIndex from '../../views/WorkIndex.astro';
 ---
-<Layout title="Case studies"><div class="page-intro"><h1>Case studies</h1></div><div class="cards">{cases.map(({frontmatter:f})=><article class="card"><Figure id={f.figure} compact/><h2><a href={'/work/'+f.slug+'/'}>{f.title}</a></h2><p>{f.summary}</p></article>)}</div></Layout>
+<WorkIndex/>

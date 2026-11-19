@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Figure from '../components/Figure.astro';
+import ShiftSimulator from '../components/ShiftSimulator.astro';
+import QueueSimulator from '../components/QueueSimulator.astro';
+import AgentSimulator from '../components/AgentSimulator.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import { ui } from '../i18n/ui';
+import { localize, type Lang } from '../i18n/config';
+const { entry, lang = 'en' } = Astro.props as { entry: any; lang?: Lang };
+const t = ui[lang].casePage;
+const { frontmatter: f, Content } = entry;
+const headings = entry.getHeadings().filter((h: any) => h.depth === 2);
+---
+<Layout lang={lang} title={f.title} description={f.summary} article><article class="entry case-study"><div class="page-intro"><a href={localize('/work/', lang)}>{t.all}</a><h1>{f.title}</h1><p class="lede">{f.summary}</p></div>{f.before && f.after && <BeforeAfter lang={lang} before={f.before} after={f.after}/>}{f.slug === 'workforce-infrastructure' && <><QueueSimulator lang={lang}/><ShiftSimulator lang={lang}/></>}{f.slug === 'antagents' && <AgentSimulator lang={lang}/>}<Figure id={f.figure} lang={lang} featured/><nav aria-label={t.onPage}>{headings.map((h: any)=><a href={'#'+h.slug}>{h.text}</a>)}</nav><Content/>{f.stack && <><h2>{t.stack}</h2><div class="tags">{f.stack.map((s: string)=><span>{s}</span>)}</div></>}<p><a href="/architecture/">{t.diagrams}</a> · <a href={localize('/contact/', lang)}>{t.discuss}</a></p></article></Layout>
+<style>
+  :global(.case-study > table) { border-collapse:collapse; width:100%; font-size:1rem; }
+  :global(.case-study > table :is(td, th)) { padding:.8rem .5rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--paper-line); }
+  :global(.case-study > table th:first-child) { width:30%; }
+</style>

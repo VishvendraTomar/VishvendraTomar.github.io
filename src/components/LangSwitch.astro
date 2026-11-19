@@ -1,0 +1,36 @@
+---
+import { languages, langs, localize, splitPath, isTranslated } from '../i18n/config';
+import { ui } from '../i18n/ui';
+const { tone = 'dark' } = Astro.props as { tone?: 'dark' | 'light' };
+const { lang, path } = splitPath(Astro.url.pathname);
+const translated = isTranslated(path);
+---
+<details class:list={['lang-switch', tone]}>
+  <summary aria-label={ui[lang].langLabel + ': ' + languages[lang].name}><span aria-hidden="true">◐</span> {languages[lang].short}</summary>
+  <ul>
+    {langs.map(l => <li><a href={localize(path, l)} hreflang={languages[l].htmlLang} lang={languages[l].htmlLang} aria-current={l === lang ? 'true' : undefined}><span>{languages[l].short}</span>{languages[l].name}</a></li>)}
+    {!translated && lang === 'en' && <li class="ls-note">{ui.en.englishOnly}</li>}
+  </ul>
+</details>
+<style>
+.lang-switch { position: relative; font: 500 11px/1 'DM Mono', ui-monospace, monospace; letter-spacing: .06em; }
+.lang-switch summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid currentColor; border-radius: 2px; user-select: none; }
+.lang-switch summary::-webkit-details-marker { display: none; }
+.lang-switch summary span { color: #2f6bff; font-size: 12px; }
+.lang-switch[open] summary { border-color: #2f6bff; }
+.lang-switch ul { position: absolute; right: 0; top: calc(100% + 6px); z-index: 20; min-width: 170px; margin: 0; padding: 6px; list-style: none; background: #1e1e1c; border: 1px solid #57554e; box-shadow: 0 10px 30px #0006; }
+.lang-switch li a { display: flex; gap: 12px; align-items: center; padding: 9px 10px; color: #d8cbb3; text-decoration: none; font-family: 'DM Sans', system-ui, sans-serif; font-size: 14px; letter-spacing: 0; }
+.lang-switch li a span { width: 22px; font: 500 10px 'DM Mono', ui-monospace, monospace; color: #8e8a80; }
+.lang-switch li a:hover { background: #292925; color: #f1e9da; }
+.lang-switch li a[aria-current] { color: #f1e9da; box-shadow: inset 2px 0 0 #2f6bff; }
+.lang-switch li a[aria-current] span { color: #afc6ff; }
+.ls-note { padding: 8px 10px 4px; font: 11px/1.5 'DM Sans', system-ui, sans-serif; letter-spacing: 0; color: #8e8a80; border-top: 1px solid #45433d; margin-top: 4px; }
+</style>
+<script>
+  document.addEventListener('click', e => {
+    document.querySelectorAll<HTMLDetailsElement>('.lang-switch[open]').forEach(d => { if (!d.contains(e.target as Node)) d.open = false; });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll<HTMLDetailsElement>('.lang-switch[open]').forEach(d => { d.open = false; d.querySelector('summary')?.focus(); });
+  });
+</script>
