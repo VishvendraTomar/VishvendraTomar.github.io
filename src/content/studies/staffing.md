@@ -1,41 +1,63 @@
 ---
 slug: workforce-infrastructure
 title: A Belgian staffing platform
-summary: From a scheduled shift to a government declaration, checked hours and an invoice.
+summary: "Picture 05:45. A worker calls in sick. The shift starts at 06:00. A colleague can cover, but the registration on file names the worker who just called. The manager has fifteen minutes to get the replacement declared before work starts."
 figure: registration
 order: 1
-stack: [Python, FastAPI, MCP]
 ---
 ## My role
 
 One of the two engineers on the platform. The founder led product direction; I built most of the backend.
 
-I worked on the platform at GeekyAnts for about a year and a half. I built from Bengaluru and spent about 20 days in Belgium for final delivery.
+I spent about a year and a half on the project at GeekyAnts. I worked remotely from Bengaluru and spent about 20 days in Belgium for final delivery. My part included Dimona registration, attendance verification and the rules that turned hours into wages, invoices and filings.
 
-## The problem
+## Three decisions when a shift changes
 
-A business could know who was working a shift and still have work to do before that person started. The staffing platform handled per-shift government registration through Dimona. After the shift, recorded hours fed wages, filings and the client invoice.
+### A different worker is a different filing
 
-Those steps run on different clocks. A manager can change a shift while an external service is slow to respond. Clock-in happens at the venue. The company needs a record it can use later when it prepares the invoice.
+**Decision.** On a swap, check the replacement’s eligibility, cancel the outgoing assignment and create one for the incoming worker. Reconcile the outgoing worker’s registration against the work that remains. In the single-shift example above, the original period is now empty.
 
-## Registration and failure handling
+**Why.** Keeping the same venue, hours and job does nothing to change whose name is on the government record. Cancelling a whole registered period indiscriminately could also remove coverage for other work.
 
-I put registration work on a queue. A shift change created a job, and a submitter sent the declaration to the government service. The queue supported retries when the external service was unreliable. Jobs that exhausted their retries went to a dead-letter queue.
+**Cost.** A manager sees one swap. The backend has two assignments to account for, and a successful cancellation says nothing about whether the replacement’s filing succeeded.
 
-> **Trade-off.** Queuing separated a scheduling action from the external response. It also created two facts the system had to keep distinct. A shift could be saved while its filing still needed attention.
+### The cancellation can arrive before the answer
 
-## Recording attendance
+**Decision.** When a shift is cancelled while its filing is in flight, keep tracking the government response. Once the outcome is known, compare the accepted period with the work still scheduled. If the period is empty, send a cancellation and track its response too.
 
-I built a layered check using secure NFC taps, venue Wi-Fi and location. Each signal answers a different question. A tap links the interaction to a physical tag. Wi-Fi adds venue context. Location adds geographic context. Together they help assess a clock-in before its hours enter the rest of the workflow.
+**Why.** Deleting the shift locally cannot withdraw a declaration the government has already accepted. Sending a correction while the original outcome is unknown leaves two requests to untangle.
 
-> **Trade-off.** Each additional signal gives the backend another piece of evidence to interpret. A check involving several signals also has to account for information that may be unavailable at the venue.
+**Cost.** “Cancelled” can be true on the schedule while the external correction is still pending. The system has to carry that outstanding work across more than one response.
 
-## Applying pay rules
+### A timeout leaves a question open
 
-A wage and compliance engine brought shift data and applicable rules together. That gave hours a common path into pay calculations and downstream records. The worker’s wage and the company’s invoice are distinct outputs even when they begin with the same hours.
+**Decision.** If the filing has a receipt, check its status. If a repeated submission is reported as a duplicate, reconcile it with the existing registration where a match can be established. Exhausted retries go to a dead-letter queue. Operations gets a signal when automatic handling cannot settle the filing.
 
-I also exposed operations through MCP tools with checks in the domain layer. An agent could request an operation through a tool. The backend still had to decide whether the operation made sense for that part of the staffing workflow.
+**Why.** The government might have accepted the request just before the connection dropped. Another submission could repeat an action that already took effect.
 
-## Platform results
+**Cost.** Looking up the outcome adds a round trip. Parking an unresolved filing also leaves someone with work to investigate. Both costs are preferable to telling a manager that an unconfirmed worker is registered.
 
-The platform grew from about 10,000 shifts to **125,000+ shifts** and served **1,000+ companies**. These are platform figures. My contribution was the backend work described here.
+## What makes a clock-in harder to fake
+
+A shared PIN can be passed to another person. A static QR code can be copied. A location reading gives geographic context, but it cannot establish on its own that someone interacted with the venue’s clock-in point.
+
+I built the check around a secure NFC tap, venue Wi-Fi and location. The tap provides evidence of a physical interaction, Wi-Fi adds local network context, and location places the device geographically. Copying one value leaves the other observations unexplained. In the walkthrough, inconsistent evidence blocks the clock-in before any hours reach payroll.
+
+The cost shows up at a real venue too. A genuine worker can have a weak location reading or an unavailable network signal. That is why the three observations have distinct roles in the check.
+
+## After the shift
+
+Recorded hours feed the wage and compliance engine. The worker’s pay and the client invoice use the same attendance record but answer different questions. For operations exposed through MCP, I kept business checks in the domain layer so an agent request still had to satisfy the staffing rules.
+
+The platform grew from about **10,000 to 125,000+ shifts** and served **1,000+ companies**. Those figures describe platform use over time. My contribution was the backend work described above.
+
+## The same problem in other countries
+
+A founder building in another market can start with one question: what event creates the filing obligation? A new hire, a day of casual work and a call under an existing contract need different scheduling logic.
+
+| Market and worker | What the backend needs to track |
+|---|---|
+| Belgium · occasional hospitality worker | The employer declares the worker for each workday through Dimona. The hourly and daily options require different time details. [Belgian social security guidance](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
+| Austria · *fallweise Beschäftigte* | Each day of casual employment requires a registration before work starts. ELDA is a submission channel. [ELDA guidance](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
+| France · hospitality *extra* | The DPAE is tied to hiring and must precede the start of work. An extra’s contract can cover several consecutive days, so counting shifts alone gives the wrong trigger. [DPAE guidance](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Extra contracts](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
+| Italy · intermittent worker | In addition to the hiring notice, the employer gives notice before the work begins. A single notice can cover an integrated cycle of work lasting up to 30 days. [Italian labour ministry](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
