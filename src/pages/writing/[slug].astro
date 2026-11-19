@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Figure from '../../components/Figure.astro';
+import {writing,figures} from '../../lib/content';
+export function getStaticPaths(){return writing.map(entry=>({params:{slug:entry.frontmatter.slug},props:{entry}}))}
+const {entry}=Astro.props;
+const {frontmatter:f,Content}=entry;
+const minutes=Math.max(1,Math.ceil(entry.rawContent().trim().split(/\s+/).length/220));
+---
+<Layout title={f.title} description={f.summary} article image={'/covers/'+f.slug+'.png'}><article class="entry"><a href="/writing/">All writing</a><p class="meta">{f.tag} · {minutes} min read</p><h1>{f.title}</h1><p class="lede">{f.summary}</p><Figure id={f.figure}/><Content/><p class="section"><a href={'/work/'+figures[f.figure][2]+'/'}>Read the related case study</a></p></article></Layout>

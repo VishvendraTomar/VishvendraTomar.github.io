@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329.0996666666667 399.9" width="329.0996666666667" height="399.9" style="--bg:#f7f3ec;--fg:#282722;--accent:#2356cf;background:var(--bg)">
+<style>
+  text { font-family: 'Arial', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+@media(prefers-color-scheme:dark){svg{--bg:#20221f!important;--fg:#f7f3ec!important;--accent:#a9c1ff!important}}</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<polyline class="edge" data-from="A" data-to="B" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.17166666666668,56.900000000000006 169.17166666666662,104.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="B" data-to="C" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="143.7785,141.8 143.7785,177.8 108.97566666666667,177.8 108.97566666666667,189.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C" data-to="D" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="125.10633333333334,226.70000000000002 125.10633333333334,246.10000000000002 201.05833333333334,246.10000000000002 201.05833333333334,258.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="D" data-to="B" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Retryable failure" points="229.36766666666665,258.1 229.36766666666665,177.8 194.5648333333333,177.8 194.5648333333333,141.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C" data-to="E" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Retries exhausted" points="92.845,226.70000000000002 92.845,343" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="D" data-to="B" data-label="Retryable failure">
+  <rect x="181.36766666666665" y="184.8" width="95.46400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="229.09966666666668" y="199.95000000000002" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Retryable failure</text>
+</g>
+<g class="edge-label" data-from="C" data-to="E" data-label="Retries exhausted">
+  <rect x="40.845" y="269.70000000000005" width="103.78000000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="92.73500000000001" y="284.85" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Retries exhausted</text>
+</g>
+<g class="node" data-id="A" data-label="Shift change" data-shape="rectangle">
+  <rect x="112.25816666666667" y="20" width="113.827" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="169.17166666666668" y="38.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Shift change</text>
+</g>
+<g class="node" data-id="B" data-label="Registration queue" data-shape="rectangle">
+  <rect x="92.99216666666665" y="104.9" width="152.359" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="169.17166666666665" y="123.35000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Registration queue</text>
+</g>
+<g class="node" data-id="C" data-label="Submitter" data-shape="rectangle">
+  <rect x="60.58366666666666" y="189.8" width="96.784" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="108.97566666666665" y="208.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Submitter</text>
+</g>
+<g class="node" data-id="D" data-label="Dimona" data-shape="rectangle">
+  <rect x="172.74899999999997" y="258.1" width="84.928" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="215.21299999999997" y="276.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Dimona</text>
+</g>
+<g class="node" data-id="E" data-label="Dead-letter queue" data-shape="rectangle">
+  <rect x="20" y="343" width="145.69" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="92.845" y="361.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Dead-letter queue</text>
+</g>
+</svg>

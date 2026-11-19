@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Figure from '../../components/Figure.astro';
+import {cases} from '../../lib/content';
+---
+<Layout title="Case studies"><h1>Case studies</h1><div class="cards">{cases.map(({frontmatter:f})=><article class="card"><Figure id={f.figure} compact/><h2><a href={'/work/'+f.slug+'/'}>{f.title}</a></h2><p>{f.summary}</p></article>)}</div></Layout>

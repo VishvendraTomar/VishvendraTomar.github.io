@@ -1,69 +1,15 @@
 ---
-const {
-  title = 'Vishvendra Tomar | Backend Software Engineer & Applied AI',
-  description = 'Explore Vishvendra Tomar’s portfolio: backend engineering with Python and FastAPI, reliable production systems, and practical AI integrations.'
-} = Astro.props;
-const site = 'https://vishvendratomar.github.io';
-const canonical = new URL(Astro.url.pathname, site).toString();
-const personId = site + '/#person';
-const person = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': personId,
-  name: 'Vishvendra Tomar',
-  url: site + '/',
-  jobTitle: 'Software Engineer',
-  description: 'Backend-focused software engineer specialising in Python, FastAPI, production systems and applied AI.',
-  sameAs: ['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/'],
-  knowsAbout: ['Python','FastAPI','Backend engineering','PostgreSQL','Distributed systems','Applied AI']
-};
-const page = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': canonical + '#webpage',
-  url: canonical,
-  name: title,
-  description,
-  inLanguage: 'en',
-  about: {'@id': personId}
-};
+import '../styles/tokens.css';
+import '../styles/site.css';
+const {title='Backend engineering for staffing software', description='Vishvendra Tomar builds backend and AI systems for workforce software, from shift registration to wages and invoices.', image='/social-card.png', article=false} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const name = 'Vishvendra Tomar';
 ---
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#1e1e1c" />
-<meta name="description" content={description} />
-<meta name="author" content="Vishvendra Tomar" />
-<meta name="robots" content="index, follow, max-image-preview:large" />
-<meta property="og:site_name" content="Vishvendra Tomar" />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:type" content="website" />
-<meta property="og:url" content={canonical} />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<link rel="canonical" href={canonical} />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="shortcut icon" href="/favicon.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<script type="application/ld+json" set:html={JSON.stringify(person)} />
-<script type="application/ld+json" set:html={JSON.stringify(page)} />
-<title>{title}</title>
-</head>
-<body><slot /></body>
-</html>
-<style is:global>
-:root{font-family:'DM Sans',Arial,sans-serif;background:#1e1e1c;color:#d8cbb3;scroll-behavior:smooth}
-*,*:before,*:after{box-sizing:border-box}
-body{margin:0;min-width:320px}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-::selection{background:#2f6bff;color:#fff}
-:focus-visible{outline:2px solid #2f6bff;outline-offset:4px}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-</style>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{title} | {name}</title><meta name="description" content={description}/><meta name="author" content={name}/>
+<link rel="canonical" href={canonical}/><link rel="icon" href="/favicon.svg"/><link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Writing by Vishvendra Tomar"/>
+<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:site_name" content={name}/><meta property="og:type" content={article?'article':'website'}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(image,Astro.site)}/><meta property="og:image:alt" content={title}/><meta name="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'Person',name:'Vishvendra Pratap Singh Tomar',alternateName:name,url:Astro.site,jobTitle:'Backend engineer',sameAs:['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/']})}/>
+</head><body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="/"><img src="/favicon.svg" alt="" width="40" height="40"/>Vishvendra Tomar</a><nav aria-label="Main">{[['/work/','Case studies'],['/architecture/','Architecture'],['/writing/','Writing'],['/about/','About'],['/contact/','Contact']].map(([url,label])=><a href={url} aria-current={Astro.url.pathname.startsWith(url)?'page':undefined}>{label}</a>)}</nav></header>
+<main id="main"><slot/></main><footer><span>Vishvendra Pratap Singh Tomar</span><a href="/contact/">Get in touch</a><a href="/rss.xml">RSS</a></footer></body></html>
