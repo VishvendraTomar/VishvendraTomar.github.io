@@ -1,0 +1,56 @@
+---
+const scenarios = [
+  { name: 'Normal shift', steps: [
+    ['Register the worker', 'The assignment creates a Dimona job. The submitter sends it and the government confirms the registration.'],
+    ['Clock in', 'At the venue, the attendance check uses the NFC tap, venue Wi-Fi and location.'],
+    ['Record hours', 'The attendance record supplies the hours used by the wage rules.'],
+    ['Prepare the invoice', 'The same hours feed the client invoice. Worker pay and the client charge are separate calculations.']
+  ]},
+  { name: 'Government API down', steps: [
+    ['Queue the filing', 'The schedule is saved. The registration still needs a government response.'],
+    ['Retry a failed attempt', 'In this example the service remains unavailable. A filing with an existing receipt follows a status check instead.'],
+    ['Stop automatic attempts', 'The job exhausts its retries and moves to the dead-letter queue.'],
+    ['Alert operations', 'The alert points to an unresolved filing. Its registration is still outstanding.']
+  ]},
+  { name: '06:00 swap', steps: [
+    ['05:45 · Worker calls in sick', 'For this example, the outgoing worker’s registration covers only this shift.'],
+    ['Check the replacement', 'Check that the new worker can take the assignment. The original worker’s registration cannot cover them.'],
+    ['Withdraw the original filing', 'Removing the outgoing assignment leaves no work in its registered period, so the original registration needs cancellation.'],
+    ['File for the replacement', 'Create a separate filing for the new worker before they start. Track its response independently of the cancellation.']
+  ]},
+  { name: 'Late cancellation', steps: [
+    ['Shift cancelled', 'The original filing has already been sent. Its government decision is still pending.'],
+    ['Resolve the pending response', 'Check what the government accepted before deciding which correction is due.'],
+    ['Correct the filing', 'In this example no work remains in the accepted period. Submit a cancellation.'],
+    ['Check the outcome', 'Track the government response to the cancellation so an unresolved correction stays visible.']
+  ]},
+  { name: 'Fake clock-in attempt', steps: [
+    ['Clock-in requested', 'A worker attempts to clock in away from the venue.'],
+    ['Compare the evidence', 'In this scenario the NFC, Wi-Fi and location evidence does not support attendance at the venue.'],
+    ['Block the clock-in', 'The attempt produces no verified attendance record. It adds no hours to wages or invoices.']
+  ]}
+];
+---
+<section class="shift-simulator" aria-labelledby="sim-title">
+  <h2 id="sim-title">Follow a shift</h2>
+  <p>Choose a scenario to watch the steps unfold. Each is a simplified example.</p>
+  {scenarios.map(({name,steps},i)=><details name="shift-scenario" open={i===2}>
+    <summary>{name}</summary>
+    <ol>{steps.map(([title,description],j)=><li style={'--step:'+j}><strong>{title}</strong><p>{description}</p></li>)}</ol>
+  </details>)}
+</section>
+<style>
+.entry > .shift-simulator {max-width:none;margin:0 0 clamp(2rem,5vw,4rem);padding:clamp(1rem,4vw,3rem);background:#1e1e1c;color:#f1e9da}
+.shift-simulator h2 {margin:0}
+.shift-simulator > p {margin:.65rem 0 1.5rem;color:#d8cbb3}
+details {border-top:1px solid #686358}
+details:last-child {border-bottom:1px solid #686358}
+summary {cursor:pointer;padding:.8rem .2rem;font-weight:650}
+details[open] summary {color:#afc6ff}
+ol {list-style:none;counter-reset:stage;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:1rem;margin:.2rem 0 1.4rem;padding:0}
+li {counter-increment:stage;padding:.9rem 0;border-top:2px solid #95b4ff}
+li::before {content:counter(stage, decimal-leading-zero);display:block;color:#afc6ff;font: .85rem/1.6 monospace}
+li p {margin:.35rem 0 0;font-size:.96rem;line-height:1.5}
+@media(prefers-reduced-motion:no-preference){details[open] li {animation:arrive .32s ease both;animation-delay:calc(var(--step)*.22s)}}
+@keyframes arrive {from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+</style>
