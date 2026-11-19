@@ -1,0 +1,71 @@
+---
+const {
+  title = 'Vishvendra Tomar | Backend Software Engineer & Applied AI',
+  description = 'Explore Vishvendra Tomar’s portfolio: backend engineering with Python and FastAPI, reliable production systems, and practical AI integrations.'
+} = Astro.props;
+const site = 'https://vishvendratomar.github.io';
+const canonical = new URL(Astro.url.pathname, site).toString();
+const personId = site + '/#person';
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'Vishvendra Tomar',
+  url: site + '/',
+  jobTitle: 'Software Engineer',
+  description: 'Backend-focused software engineer specialising in Python, FastAPI, production systems and applied AI.',
+  sameAs: ['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/'],
+  knowsAbout: ['Python','FastAPI','Backend engineering','PostgreSQL','Distributed systems','Applied AI']
+};
+const page = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical + '#webpage',
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'en',
+  about: {'@id': personId}
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#1e1e1c" />
+<meta name="description" content={description} />
+<meta name="author" content="Vishvendra Tomar" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:site_name" content="Vishvendra Tomar" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={new URL("/social-card.png",site).href} />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Writing by Vishvendra Tomar" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="shortcut icon" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json" set:html={JSON.stringify(person)} />
+<script type="application/ld+json" set:html={JSON.stringify(page)} />
+<title>{title}</title>
+</head>
+<body><slot /></body>
+</html>
+<style is:global>
+:root{font-family:'DM Sans',Arial,sans-serif;background:#1e1e1c;color:#d8cbb3;scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;min-width:320px}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#2f6bff;color:#fff}
+:focus-visible{outline:2px solid #2f6bff;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
