@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Figure from '../../components/Figure.astro';
+import {figures,type Figure as Id} from '../../lib/content';
+---
+<Layout title="Architecture gallery"><h1>Architecture gallery</h1><p>High-level views of the workflows behind the case studies. Open a diagram for the full-size SVG.</p><div class="cards">{Object.entries(figures).map(([id,[title,,slug]])=><section class="card" id={id}><h2>{title}</h2><Figure id={id as Id}/><a href={'/work/'+slug+'/'}>Read the case study</a></section>)}</div></Layout>

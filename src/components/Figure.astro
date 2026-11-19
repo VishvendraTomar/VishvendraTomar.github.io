@@ -1,0 +1,9 @@
+---
+import { figures, type Figure } from '../lib/content';
+const { id, compact = false } = Astro.props as {id: Figure, compact?: boolean};
+const [title, description] = figures[id];
+---
+<figure class:list={['diagram', { compact }]}>
+  <a href={'/diagrams/'+id+'.svg'} aria-label={'Open full-size diagram: '+title}><img src={'/diagrams/'+id+'.svg'} alt={description} loading="lazy" /></a>
+  {!compact && <figcaption><strong>{title}</strong> · {description}</figcaption>}
+</figure>

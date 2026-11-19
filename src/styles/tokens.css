@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light dark;
+  --surface: #f7f3ec;
+  --panel: #fffdf9;
+  --ink: #1e1e1c;
+  --muted: #5d574d;
+  --rule: #b4aa98;
+  --accent: #214fc7;
+  --brand-blue: #2f6bff;
+  --shadow: 0 8px 24px rgb(30 30 28 / 10%);
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --type-label: .875rem;
+  --type-body: 1.0625rem;
+  --type-heading: clamp(1.65rem, 4vw, 2.75rem);
+  --type-display: clamp(2.5rem, 7vw, 5.5rem);
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: clamp(3rem, 7vw, 6rem);
+  --radius-small: .25rem;
+  --radius-panel: .75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1e1e1c;
+    --panel: #292925;
+    --ink: #f7f3ec;
+    --muted: #d8cbb3;
+    --rule: #716c60;
+    --accent: #a9c1ff;
+    --shadow: 0 8px 24px rgb(0 0 0 / 28%);
+  }
+}

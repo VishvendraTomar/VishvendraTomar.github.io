@@ -1,0 +1,6 @@
+flowchart TD
+A[Shift change] --> B[Registration queue]
+B --> C[Submitter]
+C --> D[Dimona]
+D -->|Retryable failure| B
+C -->|Retries exhausted| E[Dead-letter queue]
