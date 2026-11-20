@@ -13,7 +13,7 @@ before:
 after:
   - "Keine verlorenen Meldungen, keine Duplikate, keine manuellen Wiederholungen."
   - "Jede Meldung endet angenommen, wiederholt oder bei einem Menschen."
-  - "Über 125.000 Schichten und mehr als 1.000 Unternehmen auf dem neuen Backend."
+  - "Über 125.000 Schichten liefen auf dem Backend, das ich größtenteils gebaut habe. Die Plattform wuchs auf mehr als 1.000 Unternehmen."
 eyebrow: Behördenmeldungen / Lohnabrechnung
 tagline: "Ein Behördensystem, das ausfällt. Meldungen, die nicht scheitern dürfen."
 highlights:
@@ -101,6 +101,8 @@ Für Operationen, die über MCP angeboten werden, blieben die fachlichen Prüfun
 ## Ehrlich zur Größenordnung
 
 Die Plattform startete bei rund **10.000 Schichten**, und das alte System kam bereits an seine Grenzen. Auf dem neuen Backend wuchs sie auf **über 125.000 Schichten** und **mehr als 1.000 Unternehmen**.
+
+Das sind Zahlen der Plattform, nicht allein meine. Der Gründer verantwortete Produkt und Geschäft. Mein Teil war das Backend, auf dem diese Schichten liefen.
 
 Der Traffic war überschaubar. Schwierig war die Korrektheit: Eine doppelte Meldung, eine verlorene Anmeldung oder eine falsche Lohnabrechnung ist bei jedem Volumen ein Problem.
 

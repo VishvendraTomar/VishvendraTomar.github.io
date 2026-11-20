@@ -11,7 +11,7 @@ before:
   - "I processi richiedevano giorni."
   - "Gli errori erano frequenti."
 after:
-  - "Oltre 20 workflow in produzione per più di 300 dipendenti."
+  - "Oltre 20 workflow in produzione sul runtime che ho costruito, per più di 300 dipendenti."
   - "Processi che richiedevano giorni si chiudono in giornata."
   - "Gli errori sono passati da frequenti a quasi zero."
 eyebrow: Runtime durabile per agenti

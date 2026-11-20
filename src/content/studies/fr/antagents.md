@@ -11,7 +11,7 @@ before:
   - "Les processus prenaient des jours."
   - "Les échecs étaient fréquents."
 after:
-  - "Plus de 20 workflows en production pour plus de 300 salariés."
+  - "Plus de 20 workflows en production sur le moteur que j’ai construit, pour plus de 300 salariés."
   - "Des processus qui prenaient des jours se terminent dans la journée."
   - "Les échecs sont passés de fréquents à quasi nuls."
 eyebrow: Moteur d’agents durable

@@ -13,7 +13,7 @@ before:
 after:
   - "Nessuna comunicazione persa, nessun duplicato, nessun rinvio manuale."
   - "Ogni comunicazione finisce accettata, ripetuta o affidata a una persona."
-  - "Oltre 125.000 turni e più di 1.000 aziende sul nuovo backend."
+  - "Oltre 125.000 turni sono passati dal backend che ho costruito in gran parte. La piattaforma è cresciuta a più di 1.000 aziende."
 eyebrow: Comunicazioni obbligatorie / Buste paga
 tagline: "Un sistema pubblico che cade. Comunicazioni che non possono fallire."
 highlights:
@@ -101,6 +101,8 @@ Per le operazioni esposte tramite MCP, i controlli di business restavano nel liv
 ## La scala, onestamente
 
 La piattaforma è partita da circa **10.000 turni**, e il vecchio sistema faticava già. Sul nuovo backend è cresciuta fino a **oltre 125.000 turni** e **più di 1.000 aziende**.
+
+Sono numeri della piattaforma, non solo miei. Il fondatore guidava il prodotto e l’azienda. La mia parte era il backend su cui giravano quei turni.
 
 Il traffico era modesto. La parte difficile era la correttezza: una comunicazione doppia, una registrazione persa o una busta paga sbagliata sono un problema a qualsiasi volume.
 
