@@ -28,7 +28,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-overline"><span class="small-rule"></span><span>{t.hero.overline}</span><span class="hero-no">01 — 03</span></div>
+      <div class="hero-overline"><span class="small-rule"></span><span>{t.hero.overline}</span></div>
       <h1 id="hero-title"><span class="hero-line">{t.hero.l1}</span><br/><span class="hero-line serif">{t.hero.l2}</span><br/><span class="hero-line">{t.hero.l3}<span class="blue-stop">.</span></span></h1>
       <div class="hero-bottom">
         <div class="hero-copy"><p>{t.hero.body}</p><div class="hero-actions"><a class="hero-cta" href={CALL_HREF}>{t.hero.cta} <span aria-hidden="true">→</span></a><a class="hero-link" href="#cases">{t.hero.cta2} <span aria-hidden="true">↓</span></a></div></div>
@@ -364,6 +364,24 @@ const pad = (n: number) => String(n).padStart(2, '0');
  .impact-items{grid-template-columns:1fr;gap:19px}
  .proposal-art .proposal-stage b{font-size:9px}
 }
+
+/* Hero: tighter vertical rhythm; on wide screens the copy sits beside the headline. */
+.header{height:86px}
+.hero{padding-top:56px}
+@media(min-width:681px){.hero h1{font-size:clamp(64px,8vw,124px);margin:30px 0 36px}}
+.proof{margin-top:64px}
+.proof-note+.hero-end{margin-top:32px}
+@media(min-width:1100px){
+  .hero{display:grid;grid-template-columns:minmax(0,2.25fr) minmax(300px,1fr);column-gap:48px;align-items:end}
+  .hero-overline,.proof,.proof-note,.hero-end{grid-column:1/-1}
+  .hero h1{grid-column:1;margin:34px 0 0;font-size:clamp(70px,6.1vw,108px)}
+  .hero-bottom{grid-column:2;flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:10px}
+  .hero-bottom .round-link{display:none}
+  .hero-copy{max-width:none}
+  .hero-bottom p{font-size:16.5px;line-height:1.7}
+  .proof{margin-top:56px}
+}
+@media(max-width:680px){.header{height:72px}.hero{padding-top:44px}.hero h1{margin:26px 0 28px}.proof{margin-top:44px}}
 </style>
 
 <script>
