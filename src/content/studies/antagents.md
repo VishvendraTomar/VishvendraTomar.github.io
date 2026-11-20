@@ -11,7 +11,7 @@ before:
   - "Processes took days."
   - "Failures were frequent."
 after:
-  - "20+ live workflows serving 300+ employees."
+  - "20+ live workflows on the runtime I built, serving 300+ employees."
   - "Processes that took days finish within a day."
   - "Failures went from frequent to near zero."
 eyebrow: Durable agent runtime

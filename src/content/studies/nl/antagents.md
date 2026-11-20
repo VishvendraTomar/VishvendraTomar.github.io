@@ -11,7 +11,7 @@ before:
   - "Processen duurden dagen."
   - "Fouten kwamen vaak voor."
 after:
-  - "Meer dan 20 live workflows voor meer dan 300 medewerkers."
+  - "Meer dan 20 live workflows op de runtime die ik bouwde, voor meer dan 300 medewerkers."
   - "Processen die dagen duurden, zijn binnen een dag klaar."
   - "Fouten gingen van vaak naar bijna nul."
 eyebrow: Robuuste agent-runtime

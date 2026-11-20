@@ -11,7 +11,7 @@ before:
   - "Prozesse dauerten Tage."
   - "Ausfälle waren häufig."
 after:
-  - "Über 20 produktive Workflows für mehr als 300 Mitarbeitende."
+  - "Über 20 produktive Workflows auf meiner Laufzeitumgebung, für mehr als 300 Mitarbeitende."
   - "Prozesse, die Tage dauerten, sind innerhalb eines Tages erledigt."
   - "Ausfälle sanken von häufig auf nahezu null."
 eyebrow: Robuste Agenten-Laufzeitumgebung

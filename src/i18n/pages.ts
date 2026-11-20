@@ -1,7 +1,10 @@
 import type { Lang } from './config';
 
 export const MAIL = 'vishvendratomar29@gmail.com';
-export const CALL_HREF = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('15-minute call');
+/** Paste your Cal.com or Calendly link here (e.g. 'https://cal.com/your-name/15min').
+ *  While it is empty, every "Book a 15-minute call" button opens an email instead. */
+export const BOOKING_URL = '';
+export const CALL_HREF = BOOKING_URL || 'mailto:' + MAIL + '?subject=' + encodeURIComponent('15-minute call');
 
 type Pages = {
   nav: { workWithMe: string; countries: string };

@@ -13,7 +13,7 @@ before:
 after:
   - "No lost filings, no duplicates, no manual reruns."
   - "Every filing ends accepted, retried or with a person."
-  - "125,000+ shifts and 1,000+ companies on the new backend."
+  - "125,000+ shifts ran on the backend I built most of. The platform grew to 1,000+ companies."
 eyebrow: Government filings / Payroll
 tagline: "A government system that goes down. Filings that can’t fail."
 highlights:
@@ -101,6 +101,8 @@ For operations exposed through MCP, I kept business checks in the domain layer, 
 ## Scale, honestly
 
 The platform started at about **10,000 shifts**, and the old system was already struggling. On the new backend it grew to **125,000+ shifts** and **1,000+ companies**.
+
+These are platform figures, not mine alone. The founder ran the product and the business. My part was the backend those shifts ran on.
 
 The traffic was modest. The hard part was correctness: a duplicated filing, a lost registration or a wrong payslip is a problem at any volume.
 

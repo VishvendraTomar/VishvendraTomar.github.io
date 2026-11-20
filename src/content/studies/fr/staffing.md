@@ -13,7 +13,7 @@ before:
 after:
   - "Aucune déclaration perdue, aucun doublon, aucune relance manuelle."
   - "Chaque déclaration finit acceptée, relancée ou confiée à une personne."
-  - "Plus de 125 000 prestations et 1 000 entreprises sur le nouveau backend."
+  - "Plus de 125 000 prestations ont tourné sur le backend que j’ai en grande partie construit. La plateforme a atteint plus de 1 000 entreprises."
 eyebrow: Déclarations / Paie
 tagline: "Un système public qui tombe. Des déclarations qui ne doivent pas échouer."
 highlights:
@@ -101,6 +101,8 @@ Pour les opérations exposées via MCP, les contrôles métier restaient dans la
 ## L’échelle, honnêtement
 
 La plateforme est partie d’environ **10 000 prestations**, et l’ancien système peinait déjà. Sur le nouveau backend, elle a atteint **plus de 125 000 prestations** et **plus de 1 000 entreprises**.
+
+Ce sont des chiffres de la plateforme, pas les miens seuls. Le fondateur pilotait le produit et l’activité. Ma part, c’était le backend sur lequel tournaient ces prestations.
 
 Le trafic restait modeste. La difficulté, c’était l’exactitude : une déclaration en double, une déclaration perdue ou une fiche de paie fausse posent problème à n’importe quel volume.
 

@@ -37,6 +37,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <dl class="proof" aria-label={t.hero.proofLabel}>
         {t.hero.proof.map(([n, label]) => <div><dt>{n}</dt><dd>{label}</dd></div>)}
       </dl>
+      <p class="proof-note">{t.hero.proofNote}</p>
       <div class="hero-end"><span>{t.hero.end}</span><span>{t.hero.scroll}</span></div>
     </section>
     <div class="blue-band" aria-hidden="true"></div>
@@ -178,7 +179,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 .contact h2#contact-title{font-size:clamp(38px,5.6vw,80px);line-height:1.08;max-width:15ch}.contact-secondary{margin:26px 0 0;font-size:13px;color:var(--paper-soft)}
 .impact-links{display:flex;flex-direction:column;gap:6px}.impact-links a{text-decoration:underline;text-underline-offset:3px}
 .proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:90px 0 0;border-top:1px solid var(--rule-dark)}.proof div{padding:24px 20px 4px 0}.proof div+div{padding-left:20px;border-left:1px solid var(--rule-dark)}.proof dt{font:500 clamp(34px,4vw,54px)/1 'Space Grotesk',sans-serif;letter-spacing:-.06em;color:#f1e9da}.proof dd{margin:12px 0 0;font-size:13px;line-height:1.55;color:var(--paper-soft);max-width:230px}
-.proof+.hero-end{margin-top:56px}
+.proof-note{margin:18px 0 0;max-width:760px;font-size:13px;line-height:1.6;color:var(--paper-soft)}.proof-note+.hero-end{margin-top:48px}
 .project-links{display:flex;flex-wrap:wrap;gap:0 34px}
 .cases{padding:120px 0 110px}
 .light-section{background:var(--paper);color:var(--charcoal)}.dark-section{background:var(--charcoal);color:var(--paper)}

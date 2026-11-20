@@ -13,7 +13,7 @@ before:
 after:
   - "Geen verloren aangiftes, geen dubbele, geen handmatig herhalen."
   - "Elke aangifte eindigt aanvaard, opnieuw geprobeerd of bij een mens."
-  - "Meer dan 125.000 shifts en 1.000 bedrijven op de nieuwe backend."
+  - "Meer dan 125.000 shifts draaiden op de backend die ik grotendeels bouwde. Het platform groeide naar meer dan 1.000 bedrijven."
 eyebrow: Overheidsaangiftes / Loonverwerking
 tagline: "Een overheidssysteem dat uitvalt. Aangiftes die niet mogen mislukken."
 highlights:
@@ -101,6 +101,8 @@ Voor handelingen die via MCP beschikbaar waren, bleven de bedrijfscontroles in d
 ## Schaal, eerlijk gezegd
 
 Het platform begon bij zo’n **10.000 shifts**, en het oude systeem had het al moeilijk. Op de nieuwe backend groeide het naar **meer dan 125.000 shifts** en **meer dan 1.000 bedrijven**.
+
+Dit zijn cijfers van het platform, niet van mij alleen. De oprichter leidde het product en het bedrijf. Mijn deel was de backend waarop die shifts draaiden.
 
 Het verkeer was bescheiden. Het moeilijke was correctheid: een dubbele aangifte, een verloren aangifte of een foute loonstrook is bij elk volume een probleem.
 

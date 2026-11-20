@@ -8,7 +8,8 @@ const en = {
     l1: 'I make', l2: 'unreliable systems', l3: 'dependable',
     body: 'I’m Vishvendra Tomar, an engineer. I build systems that keep working when things go wrong. Government filings that can’t be lost. AI agents that don’t crash or overspend. Payroll that is right to the cent.',
     cta: 'Book a 15-minute call', cta2: 'See what broke', exploreAria: 'Explore selected work', proofLabel: 'Results',
-    proof: [['125,000+', 'shifts on the staffing backend, up from about 10,000'], ['1,000+', 'companies served by that platform'], ['20+', 'live agent workflows for 300+ employees'], ['≈0', 'agent failures, down from frequent']],
+    proof: [['125,000+', 'shifts through the staffing backend I built most of (from ~10,000)'], ['1,000+', 'companies using that platform'], ['20+', 'workflows on the agent runtime I built, for 300+ employees'], ['≈0', 'failures in those workflows, down from frequent']],
+    proofNote: 'Platform usage figures. The founder owned the staffing product; I built most of its backend. The agent infrastructure was mine alone.',
     end: 'GOVERNMENT FILINGS / AI AGENTS / PAYROLL', scroll: 'SCROLL TO EXPLORE ↓',
   },
   work: {
@@ -17,7 +18,7 @@ const en = {
     all: 'All case studies ↗', gallery: 'Architecture gallery ↗', disclaimer: 'Commercial projects are discussed without publishing private code or confidential information.', caption: 'VISHVENDRA / SELECTED WORK',
   },
   projects: {
-    'workforce-infrastructure': { eyebrow: 'GOVERNMENT FILINGS / PAYROLL', name: 'Workforce infrastructure', short: 'A government system that goes down. Filings that can’t fail.', detail: 'Staffing agencies must register each worker with the government before every shift. The old system lost filings and needed manual reruns. I built most of the backend and worked on the Flutter app. Nothing is lost or filed twice now. It grew from about 10,000 to 125,000+ shifts and 1,000+ companies.' },
+    'workforce-infrastructure': { eyebrow: 'GOVERNMENT FILINGS / PAYROLL', name: 'Workforce infrastructure', short: 'A government system that goes down. Filings that can’t fail.', detail: 'Staffing agencies must register each worker with the government before every shift. The old system lost filings and needed manual reruns. I built most of the backend and worked on the Flutter app. Nothing is lost or filed twice now. On that backend, the platform grew from about 10,000 to 125,000+ shifts and 1,000+ companies.' },
     antagents: { eyebrow: 'DURABLE AGENT RUNTIME', name: 'Ant Agents', short: 'AI agents that finish the job, even after a crash.', detail: 'Onboarding and timesheet chasing used to run on email. I built the system that runs them with AI agents. I owned the agent infrastructure and the modelling alone. 20+ workflows now serve 300+ employees. Work that took days now takes less than a day. Failures went from frequent to near zero.' },
     'dealroom-ai': { eyebrow: 'HACKATHON / TEAM ACHIEVEMENT', name: 'Dealroom.ai', short: 'From client documents to a draft sales proposal.', detail: 'A 24-hour hackathon, and our team placed second. Several AI agents turned a client brief into a sales proposal. Another team later added the prototype to the GeekyAnts website.', recognition: '2ND PLACE · TEAM' },
   } as Record<string, { eyebrow: string; name: string; short: string; detail: string; recognition?: string }>,
@@ -73,7 +74,8 @@ const de: HomeText = {
     l1: 'Ich mache', l2: 'unzuverlässige Systeme', l3: 'verlässlich',
     body: 'Ich bin Vishvendra Tomar, Engineer. Ich baue Systeme, die weiterlaufen, wenn etwas schiefgeht. Behördenmeldungen, die nicht verloren gehen. KI-Agenten, die nicht abstürzen und kein Budget sprengen. Lohnabrechnungen, die auf den Cent stimmen.',
     cta: '15-Minuten-Gespräch buchen', cta2: 'Was schiefging', exploreAria: 'Ausgewählte Arbeiten ansehen', proofLabel: 'Ergebnisse',
-    proof: [['125.000+', 'Schichten auf dem neuen Backend, ausgehend von rund 10.000'], ['1.000+', 'Unternehmen auf dieser Plattform'], ['20+', 'produktive Agenten-Workflows für 300+ Mitarbeitende'], ['≈0', 'Agenten-Ausfälle – vorher an der Tagesordnung']],
+    proof: [['125.000+', 'Schichten über das Backend, das ich größtenteils gebaut habe (von rund 10.000)'], ['1.000+', 'Unternehmen auf dieser Plattform'], ['20+', 'Workflows auf der Agenten-Laufzeitumgebung, die ich gebaut habe – für 300+ Mitarbeitende'], ['≈0', 'Ausfälle in diesen Workflows – vorher häufig']],
+    proofNote: 'Nutzungszahlen der Plattformen. Das Produkt gehörte dem Gründer; ich habe den Großteil des Backends gebaut. Die Agenten-Infrastruktur habe ich allein verantwortet.',
     end: 'BEHÖRDENMELDUNGEN / KI-AGENTEN / LOHNABRECHNUNG', scroll: 'WEITER SCROLLEN ↓',
   },
   work: {
@@ -82,7 +84,7 @@ const de: HomeText = {
     all: 'Alle Fallstudien ↗', gallery: 'Architektur-Galerie ↗', disclaimer: 'Kundenprojekte werden beschrieben, ohne privaten Code oder vertrauliche Informationen zu veröffentlichen.', caption: 'VISHVENDRA / AUSGEWÄHLTE ARBEITEN',
   },
   projects: {
-    'workforce-infrastructure': { eyebrow: 'BEHÖRDENMELDUNGEN / LOHNABRECHNUNG', name: 'Personaleinsatz-Infrastruktur', short: 'Ein Behördensystem, das ausfällt. Meldungen, die nicht scheitern dürfen.', detail: 'Personaldienstleister müssen jede Arbeitskraft vor jeder Schicht bei der Behörde anmelden. Das alte System verlor Meldungen und brauchte manuelle Wiederholungen. Ich habe den Großteil des Backends gebaut und an der Flutter-App mitgearbeitet. Heute geht nichts verloren und nichts wird doppelt gemeldet. Die Plattform wuchs von rund 10.000 auf über 125.000 Schichten und mehr als 1.000 Unternehmen.' },
+    'workforce-infrastructure': { eyebrow: 'BEHÖRDENMELDUNGEN / LOHNABRECHNUNG', name: 'Personaleinsatz-Infrastruktur', short: 'Ein Behördensystem, das ausfällt. Meldungen, die nicht scheitern dürfen.', detail: 'Personaldienstleister müssen jede Arbeitskraft vor jeder Schicht bei der Behörde anmelden. Das alte System verlor Meldungen und brauchte manuelle Wiederholungen. Ich habe den Großteil des Backends gebaut und an der Flutter-App mitgearbeitet. Heute geht nichts verloren und nichts wird doppelt gemeldet. Auf diesem Backend wuchs die Plattform von rund 10.000 auf über 125.000 Schichten und mehr als 1.000 Unternehmen.' },
     antagents: { eyebrow: 'ROBUSTE AGENTEN-LAUFZEITUMGEBUNG', name: 'Ant Agents', short: 'KI-Agenten, die ihre Arbeit beenden – auch nach einem Absturz.', detail: 'Onboarding und das Nachfassen von Stundenzetteln liefen per E-Mail. Ich habe das System gebaut, das diese Abläufe mit KI-Agenten erledigt. Die Agenten-Infrastruktur und die Modellierung habe ich allein verantwortet. Über 20 Workflows dienen heute mehr als 300 Mitarbeitenden. Was Tage dauerte, dauert jetzt weniger als einen Tag. Ausfälle sanken von häufig auf nahezu null.' },
     'dealroom-ai': { eyebrow: 'HACKATHON / TEAMERFOLG', name: 'Dealroom.ai', short: 'Von Kundendokumenten zum Entwurf eines Vertriebsangebots.', detail: 'Ein 24-Stunden-Hackathon, unser Team wurde Zweiter. Mehrere KI-Agenten machten aus einem Kundenbriefing ein Vertriebsangebot. Ein anderes Team hat den Prototyp später in die GeekyAnts-Website übernommen.', recognition: '2. PLATZ · TEAM' },
   },
@@ -137,7 +139,8 @@ const fr: HomeText = {
     l1: 'Je rends', l2: 'les systèmes fragiles', l3: 'fiables',
     body: 'Je suis Vishvendra Tomar, ingénieur. Je construis des systèmes qui tiennent quand les choses tournent mal. Des déclarations administratives qui ne se perdent pas. Des agents IA qui ne plantent pas et ne dépassent pas le budget. Une paie juste au centime près.',
     cta: 'Réserver un appel de 15 minutes', cta2: 'Ce qui a cassé', exploreAria: 'Voir une sélection de projets', proofLabel: 'Résultats',
-    proof: [['125 000+', 'prestations sur le nouveau backend, contre environ 10 000 au départ'], ['1 000+', 'entreprises servies par cette plateforme'], ['20+', 'workflows d’agents en production pour plus de 300 salariés'], ['≈0', 'échec d’agent, alors qu’ils étaient fréquents']],
+    proof: [['125 000+', 'prestations via le backend que j’ai en grande partie construit (contre ~10 000)'], ['1 000+', 'entreprises sur cette plateforme'], ['20+', 'workflows sur le moteur d’agents que j’ai construit, pour 300+ salariés'], ['≈0', 'échec dans ces workflows, alors qu’ils étaient fréquents']],
+    proofNote: 'Chiffres d’usage des plateformes. Le produit appartenait au fondateur ; j’ai construit l’essentiel de son backend. L’infrastructure des agents relevait de moi seul.',
     end: 'DÉCLARATIONS / AGENTS IA / PAIE', scroll: 'FAITES DÉFILER ↓',
   },
   work: {
@@ -146,7 +149,7 @@ const fr: HomeText = {
     all: 'Toutes les études de cas ↗', gallery: 'Galerie d’architecture ↗', disclaimer: 'Les projets clients sont présentés sans publier de code privé ni d’informations confidentielles.', caption: 'VISHVENDRA / PROJETS CHOISIS',
   },
   projects: {
-    'workforce-infrastructure': { eyebrow: 'DÉCLARATIONS / PAIE', name: 'Infrastructure RH', short: 'Un système public qui tombe. Des déclarations qui ne doivent pas échouer.', detail: 'Les agences d’intérim doivent déclarer chaque travailleur avant chaque prestation. L’ancien système perdait des déclarations et demandait des relances manuelles. J’ai construit l’essentiel du backend et travaillé sur l’application Flutter. Désormais, rien n’est perdu ni déclaré deux fois. La plateforme est passée d’environ 10 000 à plus de 125 000 prestations et plus de 1 000 entreprises.' },
+    'workforce-infrastructure': { eyebrow: 'DÉCLARATIONS / PAIE', name: 'Infrastructure RH', short: 'Un système public qui tombe. Des déclarations qui ne doivent pas échouer.', detail: 'Les agences d’intérim doivent déclarer chaque travailleur avant chaque prestation. L’ancien système perdait des déclarations et demandait des relances manuelles. J’ai construit l’essentiel du backend et travaillé sur l’application Flutter. Désormais, rien n’est perdu ni déclaré deux fois. Sur ce backend, la plateforme est passée d’environ 10 000 à plus de 125 000 prestations et plus de 1 000 entreprises.' },
     antagents: { eyebrow: 'MOTEUR D’AGENTS DURABLE', name: 'Ant Agents', short: 'Des agents IA qui finissent le travail, même après une panne.', detail: 'L’onboarding et les relances de feuilles de temps passaient par e-mail. J’ai construit le système qui les confie à des agents IA. J’étais seul responsable de l’infrastructure des agents et de la modélisation. Plus de 20 workflows servent aujourd’hui plus de 300 salariés. Ce qui prenait des jours prend moins d’une journée. Les échecs sont passés de fréquents à quasi nuls.' },
     'dealroom-ai': { eyebrow: 'HACKATHON / RÉUSSITE D’ÉQUIPE', name: 'Dealroom.ai', short: 'Des documents client à un projet de proposition commerciale.', detail: 'Un hackathon de 24 heures, et notre équipe a fini deuxième. Plusieurs agents IA transformaient un brief client en proposition commerciale. Une autre équipe a ensuite intégré le prototype au site de GeekyAnts.', recognition: '2E PLACE · ÉQUIPE' },
   },
@@ -201,7 +204,8 @@ const nl: HomeText = {
     l1: 'Ik maak', l2: 'onbetrouwbare systemen', l3: 'betrouwbaar',
     body: 'Ik ben Vishvendra Tomar, engineer. Ik bouw systemen die blijven werken als het misgaat. Overheidsaangiftes die niet verloren gaan. AI-agents die niet crashen of over budget gaan. Loonverwerking die tot op de cent klopt.',
     cta: 'Plan een gesprek van 15 minuten', cta2: 'Wat er misging', exploreAria: 'Bekijk geselecteerd werk', proofLabel: 'Resultaten',
-    proof: [['125.000+', 'shifts op de nieuwe backend, vanaf zo’n 10.000'], ['1.000+', 'bedrijven op dat platform'], ['20+', 'live agent-workflows voor 300+ medewerkers'], ['≈0', 'agent-fouten, waar die eerst vaak voorkwamen']],
+    proof: [['125.000+', 'shifts via de backend die ik grotendeels bouwde (vanaf ~10.000)'], ['1.000+', 'bedrijven op dat platform'], ['20+', 'workflows op de agent-runtime die ik bouwde, voor 300+ medewerkers'], ['≈0', 'fouten in die workflows, eerst kwamen ze vaak voor']],
+    proofNote: 'Gebruikscijfers van de platforms. Het product was van de oprichter; ik bouwde het grootste deel van de backend. De agent-infrastructuur deed ik alleen.',
     end: 'OVERHEIDSAANGIFTES / AI-AGENTS / LOONVERWERKING', scroll: 'SCROL VERDER ↓',
   },
   work: {
@@ -210,7 +214,7 @@ const nl: HomeText = {
     all: 'Alle casestudy’s ↗', gallery: 'Architectuurgalerij ↗', disclaimer: 'Klantprojecten worden besproken zonder privécode of vertrouwelijke informatie te publiceren.', caption: 'VISHVENDRA / GESELECTEERD WERK',
   },
   projects: {
-    'workforce-infrastructure': { eyebrow: 'OVERHEIDSAANGIFTES / LOONVERWERKING', name: 'Personeelsinfrastructuur', short: 'Een overheidssysteem dat uitvalt. Aangiftes die niet mogen mislukken.', detail: 'Uitzendbureaus moeten elke werknemer vóór elke shift bij de overheid aangeven. Het oude systeem verloor aangiftes en vroeg handmatig herhalen. Ik bouwde het grootste deel van de backend en werkte mee aan de Flutter-app. Nu gaat er niets verloren en wordt niets dubbel aangegeven. Het platform groeide van zo’n 10.000 naar 125.000+ shifts en 1.000+ bedrijven.' },
+    'workforce-infrastructure': { eyebrow: 'OVERHEIDSAANGIFTES / LOONVERWERKING', name: 'Personeelsinfrastructuur', short: 'Een overheidssysteem dat uitvalt. Aangiftes die niet mogen mislukken.', detail: 'Uitzendbureaus moeten elke werknemer vóór elke shift bij de overheid aangeven. Het oude systeem verloor aangiftes en vroeg handmatig herhalen. Ik bouwde het grootste deel van de backend en werkte mee aan de Flutter-app. Nu gaat er niets verloren en wordt niets dubbel aangegeven. Op die backend groeide het platform van zo’n 10.000 naar 125.000+ shifts en 1.000+ bedrijven.' },
     antagents: { eyebrow: 'ROBUUSTE AGENT-RUNTIME', name: 'Ant Agents', short: 'AI-agents die hun werk afmaken, ook na een crash.', detail: 'Onboarding en het najagen van urenstaten liepen via e-mail. Ik bouwde het systeem dat dit met AI-agents doet. Ik was alleen verantwoordelijk voor de agent-infrastructuur en de modellering. Meer dan 20 workflows bedienen nu 300+ medewerkers. Wat dagen duurde, duurt nu minder dan een dag. Fouten gingen van vaak naar bijna nul.' },
     'dealroom-ai': { eyebrow: 'HACKATHON / TEAMPRESTATIE', name: 'Dealroom.ai', short: 'Van klantdocumenten naar een eerste versie van een offerte.', detail: 'Een hackathon van 24 uur, en ons team werd tweede. Meerdere AI-agents maakten van een klantbriefing een commerciële offerte. Een ander team nam het prototype later op in de website van GeekyAnts.', recognition: '2E PLAATS · TEAM' },
   },
@@ -265,7 +269,8 @@ const it: HomeText = {
     l1: 'Rendo affidabili', l2: 'i sistemi', l3: 'inaffidabili',
     body: 'Sono Vishvendra Tomar, ingegnere. Costruisco sistemi che continuano a funzionare quando qualcosa va storto. Comunicazioni obbligatorie che non si perdono. Agenti IA che non si bloccano e non sforano il budget. Buste paga corrette al centesimo.',
     cta: 'Prenota una chiamata di 15 minuti', cta2: 'Cosa si è rotto', exploreAria: 'Guarda i lavori selezionati', proofLabel: 'Risultati',
-    proof: [['125.000+', 'turni sul nuovo backend, partendo da circa 10.000'], ['1.000+', 'aziende servite dalla piattaforma'], ['20+', 'workflow di agenti in produzione per oltre 300 dipendenti'], ['≈0', 'errori degli agenti, prima frequenti']],
+    proof: [['125.000+', 'turni tramite il backend che ho costruito in gran parte (da ~10.000)'], ['1.000+', 'aziende sulla piattaforma'], ['20+', 'workflow sul runtime per agenti che ho costruito, per 300+ dipendenti'], ['≈0', 'errori in quei workflow, prima frequenti']],
+    proofNote: 'Dati di utilizzo delle piattaforme. Il prodotto era del fondatore; io ho costruito gran parte del backend. L’infrastruttura degli agenti era solo mia.',
     end: 'COMUNICAZIONI OBBLIGATORIE / AGENTI IA / BUSTE PAGA', scroll: 'SCORRI ↓',
   },
   work: {
@@ -274,7 +279,7 @@ const it: HomeText = {
     all: 'Tutti i casi di studio ↗', gallery: 'Galleria dell’architettura ↗', disclaimer: 'I progetti per clienti sono descritti senza pubblicare codice privato o informazioni riservate.', caption: 'VISHVENDRA / LAVORI SELEZIONATI',
   },
   projects: {
-    'workforce-infrastructure': { eyebrow: 'COMUNICAZIONI OBBLIGATORIE / BUSTE PAGA', name: 'Infrastruttura per il personale', short: 'Un sistema pubblico che cade. Comunicazioni che non possono fallire.', detail: 'Le agenzie per il lavoro devono registrare ogni lavoratore prima di ogni turno. Il vecchio sistema perdeva comunicazioni e richiedeva rinvii manuali. Ho costruito gran parte del backend e ho lavorato all’app Flutter. Ora nulla si perde e nulla viene inviato due volte. La piattaforma è passata da circa 10.000 a oltre 125.000 turni e più di 1.000 aziende.' },
+    'workforce-infrastructure': { eyebrow: 'COMUNICAZIONI OBBLIGATORIE / BUSTE PAGA', name: 'Infrastruttura per il personale', short: 'Un sistema pubblico che cade. Comunicazioni che non possono fallire.', detail: 'Le agenzie per il lavoro devono registrare ogni lavoratore prima di ogni turno. Il vecchio sistema perdeva comunicazioni e richiedeva rinvii manuali. Ho costruito gran parte del backend e ho lavorato all’app Flutter. Ora nulla si perde e nulla viene inviato due volte. Su quel backend la piattaforma è passata da circa 10.000 a oltre 125.000 turni e più di 1.000 aziende.' },
     antagents: { eyebrow: 'RUNTIME DURABILE PER AGENTI', name: 'Ant Agents', short: 'Agenti IA che finiscono il lavoro, anche dopo un crash.', detail: 'Onboarding e solleciti dei timesheet passavano per email. Ho costruito il sistema che li affida ad agenti IA. Ero l’unico responsabile dell’infrastruttura degli agenti e della modellazione. Oltre 20 workflow servono oggi più di 300 dipendenti. Ciò che richiedeva giorni ora richiede meno di un giorno. Gli errori sono passati da frequenti a quasi zero.' },
     'dealroom-ai': { eyebrow: 'HACKATHON / RISULTATO DI SQUADRA', name: 'Dealroom.ai', short: 'Dai documenti del cliente a una bozza di proposta commerciale.', detail: 'Un hackathon di 24 ore, e il nostro team è arrivato secondo. Più agenti IA trasformavano il brief di un cliente in una proposta commerciale. Un altro team ha poi integrato il prototipo nel sito di GeekyAnts.', recognition: '2° POSTO · TEAM' },
   },
