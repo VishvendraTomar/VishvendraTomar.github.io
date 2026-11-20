@@ -100,7 +100,7 @@ const steps = t.steps;
 .as-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1rem; margin-bottom: 1.5rem; }
 .as-controls button { font-weight: 600; font-size: .95rem; line-height: 1; padding: .75rem 1rem; color: #f1e9da; background: transparent; border: 1px solid #a9a08f; font-family: inherit; cursor: pointer; }
 .as-controls button:hover { border-color: #f1e9da; }
-.as-controls .as-primary { background: var(--brand-blue); border-color: var(--brand-blue); color: #fff; }
+.as-controls .as-primary { background: #2459e0; border-color: #2459e0; color: #fff; }
 .as-toggle { display: inline-flex; gap: .45rem; align-items: center; font-size: .92rem; color: #d8cbb3; cursor: pointer; }
 .as-toggle input { accent-color: var(--brand-blue); width: 1.05rem; height: 1.05rem; }
 .as-body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); }
@@ -130,5 +130,5 @@ const steps = t.steps;
 .as-note { margin: 1rem 0 0; padding: .8rem 1rem; border-left: 3px solid var(--brand-blue); background: #292925; font-size: .95rem; }
 .as-note[data-tone=bad] { border-color: #e0735f; }
 .as-note[data-tone=good] { border-color: #8fd6a8; }
-@media (max-width: 760px) { .as-body { grid-template-columns: 1fr; } .as-steps li { grid-template-columns: 2rem 1fr; } .as-state { grid-column: 2; } }
+@media (max-width: 760px) { .as-toggle { min-height: 44px; } .as-controls button { min-height: 44px; flex: 1 1 auto; } .as-log { font-size: .85rem; } .as-body { grid-template-columns: 1fr; } .as-steps li { grid-template-columns: 2rem 1fr; } .as-state { grid-column: 2; } }
 </style>

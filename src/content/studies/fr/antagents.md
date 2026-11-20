@@ -1,9 +1,10 @@
 ---
 slug: antagents
 title: Ant Agents
-summary: "Un moteur d’exécution durable pour agents LLM chez GeekyAnts. Il a remplacé l’onboarding, les contrôles de conformité et les relances de feuilles de temps faits par e-mail, et fait tourner aujourd’hui plus de 20 workflows pour plus de 300 salariés."
+summary: "Vendredi après-midi. Des feuilles de temps manquent encore. Quelqu’un doit écrire à chaque personne, puis relancer lundi. J’ai construit le système qui le fait aujourd’hui avec des agents IA, pour plus de 300 salariés."
 figure: automation
 order: 2
+updated: 2026-11-20
 stack: [AWS, MCP, Exécution durable]
 before:
   - "L’onboarding, les contrôles de conformité du télétravail et les relances de feuilles de temps se faisaient à la main, par e-mail."
@@ -14,16 +15,16 @@ after:
   - "Des processus qui prenaient des jours se terminent dans la journée."
   - "Les échecs sont passés de fréquents à quasi nuls."
 eyebrow: Moteur d’agents durable
-tagline: "Les agents LLM dérivent, plantent et brûlent de l’argent. Pas ceux-là."
+tagline: "Des agents IA qui finissent le travail, même après une panne."
 highlights:
-  - title: Reprendre, pas recommencer
-    text: Un worker meurt à l’étape 4 sur 7. Un autre reprend au point de sauvegarde sans refaire les étapes 1 à 3.
-  - title: Rejeu déterministe
-    text: Les sorties enregistrées du modèle et des outils rejouent exactement une exécution échouée, pour étudier un échec ponctuel.
-  - title: Du contexte, pas l’historique
-    text: Un pic de coûts venait d’un contexte gonflé. Un context builder n’envoie plus à chaque étape que ce dont elle a besoin.
-  - title: Des garde-fous en couches
-    text: Permissions d’outils, limites, validation de schéma, approbation humaine et journal d’audit. Un prompt demande ; un garde-fou impose.
+  - title: "Reprendre, pas recommencer"
+    text: "Un worker plante à l’étape 4 sur 7. Un autre reprend à l’étape 4. Rien ne tourne deux fois."
+  - title: "Rejouer chaque échec"
+    text: "Chaque réponse du modèle est enregistrée. Une exécution échouée se rejoue à l’identique, étape par étape."
+  - title: "Du contexte, pas l’historique"
+    text: "Les coûts ont grimpé quand chaque étape recevait tout l’historique. Désormais, chaque étape reçoit seulement l’utile."
+  - title: "Des garde-fous en couches"
+    text: "Permissions, limites, contrôles, validation humaine et journal d’audit. Un prompt demande ; un garde-fou impose."
 ---
 ## Mon rôle
 
@@ -49,13 +50,13 @@ Chaque étape terminée est sauvegardée avec son résultat. Quand un worker dis
 
 ## Déboguer un modèle qui ne répond jamais deux fois pareil
 
-Un appel à un LLM n’est pas déterministe. Quand une exécution échoue, rappeler le modèle reproduit rarement l’échec. Le moteur enregistre donc chaque sortie du modèle et chaque résultat d’outil au fil de l’exécution.
+Un modèle d’IA peut répondre différemment à chaque fois. Un échec ne se reproduit donc souvent pas quand on réessaie. Cela complique le débogage. Le moteur enregistre donc chaque sortie du modèle et chaque résultat d’outil au fil de l’exécution.
 
 Pour déboguer, je rejoue l’exécution à partir de cet enregistrement. Les mêmes entrées produisent le même chemin, étape par étape, sans appeler le modèle ni toucher aux vrais systèmes. Un échec survenu une fois peut être étudié autant de fois que nécessaire.
 
 ## Le pic de coûts
 
-À un moment, les coûts ont fortement augmenté. La cause : un contexte gonflé. Chaque étape envoyait au modèle une part toujours plus grande de l’historique du workflow, en grande partie sans rapport avec l’étape en cours.
+À un moment, les coûts ont fortement augmenté. Chaque étape envoyait au modèle toujours plus de texte, en grande partie inutile. On parle de contexte gonflé : tout l’historique du workflow partait avec chaque appel.
 
 La solution a été un context builder. Il assemble, à partir de l’état du workflow, seulement ce dont l’étape suivante a besoin, au lieu de transmettre tout l’historique. C’est la décision ci-dessus, mise en pratique.
 

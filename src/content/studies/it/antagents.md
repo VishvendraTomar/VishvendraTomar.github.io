@@ -1,9 +1,10 @@
 ---
 slug: antagents
 title: Ant Agents
-summary: "Un runtime durabile per agenti LLM in GeekyAnts. Ha sostituito onboarding, controlli di conformità e solleciti dei timesheet fatti via email, e oggi gestisce oltre 20 workflow per più di 300 dipendenti."
+summary: "Venerdì pomeriggio. Mancano di nuovo dei timesheet. Qualcuno deve scrivere a ogni persona e sollecitarla di nuovo lunedì. Ho costruito il sistema che ora lo fa con agenti IA, per oltre 300 dipendenti."
 figure: automation
 order: 2
+updated: 2026-11-20
 stack: [AWS, MCP, Durable execution]
 before:
   - "Onboarding, controlli di conformità sul lavoro da remoto e solleciti dei timesheet si facevano a mano, via email."
@@ -14,16 +15,16 @@ after:
   - "Processi che richiedevano giorni si chiudono in giornata."
   - "Gli errori sono passati da frequenti a quasi zero."
 eyebrow: Runtime durabile per agenti
-tagline: "Gli agenti LLM deragliano, si bloccano e bruciano soldi. Questi no."
+tagline: "Agenti IA che finiscono il lavoro, anche dopo un crash."
 highlights:
-  - title: Riprendere, non ricominciare
-    text: Un worker muore al passo 4 di 7. Un altro riprende dal checkpoint senza rifare i passi 1–3.
-  - title: Replay deterministico
-    text: Gli output registrati di modello e strumenti riproducono esattamente un’esecuzione fallita, così un errore isolato si può studiare.
-  - title: Contesto, non cronologia
-    text: Un picco di costi veniva da un contesto gonfiato. Un context builder ora dà a ogni passo solo ciò che gli serve.
-  - title: Guardrail a livelli
-    text: Permessi sugli strumenti, limiti, controlli di schema, approvazione umana e log di audit. Un prompt chiede; un guardrail impone.
+  - title: "Riprendere, non ricominciare"
+    text: "Un worker si blocca al passo 4 di 7. Un altro riprende dal passo 4. Niente viene eseguito due volte."
+  - title: "Rivedere ogni errore"
+    text: "Ogni risposta del modello viene registrata. Un’esecuzione fallita si può riprodurre esattamente, passo dopo passo."
+  - title: "Contesto, non cronologia"
+    text: "I costi sono saliti quando ogni passo riceveva tutta la storia. Ora ogni passo riceve solo ciò che gli serve."
+  - title: "Guardrail a livelli"
+    text: "Permessi, limiti, controlli, approvazione umana e log di audit. Un prompt chiede; un guardrail impone."
 ---
 ## Il mio ruolo
 
@@ -49,13 +50,13 @@ Ogni passo completato viene salvato con il suo risultato come checkpoint. Quando
 
 ## Fare debug di un modello che non risponde mai due volte uguale
 
-Una chiamata a un LLM non è deterministica. Quando un’esecuzione fallisce, richiamare il modello raramente riproduce l’errore. Per questo il runtime registra ogni output del modello e ogni risultato degli strumenti durante l’esecuzione.
+Un modello di IA può rispondere ogni volta in modo diverso. Un errore quindi spesso non si ripete quando si riprova. Questo rende difficile il debug. Per questo il runtime registra ogni output del modello e ogni risultato degli strumenti durante l’esecuzione.
 
 Per il debug riproduco l’esecuzione da quella registrazione. Gli stessi input producono lo stesso percorso, passo dopo passo, senza chiamare il modello né toccare sistemi reali. Un errore accaduto una volta si può studiare tutte le volte che serve.
 
 ## Il picco di costi
 
-A un certo punto i costi sono saliti di colpo. La causa era un contesto gonfiato: ogni passo inviava al modello una parte sempre più grande della storia del workflow, in gran parte irrilevante per il passo in corso.
+A un certo punto i costi sono saliti di colpo. Ogni passo inviava al modello sempre più testo, in gran parte inutile. Si parla di contesto gonfiato: tutta la storia del workflow partiva con ogni chiamata.
 
 La soluzione è stata un context builder. Compone dallo stato del workflow solo ciò che serve al passo successivo, invece di passare tutta la storia. È la decisione qui sopra, messa in pratica.
 

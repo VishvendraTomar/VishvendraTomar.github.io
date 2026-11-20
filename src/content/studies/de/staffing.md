@@ -4,6 +4,8 @@ title: Eine belgische Personaldienstleistungs-Plattform
 summary: "05:45 Uhr. Eine Arbeitskraft meldet sich krank, die Schicht beginnt um 06:00. Ein Kollege könnte einspringen, aber die hinterlegte Anmeldung nennt die Person, die gerade abgesagt hat. Die Leitung hat fünfzehn Minuten, um den Ersatz vor Arbeitsbeginn anzumelden."
 figure: registration
 order: 1
+stack: [Python, FastAPI, PostgreSQL, Celery, Flutter]
+updated: 2026-11-20
 before:
   - "Die erste Version des Gründers lief auf Cloud Functions und Firestore."
   - "Fehlgeschlagene Dimona-Meldungen wurden von Hand wiederholt."
@@ -13,20 +15,20 @@ after:
   - "Jede Meldung endet angenommen, wiederholt oder bei einem Menschen."
   - "Über 125.000 Schichten und mehr als 1.000 Unternehmen auf dem neuen Backend."
 eyebrow: Behördenmeldungen / Lohnabrechnung
-tagline: "Eine Behörden-API, die ausfällt. Meldungen, die es nicht dürfen."
+tagline: "Ein Behördensystem, das ausfällt. Meldungen, die nicht scheitern dürfen."
 highlights:
-  - title: Drei Ausgänge
-    text: Jede Meldung endet angenommen, wiederholt oder bei einem Menschen. Nichts geht still verloren.
-  - title: Sicher wiederholbar
-    text: Mindestens-einmal-Zustellung plus Idempotenz. Ein zweiter Versuch wird erkannt, nie doppelt gemeldet.
-  - title: Erst fragen, dann senden
-    text: Nach einem Absturz wird erst der Status bei der Behörde geprüft, bevor erneut gesendet wird.
-  - title: Löhne, die gleich bleiben
-    text: Regeln als Daten mit Gültigkeitsdatum. Eine alte Lohnabrechnung ergibt immer denselben Betrag.
+  - title: "Drei Ausgänge"
+    text: "Jede Meldung endet angenommen, wiederholt oder bei einem Menschen. Keine geht still verloren."
+  - title: "Sicher wiederholbar"
+    text: "Eine doppelt gesendete Meldung wird erkannt. Die Behörde bekommt nie ein Duplikat."
+  - title: "Erst fragen, dann senden"
+    text: "Nach einem Absturz fragt das System zuerst, ob die Meldung angekommen ist. Dann entscheidet es."
+  - title: "Löhne, die gleich bleiben"
+    text: "Lohnregeln werden mit Datum gespeichert. Alte Abrechnungen ergeben immer denselben Betrag."
 ---
 ## Meine Rolle
 
-Einer von zwei Entwicklern auf der Plattform. Der Gründer bestimmte die Produktrichtung; ich habe den Großteil des Backends gebaut.
+Einer von zwei Entwicklern auf der Plattform. Der Gründer bestimmte die Produktrichtung. Ich habe den Großteil des Backends gebaut und an der Flutter-App mitgearbeitet.
 
 Rund anderthalb Jahre war ich bei GeekyAnts auf diesem Projekt – remote aus Bengaluru und für die finale Auslieferung etwa 20 Tage in Belgien. Mein Teil umfasste die Dimona-Anmeldung, die Anwesenheitsprüfung und die Regeln, die aus Stunden Löhne, Rechnungen und Meldungen machen.
 
@@ -88,7 +90,7 @@ Der Preis zeigt sich auch an echten Einsatzorten: Eine ehrliche Arbeitskraft kan
 
 ## Löhne, die zweimal gleich herauskommen
 
-Erfasste Stunden fließen in die Lohn- und Compliance-Engine. Lohn und Kundenrechnung nutzen denselben Anwesenheitsnachweis, beantworten aber unterschiedliche Fragen.
+Aus geleisteten Stunden werden zwei Dinge: der Lohn der Arbeitskraft und die Rechnung an die Kundschaft. Beide stammen aus demselben Anwesenheitsnachweis, beantworten aber unterschiedliche Fragen.
 
 Lohnregeln ändern sich: Sätze, Zuschläge, gesetzliche Grenzen. Ich habe die Regeln als Daten mit Gültigkeitsdatum gespeichert, statt sie in den Code zu schreiben. Eine Lohnabrechnung wird mit den Regeln berechnet, die am Arbeitstag galten. Wer eine Abrechnung vom letzten Jahr neu berechnet, erhält denselben Betrag wie damals – auch wenn sich die Regeln inzwischen geändert haben.
 
@@ -104,11 +106,4 @@ Der Traffic war überschaubar. Schwierig war die Korrektheit: Eine doppelte Meld
 
 ## Dasselbe Problem in anderen Ländern
 
-Wer in einem anderen Markt baut, kann mit einer Frage beginnen: Welches Ereignis löst die Meldepflicht aus? Eine Neueinstellung, ein Tag Gelegenheitsarbeit und ein Abruf im Rahmen eines bestehenden Vertrags brauchen unterschiedliche Planungslogik.
-
-| Markt und Beschäftigung | Was das Backend verfolgen muss |
-|---|---|
-| Belgien · Gelegenheitskraft im Gastgewerbe | Der Arbeitgeber meldet die Person für jeden Arbeitstag über Dimona an. Stunden- und Tagesvariante verlangen unterschiedliche Zeitangaben. [Belgische Sozialversicherung](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
-| Österreich · *fallweise Beschäftigte* | Jeder Tag fallweiser Beschäftigung muss vor Arbeitsbeginn angemeldet werden. ELDA ist ein Übermittlungsweg. [ELDA-Information](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
-| Frankreich · *Extra* im Gastgewerbe | Die DPAE hängt an der Einstellung und muss vor Arbeitsbeginn erfolgen. Ein Extra-Vertrag kann mehrere aufeinanderfolgende Tage abdecken – Schichten zu zählen liefert den falschen Auslöser. [DPAE](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Extra-Verträge](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
-| Italien · intermittierende Beschäftigung | Zusätzlich zur Einstellungsmeldung zeigt der Arbeitgeber den Einsatz vor Beginn an. Eine Anzeige kann einen zusammenhängenden Arbeitszyklus von bis zu 30 Tagen abdecken. [Italienisches Arbeitsministerium](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
+Andere Länder haben dasselbe Problem mit anderen Regeln. Österreich, Frankreich, Italien und Ungarn verlangen alle eine Anmeldung vor Arbeitsbeginn. [Die Regeln im Vergleich](/de/countries/).

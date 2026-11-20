@@ -1,9 +1,10 @@
 ---
 slug: antagents
 title: Ant Agents
-summary: "Eine robuste Laufzeitumgebung für LLM-Agenten bei GeekyAnts. Sie hat Onboarding, Compliance-Prüfungen und das Nachfassen von Stundenzetteln per E-Mail abgelöst und betreibt heute über 20 Workflows für mehr als 300 Mitarbeitende."
+summary: "Freitagnachmittag. Wieder fehlen Stundenzettel. Jemand muss jede Person anschreiben und am Montag erneut nachhaken. Ich habe das System gebaut, das diese Arbeit heute mit KI-Agenten erledigt – für mehr als 300 Mitarbeitende."
 figure: automation
 order: 2
+updated: 2026-11-20
 stack: [AWS, MCP, Durable Execution]
 before:
   - "Onboarding, Homeoffice-Compliance-Prüfungen und das Nachfassen von Stundenzetteln liefen von Hand, per E-Mail."
@@ -14,16 +15,16 @@ after:
   - "Prozesse, die Tage dauerten, sind innerhalb eines Tages erledigt."
   - "Ausfälle sanken von häufig auf nahezu null."
 eyebrow: Robuste Agenten-Laufzeitumgebung
-tagline: "LLM-Agenten kommen vom Kurs ab, stürzen ab und verbrennen Geld. Diese nicht."
+tagline: "KI-Agenten, die ihre Arbeit beenden – auch nach einem Absturz."
 highlights:
-  - title: Fortsetzen statt neu starten
-    text: Ein Worker stirbt bei Schritt 4 von 7. Ein anderer macht am Checkpoint weiter, ohne Schritte 1–3 zu wiederholen.
-  - title: Deterministisches Replay
-    text: Aufgezeichnete Modell- und Tool-Ausgaben spielen einen fehlgeschlagenen Lauf exakt nach – ein einmaliger Fehler wird untersuchbar.
-  - title: Kontext statt Verlauf
-    text: Eine Kostenspitze kam von aufgeblähtem Kontext. Ein Context Builder gibt jedem Schritt nur noch, was er braucht.
-  - title: Guardrails in Schichten
-    text: Tool-Berechtigungen, Limits, Schemaprüfungen, menschliche Freigabe und ein Audit-Log. Ein Prompt bittet; eine Guardrail setzt durch.
+  - title: "Fortsetzen statt neu starten"
+    text: "Ein Worker stürzt bei Schritt 4 von 7 ab. Ein anderer macht bei Schritt 4 weiter. Nichts läuft doppelt."
+  - title: "Jeden Fehler nachspielen"
+    text: "Jede Modellantwort wird aufgezeichnet. Ein fehlgeschlagener Lauf lässt sich Schritt für Schritt exakt wiederholen."
+  - title: "Kontext statt Verlauf"
+    text: "Die Kosten stiegen, als jeder Schritt den ganzen Verlauf bekam. Heute bekommt jeder Schritt nur, was er braucht."
+  - title: "Guardrails in Schichten"
+    text: "Berechtigungen, Limits, Prüfungen, menschliche Freigabe und ein Audit-Log. Ein Prompt bittet; eine Guardrail setzt durch."
 ---
 ## Meine Rolle
 
@@ -49,13 +50,13 @@ Jeder abgeschlossene Schritt wird mit seinem Ergebnis als Checkpoint gesichert. 
 
 ## Ein Modell debuggen, das nie zweimal gleich antwortet
 
-Ein LLM-Aufruf ist nicht deterministisch. Schlägt ein Lauf fehl, reproduziert ein erneuter Modellaufruf den Fehler nur selten. Deshalb zeichnet die Laufzeitumgebung jede Modellausgabe und jedes Tool-Ergebnis während des Laufs auf.
+Ein KI-Modell kann jedes Mal anders antworten. Ein Fehler tritt beim nächsten Versuch also oft nicht wieder auf. Das macht die Fehlersuche schwer. Deshalb zeichnet die Laufzeitumgebung jede Modellausgabe und jedes Tool-Ergebnis während des Laufs auf.
 
 Zum Debuggen spiele ich den Lauf aus dieser Aufzeichnung ab. Dieselben Eingaben führen Schritt für Schritt zum selben Pfad – ohne das Modell aufzurufen oder echte Systeme zu berühren. Ein Fehler, der einmal passiert ist, lässt sich so oft untersuchen wie nötig.
 
 ## Die Kostenspitze
 
-Irgendwann stiegen die Kosten stark an. Die Ursache war aufgeblähter Kontext: Jeder Schritt schickte dem Modell mehr und mehr vom Verlauf des Workflows, das meiste davon ohne Bezug zum aktuellen Schritt.
+Irgendwann stiegen die Kosten stark an. Jeder Schritt schickte dem Modell immer mehr Text, und das meiste davon war irrelevant. Man nennt das aufgeblähten Kontext: Der ganze Verlauf des Workflows ging bei jedem Aufruf mit.
 
 Die Lösung war ein Context Builder. Er stellt aus dem Workflow-Zustand nur zusammen, was der nächste Schritt braucht, statt den ganzen Verlauf weiterzureichen. Das ist die Entscheidung oben, in der Praxis.
 

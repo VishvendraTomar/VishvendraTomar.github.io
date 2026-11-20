@@ -4,11 +4,16 @@ import CaseStudies from './CaseStudies.astro';
 import LangSwitch from './LangSwitch.astro';
 import { home } from '../i18n/home';
 import { localize, type Lang } from '../i18n/config';
+import { CALL_HREF } from '../i18n/pages';
+const articles: [string, string][] = [
+  ['MCP in Action: A Developer’s Take on Smarter Service Coordination', 'https://geekyants.com/en-in/blog/mcp-in-action-a-developers-take-on-smarter-service-coordination'],
+  ['Multi-Agent Communication Protocols: A Technical Deep Dive', 'https://geekyants.com/en-in/blog/multi-agent-communication-protocols-a-technical-deep-dive'],
+];
 const { lang = 'en' } = Astro.props as { lang?: Lang };
 const t = home[lang];
 const L = (path: string) => localize(path, lang);
 const projects = [
-  {num:'01',stack:['Python','FastAPI','PostgreSQL','Celery'],kind:'system',slug:'workforce-infrastructure'},
+  {num:'01',stack:['Python','FastAPI','PostgreSQL','Celery','Flutter'],kind:'system',slug:'workforce-infrastructure'},
   {num:'02',stack:['AWS','MCP','Durable execution'],kind:'flow',slug:'antagents'},
   {num:'03',stack:['FastAPI','Next.js','Python','TypeScript'],kind:'proposal',slug:'dealroom-ai'},
 ].map(p => ({...p, ...t.projects[p.slug]}));
@@ -17,16 +22,16 @@ const pad = (n: number) => String(n).padStart(2, '0');
 <Layout lang={lang} title={t.meta.title} description={t.meta.description}>
 <div class="shell" id="top">
   <header class="header wrap">
-    <a href="#top" class="brand" aria-label={t.nav.home}><span class="brand-icon">V<span>✦</span>T</span><span class="brand-text">VISHVENDRA<br/>TOMAR</span></a>
+    <a href="#top" class="brand"><span class="brand-icon" aria-hidden="true">V<span>✦</span>T</span><span class="brand-text">VISHVENDRA<br/>TOMAR</span></a>
     <nav aria-label={t.nav.label}><a href="#work">{t.nav.work}</a><a href="#cases">{t.nav.cases}</a><a href="#experience">{t.nav.experience}</a><a href="#about">{t.nav.about}</a></nav>
-    <div class="header-actions"><LangSwitch/><a class="header-contact" href="mailto:vishvendratomar29@gmail.com">{t.nav.talk} <span aria-hidden="true">↗</span></a></div>
+    <div class="header-actions"><LangSwitch/><a class="header-contact" href={L('/work-with-me/')}>{t.nav.talk} <span aria-hidden="true">↗</span></a></div>
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-overline"><span class="small-rule"></span><span>{t.hero.overline}</span><span class="hero-no">01 — 03</span></div>
       <h1 id="hero-title"><span class="hero-line">{t.hero.l1}</span><br/><span class="hero-line serif">{t.hero.l2}</span><br/><span class="hero-line">{t.hero.l3}<span class="blue-stop">.</span></span></h1>
       <div class="hero-bottom">
-        <p>{t.hero.body}</p>
+        <div class="hero-copy"><p>{t.hero.body}</p><div class="hero-actions"><a class="hero-cta" href={CALL_HREF}>{t.hero.cta} <span aria-hidden="true">→</span></a><a class="hero-link" href="#cases">{t.hero.cta2} <span aria-hidden="true">↓</span></a></div></div>
         <a href="#work" class="round-link" aria-label={t.hero.exploreAria}><span aria-hidden="true">↘</span></a>
       </div>
       <dl class="proof" aria-label={t.hero.proofLabel}>
@@ -44,7 +49,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
               <div class="project-info">
                 <div class="project-top"><span>{p.num} / {p.eyebrow}</span><span aria-hidden="true">↗</span></div>
                 <div class="project-main"><h3>{p.name}</h3><p class="project-short">{p.short}</p><p class="project-detail">{p.detail}</p></div>
-                <div class="project-tags">{p.stack.map(s=><span>{s}</span>)}</div>{p.recognition && <span class="project-recognition">{p.recognition}</span>}<div class="project-links"><a class="case-link" href="#cases" data-case={p.slug} aria-label={t.work.seeBrokeAria + ' ' + p.name}>{t.work.seeBroke} <span aria-hidden="true">↓</span></a><a class="case-link" href={L('/work/' + p.slug + '/')} aria-label={t.work.fullAria + ' ' + p.name}>{t.work.full} <span aria-hidden="true">↗</span></a></div>
+                <div class="project-tags">{p.stack.map(s=><span>{s}</span>)}</div>{p.recognition && <span class="project-recognition">{p.recognition}</span>}<div class="project-links"><a class="case-link" href="#cases" data-case={p.slug} aria-label={t.work.seeBrokeAria + ' ' + p.name}>{t.work.seeBroke} <span aria-hidden="true">↓</span></a><a class="case-link" href={L('/work/' + p.slug + '/')} aria-label={t.work.full + ': ' + p.name}>{t.work.full} <span aria-hidden="true">↗</span></a></div>
               </div>
               <div class={'project-art '+p.kind} aria-hidden="true">
                 {p.kind==='system' && <div class="artboard">
@@ -142,14 +147,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <span class="impact-title">{t.exp.impactTitle}</span>
             <div class="impact-items">
               {t.exp.impacts.map(([title, text]) => <p><strong>{title}</strong><span>{text}</span></p>)}
+              <p><strong>{t.exp.articlesTitle}</strong><span class="impact-links">{articles.map(([title, href]) => <a href={href} target="_blank" rel="noopener" lang="en">{title} ↗</a>)}</span></p>
             </div>
           </div>
         </div>
       </div>
     </div></section>
-    <section class="contact dark-section" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-head"><span class="overline"><span class="section-index">05</span> {t.contact.overline}</span><span class="contact-spark" aria-hidden="true">✦</span></div><h2 id="contact-title">{t.contact.h2a}<br/><em>{t.contact.h2b}</em></h2><div class="contact-bottom"><p>{t.contact.body}</p><a href="mailto:vishvendratomar29@gmail.com" class="contact-email">{t.contact.cta} <span>↗</span></a></div><div class="social-links"><a href={L('/about/')}>{t.contact.about}</a><a href="/writing/">{t.contact.writing}</a><a href={L('/contact/')}>{t.contact.contact}</a><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a><a href="mailto:vishvendratomar29@gmail.com">EMAIL ↗</a></div></div></section>
+    <section class="contact dark-section" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-head"><span class="overline"><span class="section-index">05</span> {t.contact.overline}</span><span class="contact-spark" aria-hidden="true">✦</span></div><h2 id="contact-title">{t.contact.h2a}<br/><em>{t.contact.h2b}</em></h2><div class="contact-bottom"><p>{t.contact.body}</p><a href={CALL_HREF} class="contact-email">{t.contact.cta} <span>↗</span></a></div><p class="contact-secondary">{t.contact.secondary}</p><div class="social-links"><a href={L('/about/')}>{t.contact.about}</a><a href="/writing/">{t.contact.writing}</a><a href={L('/contact/')}>{t.contact.contact}</a><a href="https://github.com/VishvendraTomar" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="https://linkedin.com/in/vishvendra-tomar" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a><a href="mailto:vishvendratomar29@gmail.com">EMAIL ↗</a></div></div></section>
   </main>
-  <footer class="footer wrap"><span>© {new Date().getFullYear()} VISHVENDRA TOMAR</span><span>{t.footer.designed}</span><a href="#top">{t.footer.top}</a></footer>
+  <footer class="footer wrap"><span>© {new Date().getFullYear()} VISHVENDRA TOMAR</span><a href="#top">{t.footer.top}</a></footer>
 </div>
 </Layout>
 <style>
@@ -166,7 +172,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
 .hero-bottom{display:flex;justify-content:space-between;align-items:end;gap:60px}.hero-bottom p{max-width:495px;font-size:17px;line-height:1.8;color:var(--paper-soft);margin:0}
 .round-link{flex:none;display:grid;place-items:center;width:72px;height:72px;border:1px solid var(--paper);border-radius:50%;font-size:29px;transition:background .2s,color .2s,transform .2s}.round-link:hover{background:var(--blue);border-color:var(--blue);color:white;transform:translateY(3px)}
 .hero-end{display:flex;justify-content:space-between;gap:20px;padding:23px 0 27px;margin-top:100px;border-top:1px solid var(--rule-dark);font:10px 'DM Mono',monospace;letter-spacing:1px;color:var(--paper-soft)}.blue-band{height:7px;background:var(--blue)}
+.light-section .section-index{color:#1b45ad}.dark-section .section-index,.cap-number{color:#8fb0ff!important}.work-disclaimer,#detail-principle,.timeline-row p,.career-role p{color:#4a463f!important}.impact-items span,.impact-items span a{color:#3f3b35!important}#detail-type{color:#1b45ad!important}.map-node.is-selected{background:#2459e0!important;border-color:#2459e0!important}.map-node.is-selected :is(.map-count,small,strong){color:#fff!important}.role-dates{color:#4a463f!important}.light-section .section-intro>div>p,.project-detail{color:#4a463f!important}.project-recognition{color:#173f9b!important}
 .header-actions{display:flex;align-items:center;gap:20px;flex:none}
+.hero-copy{max-width:560px}.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:26px}.hero-cta{display:inline-flex;gap:10px;align-items:center;padding:14px 18px;background:#2459e0;color:#fff;font:700 14px 'DM Sans',sans-serif}.hero-cta:hover{background:#1d4cc4}.hero-link{font:600 13px 'DM Sans',sans-serif;border-bottom:1px solid var(--paper);padding-bottom:6px}
+.contact h2#contact-title{font-size:clamp(38px,5.6vw,80px);line-height:1.08;max-width:15ch}.contact-secondary{margin:26px 0 0;font-size:13px;color:var(--paper-soft)}
+.impact-links{display:flex;flex-direction:column;gap:6px}.impact-links a{text-decoration:underline;text-underline-offset:3px}
 .proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:90px 0 0;border-top:1px solid var(--rule-dark)}.proof div{padding:24px 20px 4px 0}.proof div+div{padding-left:20px;border-left:1px solid var(--rule-dark)}.proof dt{font:500 clamp(34px,4vw,54px)/1 'Space Grotesk',sans-serif;letter-spacing:-.06em;color:#f1e9da}.proof dd{margin:12px 0 0;font-size:13px;line-height:1.55;color:var(--paper-soft);max-width:230px}
 .proof+.hero-end{margin-top:56px}
 .project-links{display:flex;flex-wrap:wrap;gap:0 34px}

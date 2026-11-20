@@ -4,6 +4,8 @@ title: Una piattaforma belga per il lavoro somministrato
 summary: "Sono le 05:45. Un lavoratore si dà malato; il turno inizia alle 06:00. Un collega può sostituirlo, ma la registrazione a sistema riporta il nome di chi ha appena chiamato. Il responsabile ha quindici minuti per registrare il sostituto prima dell’inizio del lavoro."
 figure: registration
 order: 1
+stack: [Python, FastAPI, PostgreSQL, Celery, Flutter]
+updated: 2026-11-20
 before:
   - "La prima versione del fondatore girava su Cloud Functions e Firestore."
   - "Le comunicazioni Dimona fallite venivano ripetute a mano."
@@ -13,20 +15,20 @@ after:
   - "Ogni comunicazione finisce accettata, ripetuta o affidata a una persona."
   - "Oltre 125.000 turni e più di 1.000 aziende sul nuovo backend."
 eyebrow: Comunicazioni obbligatorie / Buste paga
-tagline: "Un’API pubblica che fallisce. Comunicazioni che non possono fallire."
+tagline: "Un sistema pubblico che cade. Comunicazioni che non possono fallire."
 highlights:
-  - title: Tre uscite
-    text: Ogni comunicazione finisce accettata, ripetuta o a una persona. Niente sparisce in silenzio.
-  - title: Sicura da ripetere
-    text: Consegna almeno una volta più idempotenza. Un secondo tentativo viene riconosciuto, mai inviato due volte.
-  - title: Chiedere prima di inviare
-    text: Dopo un crash si verifica lo stato presso l’amministrazione prima di inviare di nuovo.
-  - title: Paghe che si ricalcolano
-    text: Regole salvate come dati con data di decorrenza. Una vecchia busta paga dà sempre lo stesso importo.
+  - title: "Tre uscite"
+    text: "Ogni comunicazione finisce accettata, ripetuta o a una persona. Nessuna si perde in silenzio."
+  - title: "Sicura da ripetere"
+    text: "Una comunicazione inviata due volte viene riconosciuta. L’amministrazione non riceve mai un duplicato."
+  - title: "Chiedere prima di inviare"
+    text: "Dopo un crash, il sistema chiede prima se la comunicazione è arrivata. Poi decide."
+  - title: "Paghe che si ricalcolano"
+    text: "Le regole retributive sono salvate con la loro data. Le vecchie buste paga danno sempre lo stesso importo."
 ---
 ## Il mio ruolo
 
-Uno dei due ingegneri della piattaforma. Il fondatore guidava il prodotto; io ho costruito gran parte del backend.
+Uno dei due ingegneri della piattaforma. Il fondatore guidava il prodotto. Ho costruito gran parte del backend e ho lavorato all’app Flutter.
 
 Ho lavorato al progetto per circa un anno e mezzo in GeekyAnts, da remoto da Bengaluru, con circa 20 giorni in Belgio per il rilascio finale. La mia parte comprendeva la registrazione Dimona, la verifica delle presenze e le regole che trasformano le ore in paghe, fatture e comunicazioni.
 
@@ -88,7 +90,7 @@ Il costo si vede anche in una sede reale: un lavoratore onesto può avere una po
 
 ## Paghe che si ricalcolano sempre uguali
 
-Le ore registrate alimentano il motore di paghe e conformità. La busta paga e la fattura al cliente usano lo stesso registro presenze, ma rispondono a domande diverse.
+Le ore lavorate diventano due cose: la paga del lavoratore e la fattura al cliente. Entrambe nascono dallo stesso registro presenze, ma rispondono a domande diverse.
 
 Le regole retributive cambiano: tariffe, maggiorazioni, soglie di legge. Ho salvato le regole come dati con una data di decorrenza invece di scriverle nel codice. Una busta paga si calcola con le regole valide il giorno in cui si è lavorato. Ricalcolare una busta paga dell’anno scorso dà lo stesso importo di allora, anche se nel frattempo le regole sono cambiate.
 
@@ -104,11 +106,4 @@ Il traffico era modesto. La parte difficile era la correttezza: una comunicazion
 
 ## Lo stesso problema in altri paesi
 
-Chi costruisce per un altro mercato può partire da una domanda: quale evento fa nascere l’obbligo di comunicazione? Un’assunzione, una giornata di lavoro occasionale e una chiamata nell’ambito di un contratto esistente richiedono logiche di pianificazione diverse.
-
-| Mercato e lavoratore | Cosa deve tracciare il backend |
-|---|---|
-| Belgio · lavoratore occasionale nella ristorazione | Il datore di lavoro dichiara il lavoratore per ogni giornata tramite Dimona. Le varianti oraria e giornaliera richiedono dati temporali diversi. [Previdenza sociale belga](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
-| Austria · *fallweise Beschäftigte* | Ogni giornata di lavoro occasionale va registrata prima dell’inizio. ELDA è un canale di invio. [ELDA](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
-| Francia · *extra* nella ristorazione | La DPAE è legata all’assunzione e deve precedere l’inizio del lavoro. Un contratto da extra può coprire più giorni consecutivi, quindi contare i turni dà il trigger sbagliato. [DPAE](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Contratti extra](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
-| Italia · lavoro intermittente | Oltre alla comunicazione di assunzione, il datore di lavoro comunica ogni chiamata prima dell’inizio. Una comunicazione può coprire un ciclo integrato di lavoro fino a 30 giorni. [Ministero del Lavoro](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
+Altri paesi hanno lo stesso problema con regole diverse. Austria, Francia, Italia e Ungheria richiedono tutte una registrazione prima dell’inizio del lavoro. [Confronta le regole](/it/countries/).

@@ -4,6 +4,8 @@ title: Une plateforme d’intérim belge
 summary: "Il est 05h45. Un travailleur se déclare malade ; la prestation commence à 06h00. Un collègue peut le remplacer, mais la déclaration enregistrée porte le nom de celui qui vient d’appeler. Le gestionnaire a quinze minutes pour déclarer le remplaçant avant le début du travail."
 figure: registration
 order: 1
+stack: [Python, FastAPI, PostgreSQL, Celery, Flutter]
+updated: 2026-11-20
 before:
   - "La première version du fondateur tournait sur Cloud Functions et Firestore."
   - "Les déclarations Dimona échouées étaient relancées à la main."
@@ -13,20 +15,20 @@ after:
   - "Chaque déclaration finit acceptée, relancée ou confiée à une personne."
   - "Plus de 125 000 prestations et 1 000 entreprises sur le nouveau backend."
 eyebrow: Déclarations / Paie
-tagline: "Une API publique qui tombe. Des déclarations qui ne peuvent pas tomber."
+tagline: "Un système public qui tombe. Des déclarations qui ne doivent pas échouer."
 highlights:
-  - title: Trois issues
-    text: Chaque déclaration finit acceptée, relancée ou chez une personne. Rien ne disparaît en silence.
-  - title: Sûre à répéter
-    text: Livraison « au moins une fois » plus idempotence. Une seconde tentative est reconnue, jamais déclarée deux fois.
-  - title: Demander avant d’envoyer
-    text: Après une panne, on vérifie le statut auprès de l’administration avant tout renvoi.
-  - title: Une paie qui se recalcule
-    text: Des règles stockées comme données avec date d’effet. Une ancienne fiche de paie donne toujours le même montant.
+  - title: "Trois issues"
+    text: "Chaque déclaration finit acceptée, relancée ou chez une personne. Aucune ne se perd en silence."
+  - title: "Sûre à répéter"
+    text: "Une déclaration envoyée deux fois est reconnue. L’administration ne reçoit jamais de doublon."
+  - title: "Demander avant d’envoyer"
+    text: "Après une panne, le système demande d’abord si la déclaration est arrivée. Puis il décide."
+  - title: "Une paie qui se recalcule"
+    text: "Les règles de paie sont stockées avec leur date. Une ancienne fiche donne toujours le même montant."
 ---
 ## Mon rôle
 
-L’un des deux ingénieurs de la plateforme. Le fondateur pilotait le produit ; j’ai construit l’essentiel du backend.
+L’un des deux ingénieurs de la plateforme. Le fondateur pilotait le produit. J’ai construit l’essentiel du backend et travaillé sur l’application Flutter.
 
 J’ai passé environ un an et demi sur ce projet chez GeekyAnts, à distance depuis Bangalore, avec une vingtaine de jours en Belgique pour la livraison finale. Ma part couvrait la déclaration Dimona, la vérification des présences et les règles qui transforment des heures en salaires, factures et déclarations.
 
@@ -88,7 +90,7 @@ Le coût se voit aussi sur un vrai site : un travailleur honnête peut avoir une
 
 ## Une paie qui se recalcule à l’identique
 
-Les heures enregistrées alimentent le moteur de paie et de conformité. Le salaire et la facture client utilisent le même relevé de présence, mais répondent à des questions différentes.
+Les heures travaillées deviennent deux choses : le salaire du travailleur et la facture du client. Les deux viennent du même relevé de présence, mais répondent à des questions différentes.
 
 Les règles de paie changent : taux, primes, seuils légaux. J’ai stocké les règles comme des données avec une date d’effet, au lieu de les écrire dans le code. Une fiche de paie est calculée avec les règles en vigueur le jour du travail. Recalculer une fiche de l’an dernier donne le même montant qu’à l’époque, même après l’évolution des règles.
 
@@ -104,11 +106,4 @@ Le trafic restait modeste. La difficulté, c’était l’exactitude : une décl
 
 ## Le même problème dans d’autres pays
 
-Pour un autre marché, une question suffit pour commencer : quel événement crée l’obligation de déclarer ? Une embauche, une journée de travail occasionnel et un appel dans le cadre d’un contrat existant demandent une logique de planification différente.
-
-| Marché et travailleur | Ce que le backend doit suivre |
-|---|---|
-| Belgique · travailleur occasionnel de l’horeca | L’employeur déclare le travailleur pour chaque journée via Dimona. Les variantes horaire et journalière demandent des informations de temps différentes. [Sécurité sociale belge](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
-| Autriche · *fallweise Beschäftigte* | Chaque jour d’emploi occasionnel doit être déclaré avant le début du travail. ELDA est un canal de transmission. [ELDA](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
-| France · *extra* de l’hôtellerie-restauration | La DPAE est liée à l’embauche et doit précéder le début du travail. Un contrat d’extra peut couvrir plusieurs jours consécutifs : compter les prestations donne le mauvais déclencheur. [DPAE](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Contrats d’extra](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
-| Italie · travailleur intermittent | En plus de la déclaration d’embauche, l’employeur notifie chaque intervention avant son début. Une notification peut couvrir un cycle de travail intégré de 30 jours maximum. [Ministère italien du Travail](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
+D’autres pays ont le même problème avec d’autres règles. L’Autriche, la France, l’Italie et la Hongrie exigent toutes une déclaration avant le début du travail. [Voir les règles côte à côte](/fr/countries/).

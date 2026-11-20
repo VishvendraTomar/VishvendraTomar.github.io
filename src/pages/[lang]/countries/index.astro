@@ -1,0 +1,6 @@
+---
+import Countries from '../../../views/Countries.astro';
+import { otherLangs, type Lang } from '../../../i18n/config';
+export function getStaticPaths(){return otherLangs.map(lang=>({params:{lang}}))}
+---
+<Countries lang={Astro.params.lang as Lang}/>

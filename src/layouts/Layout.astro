@@ -6,19 +6,20 @@ import LangSwitch from '../components/LangSwitch.astro';
 import LangSuggest from '../components/LangSuggest.astro';
 import { languages, localize, type Lang } from '../i18n/config';
 import { ui } from '../i18n/ui';
+import { pages } from '../i18n/pages';
 const { lang = 'en', title: titleProp, description: descriptionProp, image='/social-card.png', article=false } = Astro.props as { lang?: Lang; title?: string; description?: string; image?: string; article?: boolean };
 const t = ui[lang];
 const title = titleProp ?? t.defaults.title;
 const description = descriptionProp ?? t.defaults.description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const name = 'Vishvendra Tomar';
-const nav: [string, string][] = [[localize('/work/', lang), t.nav.work], ['/architecture/', t.nav.architecture], ['/writing/', t.nav.writing], [localize('/about/', lang), t.nav.about], [localize('/contact/', lang), t.nav.contact]];
+const nav: [string, string][] = [[localize('/work/', lang), t.nav.work], [localize('/work-with-me/', lang), pages[lang].nav.workWithMe], ['/architecture/', t.nav.architecture], [localize('/about/', lang), t.nav.about], [localize('/contact/', lang), t.nav.contact]];
 ---
 <!doctype html><html lang={languages[lang].htmlLang}><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{title} | {name}</title><meta name="description" content={description}/><meta name="author" content={name}/>
 <link rel="canonical" href={canonical}/><Alternates/><link rel="icon" href="/favicon.svg"/><link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Writing by Vishvendra Tomar"/>
 <meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:site_name" content={name}/><meta property="og:type" content={article?'article':'website'}/><meta property="og:locale" content={languages[lang].og}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(image,Astro.site)}/><meta property="og:image:alt" content={title}/><meta name="twitter:card" content="summary_large_image"/>
-<script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'Person',name:'Vishvendra Pratap Singh Tomar',alternateName:name,url:Astro.site,jobTitle:'Backend engineer',sameAs:['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/']})}/>
+<script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'Person',name:'Vishvendra Pratap Singh Tomar',alternateName:name,url:Astro.site,jobTitle:'Software engineer',sameAs:['https://github.com/VishvendraTomar','https://www.linkedin.com/in/vishvendra-tomar/']})}/>
 </head><body><a class="skip" href="#main">{t.skip}</a><header class="mast"><div class="wrap mast-inner"><a class="brand" href={localize('/', lang)}><span class="brand-icon" aria-hidden="true">V<span>✦</span>T</span><span class="brand-name">Vishvendra<br/>Tomar</span></a><div class="mast-right"><nav aria-label="Main">{nav.map(([url,label])=><a href={url} aria-current={Astro.url.pathname.startsWith(url)?'page':undefined}>{label}</a>)}</nav><LangSwitch/></div></div></header>
 <main id="main"><slot/></main><footer><div class="wrap foot-inner"><span>Vishvendra Pratap Singh Tomar</span><a href={localize('/contact/', lang)}>{t.footer.contact}</a><a href="/rss.xml">RSS</a></div></footer><LangSuggest/></body></html>

@@ -4,6 +4,8 @@ title: A Belgian staffing platform
 summary: "Picture 05:45. A worker calls in sick. The shift starts at 06:00. A colleague can cover, but the registration on file names the worker who just called. The manager has fifteen minutes to get the replacement declared before work starts."
 figure: registration
 order: 1
+stack: [Python, FastAPI, PostgreSQL, Celery, Flutter]
+updated: 2026-11-20
 before:
   - "The founder’s first version ran on Cloud Functions and Firestore."
   - "Failed Dimona filings were rerun by hand."
@@ -13,20 +15,20 @@ after:
   - "Every filing ends accepted, retried or with a person."
   - "125,000+ shifts and 1,000+ companies on the new backend."
 eyebrow: Government filings / Payroll
-tagline: "A government API that fails. Filings that can’t."
+tagline: "A government system that goes down. Filings that can’t fail."
 highlights:
-  - title: Three exits
-    text: Every filing ends accepted, retried or with a person. Nothing is silently dropped.
-  - title: Safe to repeat
-    text: At-least-once delivery plus idempotency. A second attempt is recognised, never filed twice.
-  - title: Ask before you send
-    text: After a crash, check the filing’s status with the government before sending it again.
-  - title: Pay that recalculates
-    text: Rules stored as data with effective dates. An old payslip always comes out to the same amount.
+  - title: "Three exits"
+    text: "Every filing ends accepted, retried or with a person. None is silently lost."
+  - title: "Safe to repeat"
+    text: "A filing sent twice is recognised. The government never gets a duplicate."
+  - title: "Ask before you send"
+    text: "After a crash, the system first asks if the filing arrived. Then it decides."
+  - title: "Pay that recalculates"
+    text: "Pay rules are stored with their dates. Old payslips always give the same amount."
 ---
 ## My role
 
-One of the two engineers on the platform. The founder led product direction; I built most of the backend.
+One of the two engineers on the platform. The founder led product direction. I built most of the backend and worked on the Flutter app.
 
 I spent about a year and a half on the project at GeekyAnts. I worked remotely from Bengaluru and spent about 20 days in Belgium for final delivery. My part included Dimona registration, attendance verification and the rules that turned hours into wages, invoices and filings.
 
@@ -88,7 +90,7 @@ The cost shows up at a real venue too. A genuine worker can have a weak location
 
 ## Wages that recalculate the same way twice
 
-Recorded hours feed the wage and compliance engine. The worker’s pay and the client invoice use the same attendance record but answer different questions.
+Worked hours become two things: pay for the worker and an invoice for the client. Both come from the same attendance record, but they answer different questions.
 
 Pay rules change: rates, bonuses, legal thresholds. I stored the rules as data with effective dates instead of writing them into code. A payslip is calculated with the rules that applied on the day the work was done. Recalculating a payslip from last year gives the same amount it gave then, even after the rules have moved on.
 
@@ -104,11 +106,4 @@ The traffic was modest. The hard part was correctness: a duplicated filing, a lo
 
 ## The same problem in other countries
 
-A founder building in another market can start with one question: what event creates the filing obligation? A new hire, a day of casual work and a call under an existing contract need different scheduling logic.
-
-| Market and worker | What the backend needs to track |
-|---|---|
-| Belgium · occasional hospitality worker | The employer declares the worker for each workday through Dimona. The hourly and daily options require different time details. [Belgian social security guidance](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
-| Austria · *fallweise Beschäftigte* | Each day of casual employment requires a registration before work starts. ELDA is a submission channel. [ELDA guidance](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
-| France · hospitality *extra* | The DPAE is tied to hiring and must precede the start of work. An extra’s contract can cover several consecutive days, so counting shifts alone gives the wrong trigger. [DPAE guidance](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Extra contracts](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
-| Italy · intermittent worker | In addition to the hiring notice, the employer gives notice before the work begins. A single notice can cover an integrated cycle of work lasting up to 30 days. [Italian labour ministry](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
+Other countries have the same problem with different rules. Austria, France, Italy and Hungary all require a registration before work starts. [See the rules side by side](/countries/).

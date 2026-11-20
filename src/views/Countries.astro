@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { pages, countrySources, CALL_HREF } from '../i18n/pages';
+import { localize, type Lang } from '../i18n/config';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const p = pages[lang];
+const t = p.countries;
+---
+<Layout lang={lang} title={t.title} description={t.description}><article class="entry">
+  <div class="page-intro"><h1>{t.heading}</h1><p class="lede">{t.lede}</p></div>
+  <figure class="countries">
+    <table><thead><tr><th scope="col">{t.colCountry}</th><th scope="col">{t.colRule}</th></tr></thead>
+    <tbody>{t.rows.map(([country, system, rule]) => <tr><th scope="row">{country}<small>{system}</small></th><td>{rule}</td></tr>)}</tbody></table>
+    <figcaption>{t.caption}</figcaption>
+  </figure>
+  <p>{t.after}</p>
+  <h2>{t.sources}</h2>
+  <ul class="sources">{countrySources.map(([label, href]) => <li><a href={href} rel="noopener">{label}</a></li>)}</ul>
+  <div class="actions"><a class="cta" href={CALL_HREF}>{p.bookCall} <span aria-hidden="true">→</span></a><a href={localize('/work/workforce-infrastructure/', lang)}>{t.caseLink}</a><a href={localize('/work-with-me/', lang)}>{t.wwmLink}</a></div>
+</article></Layout>

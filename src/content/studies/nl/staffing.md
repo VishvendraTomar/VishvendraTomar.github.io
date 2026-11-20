@@ -4,6 +4,8 @@ title: Een Belgisch uitzendplatform
 summary: "Het is 05:45. Een werknemer meldt zich ziek; de shift begint om 06:00. Een collega kan invallen, maar de aangifte op naam staat nog op de persoon die net belde. De manager heeft vijftien minuten om de vervanger aan te geven voordat het werk begint."
 figure: registration
 order: 1
+stack: [Python, FastAPI, PostgreSQL, Celery, Flutter]
+updated: 2026-11-20
 before:
   - "De eerste versie van de oprichter draaide op Cloud Functions en Firestore."
   - "Mislukte Dimona-aangiftes werden met de hand opnieuw verstuurd."
@@ -13,20 +15,20 @@ after:
   - "Elke aangifte eindigt aanvaard, opnieuw geprobeerd of bij een mens."
   - "Meer dan 125.000 shifts en 1.000 bedrijven op de nieuwe backend."
 eyebrow: Overheidsaangiftes / Loonverwerking
-tagline: "Een overheids-API die faalt. Aangiftes die dat niet mogen."
+tagline: "Een overheidssysteem dat uitvalt. Aangiftes die niet mogen mislukken."
 highlights:
-  - title: Drie uitgangen
-    text: Elke aangifte eindigt aanvaard, opnieuw geprobeerd of bij een mens. Niets verdwijnt ongemerkt.
-  - title: Veilig te herhalen
-    text: Minstens-één-keer-levering plus idempotentie. Een tweede poging wordt herkend, nooit dubbel aangegeven.
-  - title: Eerst vragen, dan sturen
-    text: Na een crash eerst de status bij de overheid controleren voordat er opnieuw verstuurd wordt.
-  - title: Lonen die kloppen
-    text: Regels opgeslagen als data met ingangsdatum. Een oude loonstrook geeft altijd hetzelfde bedrag.
+  - title: "Drie uitgangen"
+    text: "Elke aangifte eindigt aanvaard, opnieuw geprobeerd of bij een mens. Geen enkele verdwijnt ongemerkt."
+  - title: "Veilig te herhalen"
+    text: "Een aangifte die twee keer vertrekt, wordt herkend. De overheid krijgt nooit een dubbel."
+  - title: "Eerst vragen, dan sturen"
+    text: "Na een crash vraagt het systeem eerst of de aangifte aankwam. Dan pas beslist het."
+  - title: "Lonen die kloppen"
+    text: "Loonregels worden met hun datum opgeslagen. Oude loonstroken geven altijd hetzelfde bedrag."
 ---
 ## Mijn rol
 
-Een van de twee engineers op het platform. De oprichter bepaalde de productrichting; ik bouwde het grootste deel van de backend.
+Een van de twee engineers op het platform. De oprichter bepaalde de productrichting. Ik bouwde het grootste deel van de backend en werkte mee aan de Flutter-app.
 
 Ik werkte ongeveer anderhalf jaar aan dit project bij GeekyAnts, op afstand vanuit Bengaluru, en was zo’n 20 dagen in België voor de oplevering. Mijn deel omvatte de Dimona-aangifte, de aanwezigheidscontrole en de regels die van uren lonen, facturen en aangiftes maken.
 
@@ -88,7 +90,7 @@ De prijs zie je ook op een echte locatie: een eerlijke werknemer kan een zwakke 
 
 ## Lonen die twee keer hetzelfde uitkomen
 
-Geregistreerde uren gaan naar de loon- en compliance-engine. Het loon en de klantfactuur gebruiken dezelfde aanwezigheidsregistratie, maar beantwoorden andere vragen.
+Gewerkte uren worden twee dingen: het loon voor de werknemer en een factuur voor de klant. Beide komen uit dezelfde aanwezigheidsregistratie, maar beantwoorden andere vragen.
 
 Loonregels veranderen: tarieven, toeslagen, wettelijke grenzen. Ik sloeg de regels op als data met een ingangsdatum, in plaats van ze in de code te schrijven. Een loonstrook wordt berekend met de regels die golden op de dag van het werk. Een loonstrook van vorig jaar herberekenen geeft hetzelfde bedrag als toen, ook als de regels intussen veranderd zijn.
 
@@ -104,11 +106,4 @@ Het verkeer was bescheiden. Het moeilijke was correctheid: een dubbele aangifte,
 
 ## Hetzelfde probleem in andere landen
 
-Wie in een andere markt bouwt, kan met één vraag beginnen: welke gebeurtenis maakt de aangifteplicht? Een nieuwe aanwerving, een dag gelegenheidswerk en een oproep binnen een bestaand contract vragen elk andere planningslogica.
-
-| Markt en werknemer | Wat de backend moet bijhouden |
-|---|---|
-| België · gelegenheidswerknemer in de horeca | De werkgever geeft de werknemer voor elke werkdag aan via Dimona. De uur- en dagvariant vragen andere tijdsgegevens. [Belgische sociale zekerheid](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/occasionalsdimona.html) |
-| Oostenrijk · *fallweise Beschäftigte* | Elke dag gelegenheidswerk moet vóór de start aangemeld worden. ELDA is een indieningskanaal. [ELDA](https://www.elda.at/cdscontent/?contentid=10007.838879&portal=eldaportal) |
-| Frankrijk · *extra* in de horeca | De DPAE hoort bij de aanwerving en moet vóór de start van het werk gebeuren. Een extra-contract kan meerdere opeenvolgende dagen dekken, dus shifts tellen geeft de verkeerde trigger. [DPAE](https://www.service-public.gouv.fr/entreprendre/vosdroits/R57098) · [Extra-contracten](https://www.service-public.gouv.fr/particuliers/vosdroits/F33693) |
-| Italië · intermitterende werknemer | Naast de melding van de aanwerving meldt de werkgever elke inzet vóór de start. Eén melding kan een aaneengesloten werkcyclus tot 30 dagen dekken. [Italiaans ministerie van Arbeid](https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/disciplina-rapporto-lavoro/pagine/lavoro-intermittente) |
+Andere landen hebben hetzelfde probleem met andere regels. Oostenrijk, Frankrijk, Italië en Hongarije vragen allemaal een aangifte vóór het werk begint. [Bekijk de regels naast elkaar](/nl/countries/).

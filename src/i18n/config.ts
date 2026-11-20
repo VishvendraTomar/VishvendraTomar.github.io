@@ -12,7 +12,7 @@ export const langs = Object.keys(languages) as Lang[];
 export const otherLangs = langs.filter(l => l !== defaultLang);
 
 /** Routes that exist in every language. Everything else (architecture, writing, RSS) is English only. */
-const translated = [/^\/$/, /^\/work\/(.*)$/, /^\/about\/$/, /^\/contact\/$/];
+const translated = [/^\/$/, /^\/work\/(.*)$/, /^\/about\/$/, /^\/contact\/$/, /^\/work-with-me\/$/, /^\/countries\/$/];
 
 export function isTranslated(path: string) {
   return translated.some(r => r.test(path));
