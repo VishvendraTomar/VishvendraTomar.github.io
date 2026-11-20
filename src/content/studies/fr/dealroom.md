@@ -4,6 +4,7 @@ title: dealroom.ai
 summary: "Un hackathon d’équipe de 24 heures sur les propositions commerciales multi-agents. Nous avons terminé deuxièmes, et le prototype a ensuite été intégré au site de GeekyAnts."
 figure: proposal
 order: 3
+updated: 2026-11-20
 stack: [Workflows multi-agents]
 eyebrow: "Hackathon / Réussite d’équipe"
 tagline: "D’un brief client à une proposition commerciale en 24 heures."

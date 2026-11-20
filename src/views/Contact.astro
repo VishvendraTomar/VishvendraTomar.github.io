@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { ui } from '../i18n/ui';
-import type { Lang } from '../i18n/config';
+import { pages, CALL_HREF } from '../i18n/pages';
+import { localize, type Lang } from '../i18n/config';
 const { lang = 'en' } = Astro.props as { lang?: Lang };
 const t = ui[lang].contact;
-const mail = 'vishvendratomar29@gmail.com';
+const p = pages[lang];
 ---
-<Layout lang={lang} title={t.title}><article class="entry"><div class="page-intro"><h1>{t.heading}</h1><p class="lede">{t.lede}</p></div><p>{t.body}</p><div class="actions"><a class="primary" href={'mailto:' + mail}>{t.email}</a><a href="https://www.linkedin.com/in/vishvendra-tomar/">LinkedIn</a><a href={'mailto:' + mail + '?subject=' + encodeURIComponent(t.callSubject)}>{t.call}</a></div></article></Layout>
+<Layout lang={lang} title={t.title}><article class="entry"><div class="page-intro"><h1>{t.heading}</h1><p class="lede">{p.contact.lede}</p></div><p>{p.contact.body}</p><div class="actions"><a class="cta" href={CALL_HREF}>{p.bookCall} <span aria-hidden="true">→</span></a><a href={localize('/work-with-me/', lang)}>{p.nav.workWithMe}</a><a href="https://www.linkedin.com/in/vishvendra-tomar/">LinkedIn</a></div><p class="secondary-line">{p.fullTime}</p></article></Layout>

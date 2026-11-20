@@ -4,6 +4,7 @@ title: dealroom.ai
 summary: A 24-hour team hackathon exploring multi-agent sales proposals. We placed second, and the prototype was later adopted into the GeekyAnts website.
 figure: proposal
 order: 3
+updated: 2026-11-20
 stack: [Multi-agent workflows]
 eyebrow: Hackathon / Team achievement
 tagline: From a client brief to a sales proposal in 24 hours.

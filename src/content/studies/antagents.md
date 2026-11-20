@@ -1,9 +1,10 @@
 ---
 slug: antagents
 title: Ant Agents
-summary: "A durable runtime for LLM agents at GeekyAnts. It replaced onboarding, compliance checks and timesheet chasing done over email, and now runs 20+ live workflows for 300+ employees."
+summary: "Picture Friday afternoon. Timesheets are missing again. Someone has to email each person, then chase them again on Monday. I built the system that now does this with AI agents, for 300+ employees."
 figure: automation
 order: 2
+updated: 2026-11-20
 stack: [AWS, MCP, Durable execution]
 before:
   - "Onboarding, work-from-home compliance checks and timesheet chasing were done by hand, over email."
@@ -14,16 +15,16 @@ after:
   - "Processes that took days finish within a day."
   - "Failures went from frequent to near zero."
 eyebrow: Durable agent runtime
-tagline: "LLM agents go off track, crash and burn money. These don’t."
+tagline: "AI agents that finish the job, even after a crash."
 highlights:
-  - title: Resume, don’t restart
-    text: A worker dies at step 4 of 7. Another resumes from the checkpoint without redoing steps 1–3.
-  - title: Deterministic replay
-    text: Recorded model and tool outputs replay a failed run exactly, so a one-off failure can be studied.
-  - title: Context, not history
-    text: A cost spike came from context bloat. A context builder now sends each step only what it needs.
-  - title: Guardrails as layers
-    text: Tool permissions, limits, schema checks, human approval and an audit log. A prompt asks; a guardrail enforces.
+  - title: "Resume, don’t restart"
+    text: "A worker crashes at step 4 of 7. Another picks up at step 4. Nothing runs twice."
+  - title: "Replay any failure"
+    text: "Every model answer is recorded. A failed run can be replayed exactly, step by step."
+  - title: "Context, not history"
+    text: "Costs spiked when each step got the full history. Now each step gets only what it needs."
+  - title: "Guardrails as layers"
+    text: "Permissions, limits, checks, human approval and an audit log. A prompt asks; a guardrail enforces."
 ---
 ## My role
 
@@ -49,13 +50,13 @@ Each completed step is checkpointed with its result. When a worker disappears, a
 
 ## Debugging a model that never answers the same way twice
 
-An LLM call is not deterministic. When a run fails, calling the model again rarely reproduces the failure. So the runtime records every model output and tool result as the run happens.
+An AI model can answer differently each time. So a failure often won’t happen again when you retry. That makes it hard to debug. The runtime therefore records every model output and tool result as the run happens.
 
 To debug, I replay the run from that recording. The same inputs produce the same path, step by step, without calling the model or touching real systems. A failure that happened once can be studied as often as needed.
 
 ## The cost spike
 
-At one point costs rose sharply. The cause was context bloat: each step was sending the model more and more of the workflow’s history, most of it irrelevant to the step at hand.
+At one point costs rose sharply. Each step was sending the model more and more text, and most of it was irrelevant. This is known as context bloat: the workflow’s whole history went along with every call.
 
 The fix was a context builder. It assembles only what the next step needs from the workflow’s state, rather than passing the whole history along. That is the decision above, in practice.
 

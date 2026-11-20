@@ -6,13 +6,34 @@ import QueueSimulator from '../components/QueueSimulator.astro';
 import AgentSimulator from '../components/AgentSimulator.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import { ui } from '../i18n/ui';
-import { localize, type Lang } from '../i18n/config';
+import { pages, CALL_HREF } from '../i18n/pages';
+import { localize, languages, type Lang } from '../i18n/config';
 const { entry, lang = 'en' } = Astro.props as { entry: any; lang?: Lang };
 const t = ui[lang].casePage;
 const { frontmatter: f, Content } = entry;
 const headings = entry.getHeadings().filter((h: any) => h.depth === 2);
+const p = pages[lang];
+const hasDemo = f.slug === 'workforce-infrastructure' || f.slug === 'antagents';
+const updated = f.updated ? new Intl.DateTimeFormat(languages[lang].htmlLang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(f.updated)) : '';
 ---
-<Layout lang={lang} title={f.title} description={f.summary} article><article class="entry case-study"><div class="page-intro"><a href={localize('/work/', lang)}>{t.all}</a><h1>{f.title}</h1><p class="lede">{f.summary}</p></div>{f.before && f.after && <BeforeAfter lang={lang} before={f.before} after={f.after}/>}{f.slug === 'workforce-infrastructure' && <><QueueSimulator lang={lang}/><ShiftSimulator lang={lang}/></>}{f.slug === 'antagents' && <AgentSimulator lang={lang}/>}<Figure id={f.figure} lang={lang} featured/><nav aria-label={t.onPage}>{headings.map((h: any)=><a href={'#'+h.slug}>{h.text}</a>)}</nav><Content/>{f.stack && <><h2>{t.stack}</h2><div class="tags">{f.stack.map((s: string)=><span>{s}</span>)}</div></>}<p><a href="/architecture/">{t.diagrams}</a> · <a href={localize('/contact/', lang)}>{t.discuss}</a></p></article></Layout>
+<Layout lang={lang} title={f.title} description={f.summary} image={'/og/' + lang + '/' + f.slug + '.png'} article><article class="entry case-study">
+<div class="page-intro case-intro">
+  <p class="case-meta"><a href={localize('/work/', lang)}>{t.all}</a>{updated && <span>{p.casePage.updated} <time datetime={f.updated}>{updated}</time></span>}</p>
+  <h1>{f.title}</h1>
+  <p class="lede">{f.summary}</p>
+  <div class="actions case-actions">{hasDemo && <a class="cta" href="#demo">{p.casePage.tryDemo} <span aria-hidden="true">↓</span></a>}<a class="cta-ghost" href={CALL_HREF}>{p.bookCall}</a></div>
+  {f.before && f.after && <BeforeAfter lang={lang} before={f.before} after={f.after}/>}
+</div>
+{hasDemo && <span id="demo" class="demo-anchor"></span>}
+{f.slug === 'workforce-infrastructure' && <><QueueSimulator lang={lang}/><ShiftSimulator lang={lang}/></>}
+{f.slug === 'antagents' && <AgentSimulator lang={lang}/>}
+<Figure id={f.figure} lang={lang} featured/>
+<nav aria-label={t.onPage}>{headings.map((h: any)=><a href={'#'+h.slug}>{h.text}</a>)}</nav>
+<Content/>
+{f.slug === 'workforce-infrastructure' && <p><a href={localize('/countries/', lang)}>{p.casePage.countries} →</a></p>}
+{f.stack && <><h2>{t.stack}</h2><div class="tags">{f.stack.map((s: string)=><span>{s}</span>)}</div></>}
+<div class="actions case-end"><a class="cta" href={CALL_HREF}>{p.bookCall} <span aria-hidden="true">→</span></a><a href={localize('/work-with-me/', lang)}>{p.nav.workWithMe}</a><a href="/architecture/">{t.diagrams}</a></div>
+</article></Layout>
 <style>
   :global(.case-study > table) { border-collapse:collapse; width:100%; font-size:1rem; }
   :global(.case-study > table :is(td, th)) { padding:.8rem .5rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--paper-line); }

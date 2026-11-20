@@ -7,7 +7,7 @@ const show = lang === 'en' && isTranslated(path);
 const offers = Object.fromEntries(otherLangs.map(l => [l, { href: localize(path, l), ...ui[l].suggest }]));
 ---
 {show && <div class="lang-suggest" hidden data-offers={JSON.stringify(offers)} role="region" aria-label="Language">
-  <p><span class="lsg-text"></span> <a class="lsg-go"></a></p>
+  <p><span class="lsg-text"></span> <a class="lsg-go" href={offers.de?.href ?? "/de/"}></a></p>
   <button type="button" class="lsg-close" aria-label="Dismiss">×</button>
 </div>}
 <style>

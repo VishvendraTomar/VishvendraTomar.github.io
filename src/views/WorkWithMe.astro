@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { pages, CALL_HREF } from '../i18n/pages';
+import { localize, type Lang } from '../i18n/config';
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const p = pages[lang];
+const t = p.wwm;
+---
+<Layout lang={lang} title={t.title} description={t.description}><article class="entry wwm">
+  <div class="page-intro"><h1>{t.heading}</h1><p class="lede">{t.lede}</p><div class="actions"><a class="cta" href={CALL_HREF}>{p.bookCall} <span aria-hidden="true">→</span></a></div></div>
+  <h2>{t.doH}</h2>
+  <ul class="wwm-grid">{t.do.map(([h, d]) => <li><strong>{h}</strong><span>{d}</span></li>)}</ul>
+  <h2>{t.howH}</h2>
+  <ol class="wwm-options">{t.how.map(([h, len, d], i) => <li><span class="wwm-num">{String(i + 1).padStart(2, '0')}</span><strong>{h}</strong><em>{len}</em><span>{d}</span></li>)}</ol>
+  <h2>{t.practicalH}</h2>
+  <dl class="wwm-facts">{t.practical.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+  <h2>{t.startH}</h2>
+  <ol class="wwm-steps">{t.start.map(([h, d]) => <li><strong>{h}</strong><span>{d}</span></li>)}</ol>
+  <div class="actions"><a class="cta" href={CALL_HREF}>{p.bookCall} <span aria-hidden="true">→</span></a><a href={localize('/countries/', lang)}>{t.countriesLink}</a></div>
+  <p class="secondary-line">{p.fullTime}</p>
+</article></Layout>

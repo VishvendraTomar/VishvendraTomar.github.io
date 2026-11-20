@@ -9,16 +9,22 @@ const t = ui[lang].ba;
   <div class="ba-col ba-after"><h2>{t.after}</h2><ul>{after.map(item => <li>{item}</li>)}</ul></div>
 </section>
 <style>
-:global(.entry) > .before-after { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0 0 clamp(2rem, 5vw, 4rem); border: 1px solid var(--paper-line); }
-.ba-col { padding: clamp(1rem, 3vw, 2rem); }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 1.4rem 0 0; border: 1px solid var(--paper-line); color: #1e1e1c; text-align: left; }
+:global(.entry) > .before-after { max-width: none; margin: 0 0 clamp(2rem, 5vw, 4rem); }
+.ba-col { padding: clamp(.8rem, 2.4vw, 1.5rem); }
 .ba-before { background: #e5dac6; }
-.ba-after { background: #1e1e1c; color: #f1e9da; box-shadow: inset 4px 0 0 var(--brand-blue); }
+.ba-after { background: #292925; color: #f1e9da; box-shadow: inset 4px 0 0 var(--brand-blue); }
 .ba-col h2 { margin: 0 0 .6rem; font: 500 .8rem/1 'DM Mono', ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; font-style: normal; }
 .ba-after h2 { color: #afc6ff; }
 .ba-col ul { margin: 0; padding: 0; list-style: none; }
-.ba-col li { padding: .55rem 0; border-top: 1px solid #b9ad97; line-height: 1.5; }
+.ba-col li { padding: .45rem 0; border-top: 1px solid #b9ad97; line-height: 1.45; font-size: .95rem; }
 .ba-after li { border-color: #57554e; }
-@media (max-width: 720px) {
-  :global(.entry) > .before-after { grid-template-columns: 1fr; }
+@media (max-width: 560px) {
+  .ba-col { padding: .6rem .7rem; }
+  .ba-col h2 { margin-bottom: .3rem; font-size: .7rem; }
+  .ba-col li { font-size: .8rem; line-height: 1.35; padding: .3rem 0; }
+}
+@media (max-width: 339px) {
+  .before-after { grid-template-columns: 1fr; }
 }
 </style>
